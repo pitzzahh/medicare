@@ -24,5 +24,11 @@
 
 package io.github.pitzzahh.medicare;
 
+import io.github.pitzzahh.medicare.application.Medicare;
+
 public class Launcher {
+
+    public static void main(String[] args) {
+        Medicare.main(args);
+    }
 }
