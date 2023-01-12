@@ -24,14 +24,59 @@
 
 package io.github.pitzzahh.medicare.application;
 
+import static io.github.pitzzahh.medicare.util.ComponentUtil.getMainProgressBar;
+import static io.github.pitzzahh.medicare.util.WindowUtil.*;
+import io.github.pitzzahh.medicare.util.WindowUtil;
+import static java.util.Objects.requireNonNull;
+import io.github.pitzzahh.medicare.Launcher;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.image.Image;
+import javafx.stage.StageStyle;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.Map;
 
 public class Medicare extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) throws IOException {
+        initParents();
+        Parent parent = getParent("auth_window");
+        Scene scene = new Scene(parent);
+        setStage(primaryStage);
 
+        getStage().initStyle(StageStyle.DECORATED);
+        getStage().getIcons().add(new Image(requireNonNull(Launcher.class.getResourceAsStream("assets/logo.png"), "Icon not found")));
+        getStage().setScene(scene);
+        getStage().addEventHandler(KeyEvent.KEY_PRESSED, fullScreenEvent);
+        WindowUtil.loadParent(parent, "Authentication");
+        getStage().centerOnScreen();
+        getMainProgressBar(parent).ifPresent(p -> p.setVisible(false));
+        getStage().show();
     }
 
+    /**
+     * Initializes the parents.
+     * The window is loaded from the FXML file.
+     *
+     * @throws IOException if the parent cannot be loaded.
+     */
+    private void initParents() throws IOException {
+        Parent loginPage = FXMLLoader.load(requireNonNull(Launcher.class.getResource("fxml/auth/auth.fxml"), "Cannot find auth.fxml"));
+
+        loginPage.setId("auth_window");
+
+        WindowUtil.addParents.accept(Map.of(
+                loginPage.getId(), loginPage
+        ));
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
