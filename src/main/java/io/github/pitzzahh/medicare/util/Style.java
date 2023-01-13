@@ -25,11 +25,12 @@
 package io.github.pitzzahh.medicare.util;
 
 public interface Style {
+
     /**
      * Gets the button styles for admin window
      * @return styles for admin window buttons.
      */
-    static String leftButtonSelectionFunctionStyle() {
+    static String normalStyle() {
         return "-fx-background-color: #003049; " +
                "-fx-text-fill: white; " +
                "-fx-font-weight: bold; " +
@@ -37,7 +38,7 @@ public interface Style {
                "-fx-font-size: 13px;";
     }
 
-    static String errorToolTipStyle() {
+    static String errorStyle() {
         return "-fx-background-color: #CFD7DF; " +
                 "-fx-text-fill: #D50000; " +
                 "-fx-font-weight: bold; " +
