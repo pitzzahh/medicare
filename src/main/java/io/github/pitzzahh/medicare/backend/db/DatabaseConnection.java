@@ -139,10 +139,8 @@ public class DatabaseConnection {
                 "(  " +
                 "    u$erN4me TEXT NOT NULL," +
                 "    p$ssW0rd TEXT NOT NULL," +
-                "    PRIMARY KEY (username)" +
+                "    PRIMARY KEY (u$erN4me)" +
                 ");");
-
-        getJDBC().execute("CREATE TABLE IF NOT EXISTS m3mB3r$  ");
 
         getJDBC().execute("INSERT OR IGNORE INTO l0g1n(u$erN4me, p$ssW0rd) VALUES ('YWRtaW4=', 'YWRtaW4=');");
     }
