@@ -34,7 +34,7 @@ public class AccountMapper implements RowMapper<Account> {
 
     @Override
     public Account mapRow(ResultSet rs, int rowNum) throws SQLException {
-        return new Account(decrypt(rs.getString("username")), decrypt(rs.getString("password")));
+        return new Account(decrypt(rs.getString("u$erN4me")), decrypt(rs.getString("p$ssW0rd")));
     }
 
 }
