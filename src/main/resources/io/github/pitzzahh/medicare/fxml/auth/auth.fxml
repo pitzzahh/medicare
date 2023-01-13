@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="556.0" prefWidth="697.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.pitzzahh.medicare.controllers.AuthenticationController">
+<BorderPane prefHeight="555.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.pitzzahh.medicare.controllers.AuthenticationController">
    <center>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <VBox alignment="CENTER" prefHeight="556.0" prefWidth="370.0" styleClass="left-side" stylesheets="@../../css/auth/auth.css" HBox.hgrow="ALWAYS">
@@ -49,14 +49,12 @@
                   <Insets top="10.0" />
                </VBox.margin>
                <VBox alignment="CENTER">
-                  <Button fx:id="loginButton" mnemonicParsing="false" onAction="#onLogin" prefHeight="50.0"
-                          prefWidth="203.0" styleClass="login-button" stylesheets="@../../css/auth/auth.css"
-                          text="LOGIN">
+                  <Button fx:id="loginButton" mnemonicParsing="false" onAction="#onLogin" prefHeight="50.0" prefWidth="203.0" styleClass="login-button" stylesheets="@../../css/auth/auth.css" text="LOGIN">
                      <VBox.margin>
-                        <Insets bottom="5.0"/>
+                        <Insets bottom="5.0" />
                      </VBox.margin>
                   </Button>
-                  <Label fx:id="errorMessage" alignment="CENTER" prefHeight="15.0" prefWidth="351.0"/>
+                  <Label fx:id="errorMessage" alignment="CENTER" prefHeight="15.0" prefWidth="351.0" />
                </VBox>
             </HBox>
          </VBox>
