@@ -30,24 +30,22 @@
                     </ImageView>
                 </HBox>
                 <HBox alignment="CENTER" layoutX="10.0" layoutY="64.0">
-                    <children>
-                        <Label styleClass="brand-name" stylesheets="@../../css/auth/auth.css" text="MED" />
-                        <Label layoutX="179.0" layoutY="78.0" stylesheets="@../../css/auth/auth.css" text="i">
-                            <styleClass>
-                                <String fx:value="brand-name" />
-                                <String fx:value="i" />
-                            </styleClass>
-                        </Label>
-                        <Label layoutX="206.0" layoutY="78.0" stylesheets="@../../css/auth/auth.css" text="CARE">
-                            <styleClass>
-                                <String fx:value="brand-name" />
-                                <String fx:value="care" />
-                            </styleClass>
-                        </Label>
-                    </children>
                     <VBox.margin>
-                        <Insets bottom="50.0" />
+                        <Insets bottom="50.0"/>
                     </VBox.margin>
+                    <Label styleClass="brand-name" stylesheets="@../../css/auth/auth.css" text="MED"/>
+                    <Label layoutX="179.0" layoutY="78.0" stylesheets="@../../css/auth/auth.css" text="i">
+                        <styleClass>
+                            <String fx:value="brand-name"/>
+                            <String fx:value="i"/>
+                        </styleClass>
+                    </Label>
+                    <Label layoutX="206.0" layoutY="78.0" stylesheets="@../../css/auth/auth.css" text="CARE">
+                        <styleClass>
+                            <String fx:value="brand-name"/>
+                            <String fx:value="care"/>
+                        </styleClass>
+                    </Label>
                 </HBox>
                 <HBox alignment="CENTER" layoutX="10.0" layoutY="40.0">
                     <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
