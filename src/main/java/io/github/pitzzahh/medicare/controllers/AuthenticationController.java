@@ -25,12 +25,11 @@
 package io.github.pitzzahh.medicare.controllers;
 
 import static io.github.pitzzahh.medicare.util.Style.leftButtonSelectionFunctionStyle;
+import static io.github.pitzzahh.medicare.util.ComponentUtil.getMainProgressBar;
 import static io.github.pitzzahh.medicare.util.ToolTipUtil.initToolTip;
 import io.github.pitzzahh.medicare.backend.login.cache.AuthData;
 import io.github.pitzzahh.medicare.backend.login.model.Account;
 import static io.github.pitzzahh.medicare.util.WindowUtil.*;
-import io.github.pitzzahh.medicare.util.ComponentUtil;
-import io.github.pitzzahh.medicare.util.WindowUtil;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
 import javafx.event.ActionEvent;
@@ -81,21 +80,21 @@ public class AuthenticationController {
                     this.username.clear();
                     this.password.clear();
                     errorMessage.setText("");
-                    WindowUtil.loadParent(getParent("main_panel"), "MEDiCARE");
+                    loadParent(getParent("main_panel"), "MEDiCARE");
                     loadPage("main_panel", "dashboard");
                     getStage().show();
                 }
                 else {
-                    ComponentUtil.getMainProgressBar(getParent("auth_window")).ifPresent(p -> p.setVisible(false));
+                    getMainProgressBar(getParent("auth_window")).ifPresent(p -> p.setVisible(false));
                     errorMessage.setText("Invalid username or password");
                 }
             } else {
-                ComponentUtil.getMainProgressBar(getParent("auth_window")).ifPresent(p -> p.setVisible(false));
+                getMainProgressBar(getParent("auth_window")).ifPresent(p -> p.setVisible(false));
                 errorMessage.setText("Invalid username or password");
             }
         }
         else {
-            ComponentUtil.getMainProgressBar(getParent("auth_window")).ifPresent(p -> p.setVisible(false));
+            getMainProgressBar(getParent("auth_window")).ifPresent(p -> p.setVisible(false));
             errorMessage.setText("Invalid username or password");
         }
     }

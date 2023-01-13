@@ -24,6 +24,7 @@
 
 package io.github.pitzzahh.medicare.util;
 
+import static io.github.pitzzahh.medicare.util.WindowUtil.getParent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.time.format.DateTimeFormatter;
 import javafx.scene.effect.GaussianBlur;
@@ -43,7 +44,7 @@ public interface ComponentUtil {
      * @return an {@code Optional<TableView<?>>}.
      */
     static Optional<TableView<?>> getTable(String parentId, String tableId) {
-        return Optional.ofNullable((TableView<?>) WindowUtil.getParent(parentId).lookup(format("#%s", tableId)));
+        return Optional.ofNullable((TableView<?>) getParent(parentId).lookup(format("#%s", tableId)));
     }
 
     /**
