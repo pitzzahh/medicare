@@ -24,13 +24,13 @@
 
 package io.github.pitzzahh.medicare.backend.login.model;
 
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-import lombok.Data;
+import lombok.*;
 
 @Data
 @ToString
 @EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 public class Account {
     private String username;
     private String password;
