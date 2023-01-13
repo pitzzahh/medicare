@@ -24,5 +24,24 @@
 
 package io.github.pitzzahh.medicare.backend.login.service;
 
+import io.github.pitzzahh.medicare.backend.login.dao.AccountDAO;
+import io.github.pitzzahh.medicare.backend.login.model.Account;
+import lombok.AllArgsConstructor;
+import java.util.Map;
+
+@AllArgsConstructor
 public class AccountService {
+
+    private final AccountDAO DAO;
+
+    /**
+     * Get the accounts from the db as a map
+     * @return a {@code Map<String, Account>}
+     * @see Map
+     * @see Account
+     */
+    public Map<String, Account> getAccounts() {
+        return DAO.getAccounts();
+    }
+
 }
