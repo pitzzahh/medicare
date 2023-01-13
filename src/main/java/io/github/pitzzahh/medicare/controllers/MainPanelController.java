@@ -44,16 +44,17 @@ public class MainPanelController {
 
     @FXML
     public void onClickPatients(ActionEvent actionEvent) {
-
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     @FXML
     public void onClickDoctors(ActionEvent actionEvent) {
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     @FXML
     public void onClickAbout(ActionEvent actionEvent) {
-
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     @FXML
