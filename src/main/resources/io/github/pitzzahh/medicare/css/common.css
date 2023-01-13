@@ -31,3 +31,16 @@
     -fx-background-color: #3D5A80;
     -fx-background-radius: 0 0 50px 0;
 }
+
+.input-labels {
+    -fx-text-fill: #fff;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+.inputs, .inputs .text-field, .inputs .textarea {
+    -fx-background-color: #D9D9D9;
+}
+
+.add-button {
+}

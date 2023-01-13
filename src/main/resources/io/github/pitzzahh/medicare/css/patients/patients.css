@@ -24,13 +24,5 @@
     -fx-background-color: #E0FBFC;
 }
 
-.input-labels {
-    -fx-text-fill: #fff;
-    -fx-font-size: 15px;
-    -fx-font-weight: bold;
-}
 
-.inputs, .inputs .text-field, .inputs .textarea {
-    -fx-background-color: #D9D9D9;
-}
 
