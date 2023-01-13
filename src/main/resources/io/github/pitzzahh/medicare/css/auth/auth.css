@@ -12,12 +12,24 @@
     -fx-background-color: #E0FBFC;
 }
 
+.brand-name {
+    -fx-font-size: 35px;
+    -fx-font-weight: bold;
+}
+
+.i {
+    -fx-text-fill: #D1462F;
+}
+
+.care {
+    -fx-text-fill: #3D5A80;
+}
 
 .login-button {
     -fx-border-color: #97d1d2;
     -fx-text-fill: #293241;
-    -fx-border-radius: 20px;
-    -fx-background-radius: 20px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
     -fx-background-color: transparent;
     -fx-border-width: 2px;
     -fx-font-size: 20px;
@@ -27,21 +39,21 @@
 
 .login-button:hover{
     -fx-background-color: #293241;
-    -fx-border-color: none;
     -fx-text-fill: #E0FBFC;
+    -fx-border-color: #293241;
     -fx-cursor: hand;
-}
-
-.login-button:armed {
-    -fx-background-color: #161c25;
-    -fx-border-color: none;
-    -fx-text-fill: #E0FBFC;
 }
 
 .labels {
     -fx-text-fill: #293241;
     -fx-font-size: 20px;
     -fx-font-weight: bold;
+}
+
+.login-button:armed {
+    -fx-background-color: #161c25;
+    -fx-border-color: #161c25;
+    -fx-text-fill: #E0FBFC;
 }
 
 .inputs {
