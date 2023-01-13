@@ -21,7 +21,7 @@
 }
 
 .logout-button {
-    -fx-background-color: tranaparent;
+    -fx-background-color: transparent;
 }
 
 .logout-button:hover {
