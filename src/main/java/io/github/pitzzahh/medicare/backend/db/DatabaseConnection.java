@@ -116,16 +116,16 @@ public class DatabaseConnection {
     public static void createDatabaseFile() throws IOException {
         String appDataPath = System.getenv("LOCALAPPDATA") + "\\Programs";
 
-        File dir = new File(appDataPath, "Medicare");
+        File dir = new File(appDataPath, "MEDiCARE");
         if (!dir.exists()) {
-            System.out.println("Create folder Medicare = " + dir.mkdir());
+            System.out.println("Create folder MEDiCARE = " + dir.mkdir());
         }
         System.out.println("Create Database: " + new File(dir, "data.db").createNewFile());
     }
 
     public static File getDatabaseFile() {
         String appDataPath = System.getenv("LOCALAPPDATA") + "\\Programs";
-        File dir = new File(appDataPath, "Medicare");
+        File dir = new File(appDataPath, "MEDiCARE");
         return new File(dir, "data.db");
     }
 
@@ -135,16 +135,16 @@ public class DatabaseConnection {
 
     // exposing tables
     public static void createTables() {
-        getJDBC().execute("CREATE TABLE IF NOT EXISTS login " +
+        getJDBC().execute("CREATE TABLE IF NOT EXISTS l0g1n " +
                 "(  " +
-                "    username TEXT NOT NULL," +
-                "    password TEXT NOT NULL," +
+                "    u$erN4me TEXT NOT NULL," +
+                "    p$ssW0rd TEXT NOT NULL," +
                 "    PRIMARY KEY (username)" +
                 ");");
 
-        getJDBC().execute("CREATE TABLE IF NOT EXISTS members  ");
+        getJDBC().execute("CREATE TABLE IF NOT EXISTS m3mB3r$  ");
 
-        getJDBC().execute("INSERT OR IGNORE INTO login(username, password) VALUES ('YWRtaW4=', 'YWRtaW4=');");
+        getJDBC().execute("INSERT OR IGNORE INTO l0g1n(u$erN4me, p$ssW0rd) VALUES ('YWRtaW4=', 'YWRtaW4=');");
     }
 
 }
