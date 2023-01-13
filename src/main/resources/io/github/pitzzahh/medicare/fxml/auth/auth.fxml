@@ -10,60 +10,52 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <BorderPane prefHeight="556.0" prefWidth="697.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.pitzzahh.medicare.controllers.AuthenticationController">
    <center>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <VBox alignment="CENTER" prefHeight="556.0" prefWidth="370.0" styleClass="left-side" stylesheets="@../../css/auth/auth.css" HBox.hgrow="ALWAYS">
-               <children>
-                  <ImageView fitHeight="347.0" fitWidth="292.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
-                     <image>
-                        <Image url="@../../assets/auth/illustration.png" />
-                     </image>
-                  </ImageView>
-               </children>
-               <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </padding>
-            </VBox>
-            <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="600.0" prefHeight="556.0" prefWidth="440.0"
-                  styleClass="right-side" stylesheets="@../../css/auth/auth.css" HBox.hgrow="ALWAYS">
-               <HBox alignment="CENTER" prefHeight="165.0" prefWidth="373.0" styleClass="logo-box"
-                     stylesheets="@../../css/auth/auth.css">
-                  <VBox.margin>
-                     <Insets bottom="10.0"/>
-                  </VBox.margin>
-                  <ImageView fitHeight="150.0" fitWidth="172.0" pickOnBounds="true" preserveRatio="true">
-                     <Image url="@../../assets/logo.png"/>
-                  </ImageView>
-               </HBox>
-               <HBox alignment="CENTER" layoutX="10.0" layoutY="40.0" prefHeight="165.0" prefWidth="373.0"
-                     styleClass="logo-box" stylesheets="@../../css/auth/auth.css">
-                  <VBox alignment="CENTER" prefHeight="157.0" prefWidth="387.0" HBox.hgrow="ALWAYS">
-                     <padding>
-                        <Insets left="20.0" right="20.0"/>
-                     </padding>
-                     <TextField maxWidth="400.0" promptText="Userame" styleClass="inputs"
-                                stylesheets="@../../css/auth/auth.css">
-                        <VBox.margin>
-                           <Insets bottom="10.0"/>
-                        </VBox.margin>
-                     </TextField>
-                     <PasswordField maxWidth="400.0" promptText="Password" styleClass="inputs"
-                                    stylesheets="@../../css/auth/auth.css"/>
-                  </VBox>
-               </HBox>
-               <HBox alignment="CENTER" layoutX="10.0" layoutY="205.0" prefHeight="97.0" prefWidth="373.0"
-                     styleClass="logo-box" stylesheets="@../../css/auth/auth.css">
-                  <VBox.margin>
-                     <Insets top="10.0"/>
-                  </VBox.margin>
-                  <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="154.0" styleClass="login-button"
-                          stylesheets="@../../css/auth/auth.css" text="LOGIN"/>
-               </HBox>
-            </VBox>
-         </children>
+         <VBox alignment="CENTER" prefHeight="556.0" prefWidth="370.0" styleClass="left-side"
+               stylesheets="@../../css/auth/auth.css" HBox.hgrow="ALWAYS">
+            <padding>
+               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            </padding>
+            <ImageView fitHeight="347.0" fitWidth="292.0" pickOnBounds="true" preserveRatio="true"
+                       VBox.vgrow="ALWAYS">
+               <Image url="@../../assets/auth/illustration.png"/>
+            </ImageView>
+         </VBox>
+         <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="600.0" prefHeight="556.0" prefWidth="440.0"
+               styleClass="right-side" stylesheets="@../../css/auth/auth.css" HBox.hgrow="ALWAYS">
+            <HBox alignment="CENTER" prefHeight="165.0" prefWidth="373.0">
+               <VBox.margin>
+                  <Insets bottom="10.0"/>
+               </VBox.margin>
+               <ImageView fitHeight="150.0" fitWidth="172.0" pickOnBounds="true" preserveRatio="true">
+                  <Image url="@../../assets/logo.png"/>
+               </ImageView>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="40.0" prefHeight="165.0" prefWidth="373.0">
+               <VBox alignment="CENTER" prefHeight="157.0" prefWidth="387.0" HBox.hgrow="ALWAYS">
+                  <padding>
+                     <Insets left="20.0" right="20.0"/>
+                  </padding>
+                  <TextField maxWidth="400.0" promptText="Userame" styleClass="inputs"
+                             stylesheets="@../../css/auth/auth.css">
+                     <VBox.margin>
+                        <Insets bottom="10.0"/>
+                     </VBox.margin>
+                  </TextField>
+                  <PasswordField maxWidth="400.0" promptText="Password" styleClass="inputs"
+                                 stylesheets="@../../css/auth/auth.css"/>
+               </VBox>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="205.0" prefHeight="97.0" prefWidth="373.0">
+               <VBox.margin>
+                  <Insets top="10.0"/>
+               </VBox.margin>
+               <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="154.0" styleClass="login-button"
+                       stylesheets="@../../css/auth/auth.css" text="LOGIN"/>
+            </HBox>
+         </VBox>
       </HBox>
    </center>
 </BorderPane>
