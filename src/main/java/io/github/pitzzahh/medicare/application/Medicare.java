@@ -24,38 +24,43 @@
 
 package io.github.pitzzahh.medicare.application;
 
+import static io.github.pitzzahh.medicare.backend.login.cache.AuthData.initAccounts;
 import static io.github.pitzzahh.medicare.util.ComponentUtil.getMainProgressBar;
+import static io.github.pitzzahh.medicare.backend.db.DatabaseConnection.*;
+import io.github.pitzzahh.medicare.backend.login.service.AccountService;
+import io.github.pitzzahh.medicare.backend.login.dao.AccountDAOImp;
+import io.github.pitzzahh.medicare.backend.db.DatabaseConnection;
+import io.github.pitzzahh.medicare.backend.login.dao.AccountDAO;
 import static io.github.pitzzahh.medicare.util.WindowUtil.*;
 import io.github.pitzzahh.medicare.util.WindowUtil;
 import static java.util.Objects.requireNonNull;
 import io.github.pitzzahh.medicare.Launcher;
 import javafx.application.Application;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.image.Image;
 import javafx.stage.StageStyle;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import java.io.IOException;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.util.Map;
 
 public class Medicare extends Application {
 
+    private static final AccountDAO ACCOUNT_DAO = new AccountDAOImp();
+    private static final AccountService ACCOUNT_SERVICE = new AccountService(ACCOUNT_DAO);
+    private static final DatabaseConnection DATABASE_CONNECTION = new DatabaseConnection();
+
     @Override
     public void start(Stage primaryStage) throws IOException {
         initParents();
         Parent parent = getParent("auth_window");
-        Scene scene = new Scene(parent);
         setStage(primaryStage);
-
         getStage().initStyle(StageStyle.DECORATED);
         getStage().getIcons().add(new Image(requireNonNull(Launcher.class.getResourceAsStream("assets/logo.png"), "Icon not found")));
-        getStage().setScene(scene);
-        getStage().addEventHandler(KeyEvent.KEY_PRESSED, fullScreenEvent);
         WindowUtil.loadParent(parent, "Authentication");
-        getStage().centerOnScreen();
         getMainProgressBar(parent).ifPresent(p -> p.setVisible(false));
+        getStage().setWidth(697);
+        getStage().setHeight(556);
         getStage().show();
     }
 
@@ -78,7 +83,18 @@ public class Medicare extends Application {
         ));
     }
 
-    public static void main(String[] args) {
+    public static AccountService getAccountService() {
+        return ACCOUNT_SERVICE;
+    }
+
+    public static void main(String[] args) throws IOException {
+        if (doesNotExist()) createDatabaseFile();
+        DATABASE_CONNECTION
+                .setDriverClassName("org.sqlite.JDBC")
+                .setUrl("jdbc:sqlite:".concat(getDatabaseFile().getPath()))
+                .setDataSource();
+        createTables();
+        initAccounts.accept(ACCOUNT_SERVICE.getAccounts());
         launch(args);
     }
 }
