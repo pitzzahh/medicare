@@ -112,16 +112,6 @@ public class AuthenticationController {
 
         this.password.setOnKeyPressed(event -> {
             if (event.getCode().equals(KeyCode.ENTER)) checkCredentials(username, password);
-            else {
-                final String STYLE =
-                        "    -fx-border-color: transparent transparent #000 transparent;" +
-                                "    -fx-border-width: 2px;" +
-                                "    -fx-border-style: solid;" +
-                                "    -fx-font-size: 18px;";
-                this.username.setStyle(STYLE);
-                this.password.setStyle(STYLE);
-                this.errorMessage.setText("");
-            }
         });
 
     }
