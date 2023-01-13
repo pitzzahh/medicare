@@ -44,7 +44,8 @@ public class MainPanelController {
 
     @FXML
     public void onClickPatients(ActionEvent actionEvent) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        actionEvent.consume();
+        loadPage("main_panel", "patients_panel");
     }
 
     @FXML
