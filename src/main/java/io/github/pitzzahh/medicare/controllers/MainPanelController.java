@@ -24,8 +24,10 @@
 
 package io.github.pitzzahh.medicare.controllers;
 
+import static io.github.pitzzahh.medicare.backend.login.cache.AuthData.initAccounts;
 import static io.github.pitzzahh.medicare.backend.login.cache.AuthData.getAccounts;
 import static io.github.pitzzahh.medicare.util.WindowUtil.getStage;
+import io.github.pitzzahh.medicare.application.Medicare;
 import io.github.pitzzahh.medicare.util.WindowUtil;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.Button;
@@ -39,7 +41,7 @@ public class MainPanelController {
 
     @FXML
     public void initialize() {
-        logoutButton.setTooltip(new Tooltip("Click to log in"));
+        logoutButton.setTooltip(new Tooltip("Click to log out"));
     }
 
     @FXML
@@ -61,7 +63,7 @@ public class MainPanelController {
         actionEvent.consume();
         WindowUtil.logoutSession();
         getAccounts().clear();
-//        initAccounts.accept(Medicare.getAccountService().getAccounts()); TODO: fix
+        initAccounts.accept(Medicare.getAccountService().getAccounts());
 //        loadPage("main_panel", "dashboard");
         getStage().show();
     }
