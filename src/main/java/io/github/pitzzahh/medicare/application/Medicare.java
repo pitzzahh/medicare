@@ -30,15 +30,14 @@ import io.github.pitzzahh.medicare.util.WindowUtil;
 import static java.util.Objects.requireNonNull;
 import io.github.pitzzahh.medicare.Launcher;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.image.Image;
 import javafx.stage.StageStyle;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import java.io.IOException;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 import java.util.Map;
 
 public class Medicare extends Application {
@@ -68,11 +67,14 @@ public class Medicare extends Application {
      */
     private void initParents() throws IOException {
         Parent loginPage = FXMLLoader.load(requireNonNull(Launcher.class.getResource("fxml/auth/auth.fxml"), "Cannot find auth.fxml"));
+        Parent mainPanel = FXMLLoader.load(requireNonNull(Launcher.class.getResource("fxml/mainPanel.fxml"), "Cannot find mainPanel.fxml"));
 
         loginPage.setId("auth_window");
+        mainPanel.setId("main_panel");
 
         WindowUtil.addParents.accept(Map.of(
-                loginPage.getId(), loginPage
+                loginPage.getId(), loginPage,
+                mainPanel.getId(), mainPanel
         ));
     }
 
