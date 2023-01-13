@@ -1,0 +1,16 @@
+
+.main-button {
+    -fx-background-color: transparent;
+    -fx-font-size: 16px;
+}
+
+.main-button:hover {
+    -fx-background-color: #3D5A80;
+    -fx-background-radius: 10px;
+    -fx-border-width: 3px;
+    -fx-text-fill: #fff;
+}
+
+.main-button:armed {
+    -fx-opacity: 0.5;
+}
