@@ -59,7 +59,7 @@ public class Medicare extends Application {
         getStage().getIcons().add(new Image(requireNonNull(Launcher.class.getResourceAsStream("assets/logo.png"), "Icon not found")));
         WindowUtil.loadParent(parent, "Authentication");
         getMainProgressBar(parent).ifPresent(p -> p.setVisible(false));
-        getStage().setWidth(700);
+        getStage().setWidth(800);
         getStage().setHeight(555);
         getStage().show();
     }
@@ -73,13 +73,16 @@ public class Medicare extends Application {
     private void initParents() throws IOException {
         Parent loginPage = FXMLLoader.load(requireNonNull(Launcher.class.getResource("fxml/auth/auth.fxml"), "Cannot find auth.fxml"));
         Parent mainPanel = FXMLLoader.load(requireNonNull(Launcher.class.getResource("fxml/mainPanel.fxml"), "Cannot find mainPanel.fxml"));
+        Parent dashboard = FXMLLoader.load(requireNonNull(Launcher.class.getResource("fxml/dashboard.fxml"), "Cannot find mainPanel.fxml"));
 
         loginPage.setId("auth_window");
         mainPanel.setId("main_panel");
+        dashboard.setId("dashboard");
 
         WindowUtil.addParents.accept(Map.of(
                 loginPage.getId(), loginPage,
-                mainPanel.getId(), mainPanel
+                mainPanel.getId(), mainPanel,
+                dashboard.getId(), dashboard
         ));
     }
 
