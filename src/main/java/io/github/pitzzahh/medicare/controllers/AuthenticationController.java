@@ -34,7 +34,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
-import javafx.scene.Parent;
 import javafx.fxml.FXML;
 import java.util.Map;
 
@@ -73,32 +72,28 @@ public class AuthenticationController {
     private void signIn(String username, String password) {
         Map<String, Account> accounts = AuthData.getAccounts();
 
-        //noinspection ConstantValue
-        if (true) { // !accounts.isEmpty()
+        if (!accounts.isEmpty()) {
             boolean containsUsername = accounts.containsKey(username);
-            //noinspection ConstantValue
-            if (true) { // containsUsername
+            if (containsUsername) {
                 Account account = accounts.get(username);
-                //noinspection ConstantValue
-                if (true) { // account.getPassword().equals(password)
+                if (account.getPassword().equals(password)) {
                     this.username.clear();
                     this.password.clear();
                     errorMessage.setText("");
-                    Parent parent = getParent("main_panel");
-                    WindowUtil.loadParent(parent, "MEDiCARE");
+                    WindowUtil.loadParent(getParent("main_panel"), "MEDiCARE");
                     getStage().show();
                 }
                 else {
-                    ComponentUtil.getMainProgressBar(getParent("login_window")).ifPresent(p -> p.setVisible(false));
+                    ComponentUtil.getMainProgressBar(getParent("auth_window")).ifPresent(p -> p.setVisible(false));
                     errorMessage.setText("Invalid username or password");
                 }
             } else {
-                ComponentUtil.getMainProgressBar(getParent("login_window")).ifPresent(p -> p.setVisible(false));
+                ComponentUtil.getMainProgressBar(getParent("auth_window")).ifPresent(p -> p.setVisible(false));
                 errorMessage.setText("Invalid username or password");
             }
         }
         else {
-            ComponentUtil.getMainProgressBar(getParent("login_window")).ifPresent(p -> p.setVisible(false));
+            ComponentUtil.getMainProgressBar(getParent("auth_window")).ifPresent(p -> p.setVisible(false));
             errorMessage.setText("Invalid username or password");
         }
     }
@@ -109,9 +104,10 @@ public class AuthenticationController {
 
         String username = this.username.getText();
         String password = this.password.getText();
-
+        this.password.setOnKeyPressed(event -> errorMessage.setText(""));
         this.password.setOnKeyPressed(event -> {
             if (event.getCode().equals(KeyCode.ENTER)) checkCredentials(username, password);
+            else errorMessage.setText("");
         });
 
     }
