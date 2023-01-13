@@ -24,6 +24,8 @@
 
 package io.github.pitzzahh.medicare.controllers;
 
+import static io.github.pitzzahh.medicare.util.Style.leftButtonSelectionFunctionStyle;
+import static io.github.pitzzahh.medicare.util.ToolTipUtil.initToolTip;
 import io.github.pitzzahh.medicare.backend.login.cache.AuthData;
 import io.github.pitzzahh.medicare.backend.login.model.Account;
 import static io.github.pitzzahh.medicare.util.WindowUtil.*;
@@ -52,7 +54,7 @@ public class AuthenticationController {
 
     @FXML
     public void initialize() {
-        loginButton.setTooltip(new Tooltip("Click to log in"));
+        loginButton.setTooltip(initToolTip("Click to log in", leftButtonSelectionFunctionStyle()));
     }
 
     @FXML
