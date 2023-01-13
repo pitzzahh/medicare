@@ -11,6 +11,7 @@
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="365.0"
             prefWidth="542.0" style="-fx-background-color: #3D5A80;"
             xmlns="http://javafx.com/javafx/19"
+            fx:controller="io.github.pitzzahh.medicare.controllers.DashboardController"
             xmlns:fx="http://javafx.com/fxml/1">
     <center>
         <VBox alignment="CENTER" BorderPane.alignment="CENTER">
