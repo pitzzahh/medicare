@@ -24,12 +24,12 @@
 
 package io.github.pitzzahh.medicare.controllers;
 
-import static io.github.pitzzahh.medicare.util.Style.leftButtonSelectionFunctionStyle;
 import static io.github.pitzzahh.medicare.util.ComponentUtil.getMainProgressBar;
 import static io.github.pitzzahh.medicare.util.ToolTipUtil.initToolTip;
 import io.github.pitzzahh.medicare.backend.login.cache.AuthData;
 import io.github.pitzzahh.medicare.backend.login.model.Account;
 import static io.github.pitzzahh.medicare.util.WindowUtil.*;
+import static io.github.pitzzahh.medicare.util.Style.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
 import javafx.event.ActionEvent;
@@ -53,7 +53,7 @@ public class AuthenticationController {
 
     @FXML
     public void initialize() {
-        loginButton.setTooltip(initToolTip("Click to log in", leftButtonSelectionFunctionStyle()));
+        loginButton.setTooltip(initToolTip("Click to log in", normalStyle()));
     }
 
     @FXML
