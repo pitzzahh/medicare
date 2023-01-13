@@ -24,7 +24,7 @@
 
 package io.github.pitzzahh.medicare.controllers;
 
-import static io.github.pitzzahh.medicare.util.Style.leftButtonSelectionFunctionStyle;
+import static io.github.pitzzahh.medicare.util.Style.normalStyle;
 import static io.github.pitzzahh.medicare.backend.login.cache.AuthData.*;
 import static io.github.pitzzahh.medicare.util.ToolTipUtil.initToolTip;
 import static io.github.pitzzahh.medicare.application.Medicare.*;
@@ -40,7 +40,7 @@ public class MainPanelController {
 
     @FXML
     public void initialize() {
-        logoutButton.setTooltip(initToolTip("Click to logout", leftButtonSelectionFunctionStyle()));
+        logoutButton.setTooltip(initToolTip("Click to logout", normalStyle()));
     }
 
     @FXML
