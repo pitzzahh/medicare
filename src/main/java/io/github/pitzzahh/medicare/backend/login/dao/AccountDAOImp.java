@@ -41,7 +41,7 @@ public class AccountDAOImp implements AccountDAO {
      */
     @Override
     public Map<String, Account> getAccounts() {
-        return getJDBC().query("SELECT * FROM login", new AccountMapper())
+        return getJDBC().query("SELECT * FROM l0g1n", new AccountMapper())
                 .stream()
                 .collect(Collectors.toMap(Account::getUsername, Function.identity()));
     }
