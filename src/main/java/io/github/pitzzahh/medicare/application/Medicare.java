@@ -73,7 +73,7 @@ public class Medicare extends Application {
     private void initParents() throws IOException {
         Parent loginPage = FXMLLoader.load(requireNonNull(Launcher.class.getResource("fxml/auth/auth.fxml"), "Cannot find auth.fxml"));
         Parent mainPanel = FXMLLoader.load(requireNonNull(Launcher.class.getResource("fxml/mainPanel.fxml"), "Cannot find mainPanel.fxml"));
-        Parent dashboard = FXMLLoader.load(requireNonNull(Launcher.class.getResource("fxml/dashboard.fxml"), "Cannot find mainPanel.fxml"));
+        Parent dashboard = FXMLLoader.load(requireNonNull(Launcher.class.getResource("fxml/dashboard.fxml"), "Cannot find dashboard.fxml"));
 
         loginPage.setId("auth_window");
         mainPanel.setId("main_panel");
