@@ -1,4 +1,20 @@
 
+.main-button {
+    -fx-background-color: transparent;
+    -fx-font-size: 16px;
+}
+
+.main-button:hover {
+    -fx-background-color: #98C1D9;
+    -fx-background-radius: 10px;
+    -fx-border-width: 3px;
+    -fx-cursor: default;
+}
+
+.main-button:armed {
+    -fx-opacity: 0.5;
+}
+
 .header-box {
     -fx-background-color: #E0FBFC;
     -fx-background-radius: 50px 0 50px 0;
