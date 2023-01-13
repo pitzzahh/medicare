@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -8,7 +9,6 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <BorderPane style="-fx-background-color: #3D5A80;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.pitzzahh.medicare.controllers.MainPanelController">
     <top>
@@ -17,19 +17,25 @@
                 <padding>
                     <Insets bottom="2.0" left="20.0" right="2.0" top="2.0" />
                 </padding>
-                <Label graphicTextGap="20.0" prefHeight="25.0" prefWidth="159.0" text="MEDiCARE" textFill="#d1462f">
-                    <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                            <Image url="@../assets/logo.png" />
-                        </ImageView>
-                    </graphic>
-                    <HBox.margin>
-                        <Insets />
-                    </HBox.margin>
-                    <font>
-                        <Font name="System Bold" size="20.0" />
-                    </font>
-                </Label>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                      <Image url="@../assets/logo.png" />
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+                  </ImageView>
+            <Label styleClass="brand-name" stylesheets="@../css/main.css" text="MED" />
+            <Label stylesheets="@../css/main.css" text="i">
+               <styleClass>
+                  <String fx:value="brand-name" />
+                  <String fx:value="i" />
+               </styleClass>
+            </Label>
+            <Label stylesheets="@../css/main.css" text="CARE">
+               <styleClass>
+                  <String fx:value="brand-name" />
+                  <String fx:value="care" />
+               </styleClass>
+            </Label>
             </HBox>
             <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="56.0" prefWidth="511.0" HBox.hgrow="ALWAYS">
                 <padding>
