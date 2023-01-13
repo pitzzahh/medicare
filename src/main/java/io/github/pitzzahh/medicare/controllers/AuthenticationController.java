@@ -24,10 +24,9 @@
 
 package io.github.pitzzahh.medicare.controllers;
 
-import static io.github.pitzzahh.medicare.util.WindowUtil.getParent;
-import static io.github.pitzzahh.medicare.util.WindowUtil.getStage;
 import io.github.pitzzahh.medicare.backend.login.cache.AuthData;
 import io.github.pitzzahh.medicare.backend.login.model.Account;
+import static io.github.pitzzahh.medicare.util.WindowUtil.*;
 import io.github.pitzzahh.medicare.util.ComponentUtil;
 import io.github.pitzzahh.medicare.util.WindowUtil;
 import javafx.scene.input.KeyEvent;
@@ -81,6 +80,7 @@ public class AuthenticationController {
                     this.password.clear();
                     errorMessage.setText("");
                     WindowUtil.loadParent(getParent("main_panel"), "MEDiCARE");
+                    loadPage("main_panel", "dashboard");
                     getStage().show();
                 }
                 else {
