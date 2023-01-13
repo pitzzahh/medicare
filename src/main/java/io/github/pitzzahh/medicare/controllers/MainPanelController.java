@@ -24,9 +24,10 @@
 
 package io.github.pitzzahh.medicare.controllers;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
+import javafx.scene.control.Button;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 
 public class MainPanelController {
 
@@ -37,4 +38,21 @@ public class MainPanelController {
     public void initialize() {
         logoutButton.setTooltip(new Tooltip("Click to log in"));
     }
+
+    @FXML
+    public void onClickPatients(ActionEvent actionEvent) {
+
+    }
+
+    @FXML
+    public void onClickDoctors(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void onClickAbout(ActionEvent actionEvent) {
+
+    }
+
+
+
 }
