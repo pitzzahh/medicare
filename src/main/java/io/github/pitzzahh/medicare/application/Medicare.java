@@ -32,13 +32,12 @@ import io.github.pitzzahh.medicare.backend.login.dao.AccountDAOImp;
 import io.github.pitzzahh.medicare.backend.db.DatabaseConnection;
 import io.github.pitzzahh.medicare.backend.login.dao.AccountDAO;
 import static io.github.pitzzahh.medicare.util.WindowUtil.*;
-import io.github.pitzzahh.medicare.util.WindowUtil;
 import static java.util.Objects.requireNonNull;
 import io.github.pitzzahh.medicare.Launcher;
+import static javafx.fxml.FXMLLoader.load;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.StageStyle;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import java.io.IOException;
 import javafx.stage.Stage;
@@ -49,6 +48,7 @@ public class Medicare extends Application {
     private static final AccountDAO ACCOUNT_DAO = new AccountDAOImp();
     private static final AccountService ACCOUNT_SERVICE = new AccountService(ACCOUNT_DAO);
     private static final DatabaseConnection DATABASE_CONNECTION = new DatabaseConnection();
+    private final Class<Launcher> aClass = Launcher.class;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -56,8 +56,8 @@ public class Medicare extends Application {
         Parent parent = getParent("auth_window");
         setStage(primaryStage);
         getStage().initStyle(StageStyle.DECORATED);
-        getStage().getIcons().add(new Image(requireNonNull(Launcher.class.getResourceAsStream("assets/logo.png"), "Icon not found")));
-        WindowUtil.loadParent(parent, "Authentication");
+        getStage().getIcons().add(new Image(requireNonNull(aClass.getResourceAsStream("assets/logo.png"), "Icon not found")));
+        loadParent(parent, "Authentication");
         getMainProgressBar(parent).ifPresent(p -> p.setVisible(false));
         getStage().setWidth(800);
         getStage().setHeight(555);
@@ -71,18 +71,22 @@ public class Medicare extends Application {
      * @throws IOException if the parent cannot be loaded.
      */
     private void initParents() throws IOException {
-        Parent loginPage = FXMLLoader.load(requireNonNull(Launcher.class.getResource("fxml/auth/auth.fxml"), "Cannot find auth.fxml"));
-        Parent mainPanel = FXMLLoader.load(requireNonNull(Launcher.class.getResource("fxml/mainPanel.fxml"), "Cannot find mainPanel.fxml"));
-        Parent dashboard = FXMLLoader.load(requireNonNull(Launcher.class.getResource("fxml/dashboard.fxml"), "Cannot find dashboard.fxml"));
+
+        Parent loginPage = load(requireNonNull(aClass.getResource("fxml/auth/auth.fxml"), "Cannot find auth.fxml"));
+        Parent mainPanel = load(requireNonNull(aClass.getResource("fxml/mainPanel.fxml"), "Cannot find mainPanel.fxml"));
+        Parent dashboard = load(requireNonNull(aClass.getResource("fxml/dashboard.fxml"), "Cannot find dashboard.fxml"));
+        Parent patientsPanel = load(requireNonNull(aClass.getResource("fxml/patients/patientsPanel.fxml"), "Cannot find patientsPanel.fxml"));
 
         loginPage.setId("auth_window");
         mainPanel.setId("main_panel");
         dashboard.setId("dashboard");
+        patientsPanel.setId("patients_panel");
 
-        WindowUtil.addParents.accept(Map.of(
+        addParents.accept(Map.of(
                 loginPage.getId(), loginPage,
                 mainPanel.getId(), mainPanel,
-                dashboard.getId(), dashboard
+                dashboard.getId(), dashboard,
+                patientsPanel.getId(), patientsPanel
         ));
     }
 
