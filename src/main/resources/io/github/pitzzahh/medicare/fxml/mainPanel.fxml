@@ -35,7 +35,7 @@
                 <padding>
                     <Insets right="20.0" />
                 </padding>
-                <Button fx:id="logoutButton" mnemonicParsing="false" styleClass="logout-button" stylesheets="@../css/main.css">
+                <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#onLogout" styleClass="logout-button" stylesheets="@../css/main.css">
                     <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="logout-button">
                             <Image url="@../assets/logout.png" />
