@@ -4,12 +4,13 @@
 }
 
 .nav-box {
-    -fx-background-color: #98C1D9;
+    -fx-background-color: #E0FBFC;
 }
 
 .logout-button {
     -fx-background-color: tranaparent;
 }
+
 .logout-button:hover {
     -fx-background-color: #98C1D9;
 }
