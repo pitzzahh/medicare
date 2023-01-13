@@ -1,6 +1,12 @@
 
 .header-box {
     -fx-background-color: #E0FBFC;
+    -fx-background-radius: 50px 0 50px 0;
+}
+
+.nav-box {
+    -fx-background-color: #E0FBFC;
+    -fx-background-radius: 0 0 50px 0;
 }
 
 .brand-name {
@@ -14,10 +20,6 @@
 
 .care {
     -fx-text-fill: #3D5A80;
-}
-
-.nav-box {
-    -fx-background-color: #E0FBFC;
 }
 
 .logout-button {
