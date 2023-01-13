@@ -25,10 +25,11 @@
 package io.github.pitzzahh.medicare;
 
 import io.github.pitzzahh.medicare.application.Medicare;
+import java.io.IOException;
 
 public class Launcher {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Medicare.main(args);
     }
 }
