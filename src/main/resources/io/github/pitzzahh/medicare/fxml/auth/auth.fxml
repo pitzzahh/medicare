@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -35,19 +36,28 @@
                   <padding>
                      <Insets left="20.0" right="20.0" />
                   </padding>
-                  <TextField fx:id="username" maxWidth="400.0" promptText="Userame" styleClass="inputs" stylesheets="@../../css/auth/auth.css">
+                  <TextField fx:id="username" maxWidth="400.0" onKeyTyped="#onType" promptText="Username" styleClass="inputs" stylesheets="@../../css/auth/auth.css">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </TextField>
-                  <PasswordField fx:id="password" maxWidth="400.0" promptText="Password" styleClass="inputs" stylesheets="@../../css/auth/auth.css" />
+                  <PasswordField fx:id="password" maxWidth="400.0" onKeyTyped="#onType" promptText="Password" styleClass="inputs" stylesheets="@../../css/auth/auth.css" />
                </VBox>
             </HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="205.0" prefHeight="97.0" prefWidth="373.0">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
-               <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="203.0" styleClass="login-button" stylesheets="@../../css/auth/auth.css" text="LOGIN" />
+               <VBox alignment="CENTER">
+                  <Button fx:id="loginButton" mnemonicParsing="false" onAction="#onLogin" prefHeight="50.0"
+                          prefWidth="203.0" styleClass="login-button" stylesheets="@../../css/auth/auth.css"
+                          text="LOGIN">
+                     <VBox.margin>
+                        <Insets bottom="5.0"/>
+                     </VBox.margin>
+                  </Button>
+                  <Label fx:id="errorMessage" alignment="CENTER" prefHeight="15.0" prefWidth="351.0"/>
+               </VBox>
             </HBox>
          </VBox>
       </HBox>
