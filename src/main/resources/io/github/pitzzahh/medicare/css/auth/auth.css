@@ -14,10 +14,12 @@
 
 
 .login-button {
-    -fx-background-color: #97d1d2;
+    -fx-border-color: #97d1d2;
     -fx-text-fill: #293241;
+    -fx-border-radius: 20px;
     -fx-background-radius: 20px;
-
+    -fx-background-color: transparent;
+    -fx-border-width: 2px;
     -fx-font-size: 20px;
     -fx-font-weight: bold;
     -fx-padding: 10px;
@@ -25,12 +27,14 @@
 
 .login-button:hover{
     -fx-background-color: #293241;
+    -fx-border-color: none;
     -fx-text-fill: #E0FBFC;
     -fx-cursor: hand;
 }
 
 .login-button:armed {
     -fx-background-color: #161c25;
+    -fx-border-color: none;
     -fx-text-fill: #E0FBFC;
 }
 
