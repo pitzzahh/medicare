@@ -82,7 +82,6 @@ public class AuthenticationController {
                     errorMessage.setText("");
                     loadParent(getParent("main_panel"), "MEDiCARE");
                     loadPage("main_panel", "dashboard");
-                    getStage().show();
                 }
                 else {
                     getMainProgressBar(getParent("auth_window")).ifPresent(p -> p.setVisible(false));
