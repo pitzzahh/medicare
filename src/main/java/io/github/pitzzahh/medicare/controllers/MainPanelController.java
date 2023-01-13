@@ -24,5 +24,17 @@
 
 package io.github.pitzzahh.medicare.controllers;
 
-public class DoctorPanelController {
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
+
+public class MainPanelController {
+
+    @FXML
+    public Button logoutButton;
+
+    @FXML
+    public void initialize() {
+        logoutButton.setTooltip(new Tooltip("Click to log in"));
+    }
 }
