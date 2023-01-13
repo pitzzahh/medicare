@@ -12,87 +12,80 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="io.github.pitzzahh.medicare.controllers.AuthenticationController">
+<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.pitzzahh.medicare.controllers.AuthenticationController">
     <center>
         <HBox alignment="CENTER" BorderPane.alignment="CENTER">
             <VBox alignment="CENTER" styleClass="left-side" stylesheets="@../../css/auth/auth.css" HBox.hgrow="ALWAYS">
-                <ImageView fitHeight="347.0" fitWidth="292.0" pickOnBounds="true" preserveRatio="true"
-                           VBox.vgrow="ALWAYS">
-                    <Image url="@../../assets/auth/illustration.png"/>
+                <ImageView fitHeight="347.0" fitWidth="292.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                    <Image url="@../../assets/auth/illustration.png" />
                 </ImageView>
             </VBox>
-            <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" styleClass="right-side"
-                  stylesheets="@../../css/auth/auth.css" HBox.hgrow="ALWAYS">
+            <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" styleClass="right-side" stylesheets="@../../css/auth/auth.css" HBox.hgrow="ALWAYS">
                 <HBox alignment="CENTER">
                     <VBox.margin>
-                        <Insets/>
+                        <Insets />
                     </VBox.margin>
                     <ImageView fitHeight="150.0" fitWidth="172.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@../../assets/logo.png"/>
+                        <Image url="@../../assets/logo.png" />
                     </ImageView>
                 </HBox>
                 <HBox alignment="CENTER" layoutX="10.0" layoutY="64.0">
                     <children>
-                        <Label styleClass="brand-name" stylesheets="@../../css/auth/auth.css" text="MED"/>
+                        <Label styleClass="brand-name" stylesheets="@../../css/auth/auth.css" text="MED" />
                         <Label layoutX="179.0" layoutY="78.0" stylesheets="@../../css/auth/auth.css" text="i">
                             <styleClass>
-                                <String fx:value="brand-name"/>
-                                <String fx:value="i"/>
+                                <String fx:value="brand-name" />
+                                <String fx:value="i" />
                             </styleClass>
                         </Label>
                         <Label layoutX="206.0" layoutY="78.0" stylesheets="@../../css/auth/auth.css" text="CARE">
                             <styleClass>
-                                <String fx:value="brand-name"/>
-                                <String fx:value="care"/>
+                                <String fx:value="brand-name" />
+                                <String fx:value="care" />
                             </styleClass>
                         </Label>
                     </children>
                     <VBox.margin>
-                        <Insets bottom="50.0"/>
+                        <Insets bottom="50.0" />
                     </VBox.margin>
                 </HBox>
                 <HBox alignment="CENTER" layoutX="10.0" layoutY="40.0">
                     <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
                         <padding>
-                            <Insets left="20.0" right="20.0"/>
+                            <Insets left="20.0" right="20.0" />
                         </padding>
-                        <TextField fx:id="username" onKeyTyped="#onType" promptText="Username" styleClass="inputs"
-                                   stylesheets="@../../css/auth/auth.css">
+                        <TextField fx:id="username" onKeyTyped="#onType" promptText="Username" styleClass="inputs" stylesheets="@../../css/auth/auth.css">
                             <VBox.margin>
-                                <Insets bottom="10.0"/>
+                                <Insets bottom="10.0" />
                             </VBox.margin>
                         </TextField>
-                        <PasswordField fx:id="password" onKeyTyped="#onType" promptText="Password" styleClass="inputs"
-                                       stylesheets="@../../css/auth/auth.css"/>
+                        <PasswordField fx:id="password" onKeyTyped="#onType" promptText="Password" styleClass="inputs" stylesheets="@../../css/auth/auth.css" />
                         <HBox.margin>
-                            <Insets bottom="20.0"/>
+                            <Insets bottom="20.0" />
                         </HBox.margin>
                     </VBox>
                     <VBox.margin>
-                        <Insets bottom="50.0"/>
+                        <Insets bottom="50.0" />
                     </VBox.margin>
                 </HBox>
                 <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="205.0">
                     <VBox.margin>
-                        <Insets/>
+                        <Insets />
                     </VBox.margin>
                     <VBox alignment="CENTER" prefHeight="36.0" prefWidth="350.0">
-                        <Button fx:id="loginButton" mnemonicParsing="false" onAction="#onLogin" prefHeight="47.0"
-                                prefWidth="133.0" styleClass="login-button" stylesheets="@../../css/auth/auth.css"
-                                text="LOGIN">
+                        <Button fx:id="loginButton" mnemonicParsing="false" onAction="#onLogin" prefHeight="47.0" prefWidth="133.0" styleClass="login-button" stylesheets="@../../css/auth/auth.css" text="LOGIN">
                             <VBox.margin>
-                                <Insets bottom="5.0"/>
+                                <Insets bottom="5.0" />
                             </VBox.margin>
                         </Button>
-                        <Label fx:id="errorMessage" alignment="CENTER" prefWidth="350.0"/>
+                        <Label fx:id="errorMessage" alignment="CENTER" prefWidth="350.0" />
                         <padding>
-                            <Insets left="20.0" right="20.0"/>
+                            <Insets left="20.0" right="20.0" />
                         </padding>
                     </VBox>
                 </HBox>
                 <padding>
-                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                 </padding>
             </VBox>
         </HBox>
