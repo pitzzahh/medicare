@@ -71,12 +71,16 @@ public interface WindowUtil {
     }
 
     static void loadParent(Parent parent, String stageTitle) {
+        boolean isFullScreen = getStage().isFullScreen();
         Optional<Scene> scene = Optional.ofNullable(parent.getScene());
         getStage().setScene(scene.orElseGet(() -> new Scene(parent)));
+        getStage().setWidth(getStage().getScene().getWidth());
+        getStage().setHeight(getStage().getScene().getHeight());
         getStage().setTitle(Optional.ofNullable(getStage().getTitle()).orElse(stageTitle));
-        getStage().centerOnScreen();
+        if (!isFullScreen) getStage().centerOnScreen();
         getStage().addEventHandler(KeyEvent.KEY_PRESSED, fullScreenEvent);
         getStage().toFront();
+        getStage().setFullScreen(isFullScreen);
     }
 
     static void logoutSession() {
