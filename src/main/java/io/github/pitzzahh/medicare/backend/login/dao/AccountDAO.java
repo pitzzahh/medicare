@@ -24,5 +24,16 @@
 
 package io.github.pitzzahh.medicare.backend.login.dao;
 
-public interface AccountDao {
+import io.github.pitzzahh.medicare.backend.login.model.Account;
+import java.util.Map;
+
+public interface AccountDAO {
+
+    /**
+     * Get the accounts from the db as a map
+     * @return a {@code Map<String, Account>}
+     * @see Map
+     * @see Account
+     */
+    Map<String, Account> getAccounts();
 }
