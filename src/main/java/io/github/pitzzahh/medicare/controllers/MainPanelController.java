@@ -62,10 +62,9 @@ public class MainPanelController {
     @FXML
     public void onLogout(ActionEvent actionEvent) {
         actionEvent.consume();
-        logoutSession();
         getAccounts().clear();
         initAccounts.accept(getAccountService().getAccounts());
+        logoutSession();
         loadPage("main_panel", "dashboard");
-        getStage().show();
     }
 }
