@@ -10,6 +10,7 @@
 
 .right-side {
     -fx-background-color: #E0FBFC;
+    -fx-background-radius: 50px 120px 50px 120px;
 }
 
 .brand-name {
