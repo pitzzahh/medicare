@@ -51,7 +51,7 @@
                 <Insets top="20.0" />
             </padding>
             <HBox alignment="CENTER" prefHeight="41.0" prefWidth="167.0">
-                <Button mnemonicParsing="false" prefWidth="150.0" styleClass="main-button" stylesheets="@../css/common.css" text="PATIENTS">
+                <Button mnemonicParsing="false" onAction="#onClickPatients" prefWidth="150.0" styleClass="main-button" stylesheets="@../css/common.css" text="PATIENTS">
                     <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@../assets/patient-logo.png" />
@@ -63,7 +63,7 @@
                 </VBox.margin>
             </HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="41.0" prefWidth="167.0">
-                <Button mnemonicParsing="false" prefWidth="150.0" styleClass="main-button" stylesheets="@../css/common.css" text="DOCTORS">
+                <Button mnemonicParsing="false" onAction="#onClickDoctors" prefWidth="150.0" styleClass="main-button" stylesheets="@../css/common.css" text="DOCTORS">
                     <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@../assets/doctor-logo.png" />
@@ -75,7 +75,7 @@
                 </VBox.margin>
             </HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="133.0" prefHeight="41.0" prefWidth="167.0">
-                <Button graphicTextGap="25.0" mnemonicParsing="false" prefWidth="150.0" styleClass="main-button" stylesheets="@../css/common.css" text="ABOUT">
+                <Button graphicTextGap="25.0" mnemonicParsing="false" onAction="#onClickAbout" prefWidth="150.0" styleClass="main-button" stylesheets="@../css/common.css" text="ABOUT">
                     <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@../assets/about.png" />
