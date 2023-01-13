@@ -24,18 +24,16 @@
 
 package io.github.pitzzahh.medicare.util;
 
+import static java.lang.String.format;
+import javafx.scene.layout.BorderPane;
+import java.util.function.Consumer;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.KeyCode;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
 import java.util.*;
-import java.util.function.Consumer;
-
-import static java.lang.String.format;
 
 public interface WindowUtil {
 
