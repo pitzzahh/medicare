@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane style="-fx-background-color: #3D5A80;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.pitzzahh.medicare.controllers.MainPanelController">
+<BorderPane style="-fx-background-color: #3D5A80; -fx-background-radius: 50px 0 0 0;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.pitzzahh.medicare.controllers.MainPanelController">
     <top>
         <HBox prefHeight="56.0" prefWidth="600.0" styleClass="header-box" stylesheets="@../css/main.css" BorderPane.alignment="CENTER">
             <HBox alignment="CENTER_LEFT" prefHeight="51.0" prefWidth="292.0">
@@ -57,7 +57,7 @@
                 <Insets top="20.0" />
             </padding>
             <HBox alignment="CENTER" prefHeight="41.0" prefWidth="167.0">
-                <Button mnemonicParsing="false" onAction="#onClickPatients" prefWidth="150.0" styleClass="main-button" stylesheets="@../css/common.css" text="PATIENTS">
+                <Button mnemonicParsing="false" onAction="#onClickPatients" prefWidth="150.0" styleClass="main-button" stylesheets="@../css/main.css" text="PATIENTS">
                     <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@../assets/patient-logo.png" />
@@ -69,7 +69,7 @@
                 </VBox.margin>
             </HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="41.0" prefWidth="167.0">
-                <Button mnemonicParsing="false" onAction="#onClickDoctors" prefWidth="150.0" styleClass="main-button" stylesheets="@../css/common.css" text="DOCTORS">
+                <Button mnemonicParsing="false" onAction="#onClickDoctors" prefWidth="150.0" styleClass="main-button" stylesheets="@../css/main.css" text="DOCTORS">
                     <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@../assets/doctor-logo.png" />
@@ -81,7 +81,7 @@
                 </VBox.margin>
             </HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="133.0" prefHeight="41.0" prefWidth="167.0">
-                <Button graphicTextGap="25.0" mnemonicParsing="false" onAction="#onClickAbout" prefWidth="150.0" styleClass="main-button" stylesheets="@../css/common.css" text="ABOUT">
+                <Button graphicTextGap="25.0" mnemonicParsing="false" onAction="#onClickAbout" prefWidth="150.0" styleClass="main-button" stylesheets="@../css/main.css" text="ABOUT">
                     <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@../assets/about.png" />
