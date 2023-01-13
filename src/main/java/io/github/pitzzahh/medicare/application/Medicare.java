@@ -60,7 +60,7 @@ public class Medicare extends Application {
         loadParent(parent, "Authentication");
         getMainProgressBar(parent).ifPresent(p -> p.setVisible(false));
         getStage().setWidth(800);
-        getStage().setHeight(555);
+        getStage().setHeight(600);
         getStage().show();
     }
 
