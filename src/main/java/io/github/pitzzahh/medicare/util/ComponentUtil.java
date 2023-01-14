@@ -99,6 +99,23 @@ public interface ComponentUtil {
         choiceBox.getSelectionModel().selectFirst();
     }
 
+    static void resetInputs(
+            TextField lastName,
+            TextField firstName,
+            TextField middleName,
+            TextField address,
+            TextField phoneNumber,
+            ChoiceBox<Gender> gender,
+            DatePicker birthDate
+    ) {
+        lastName.clear();
+        firstName.clear();
+        middleName.clear();
+        address.clear();
+        phoneNumber.clear();
+        gender.getSelectionModel().selectFirst();
+        birthDate.setValue(null);
+    }
 }
 
 class ComponentUtilFields {
