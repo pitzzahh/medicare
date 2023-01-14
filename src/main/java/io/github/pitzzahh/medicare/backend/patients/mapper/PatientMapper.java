@@ -38,13 +38,14 @@ public class PatientMapper implements RowMapper<Patient> {
     public Patient mapRow(ResultSet rs, int rowNum) throws SQLException {
         String[] date = decrypt(rs.getString("birthdate")).split("-");
         return new Patient(
-                parseInt(decrypt(rs.getString("patient_id"))),
+                rs.getInt("id"),
                 decrypt(rs.getString("last_name")),
                 decrypt(rs.getString("first_name")),
-                decrypt(rs.getString("middle_name")),
+                rs.getString("middle_name") != null ? decrypt(rs.getString("middle_name")) : "",
                 Gender.valueOf(decrypt(rs.getString("gender"))),
                 LocalDate.of(parseInt(date[0]), parseInt(date[1]), parseInt(date[2])),
                 decrypt(rs.getString("address")),
+                rs.getString("phone_number") != null ? decrypt(rs.getString("phone_number")) : "",
                 decrypt(rs.getString("symptoms"))
         );
     }
