@@ -11,8 +11,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="530.0" prefWidth="502.0" style="-fx-background-radius: 50px 0 0 0; -fx-background-color: #3D5A80;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.pitzzahh.medicare.controllers.AddPatientController">
-    <VBox alignment="TOP_CENTER" prefHeight="528.0" prefWidth="521.0" style="-fx-background-color: #293241; -fx-background-radius: 50px 0 0 0;">
+<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="530.0" prefWidth="502.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.pitzzahh.medicare.controllers.AddPatientController">
+    <VBox alignment="TOP_CENTER" prefHeight="528.0" prefWidth="521.0" style="-fx-background-color: transparent;">
         <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
         </padding>
