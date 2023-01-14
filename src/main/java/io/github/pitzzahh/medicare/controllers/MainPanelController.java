@@ -47,6 +47,7 @@ public class MainPanelController {
     public void onClickPatients(ActionEvent actionEvent) {
         actionEvent.consume();
         loadPage("main_panel", "patients_panel");
+        loadPage("patients_panel", "dashboard");
     }
 
     @FXML
