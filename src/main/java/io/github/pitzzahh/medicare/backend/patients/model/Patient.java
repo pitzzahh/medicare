@@ -30,7 +30,7 @@ import lombok.*;
 
 @Data
 @ToString
-@EqualsAndHashCode()
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 public class Patient  {
@@ -41,5 +41,17 @@ public class Patient  {
     private Gender gender;
     private LocalDate birthDate;
     private String address;
+    private String phoneNumber;
     private String symptoms;
+
+    public Patient(String lastName, String firstName, String middleName, Gender gender, LocalDate birthDate, String address, String phoneNumber, String symptoms) {
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.gender = gender;
+        this.birthDate = birthDate;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.symptoms = symptoms;
+    }
 }
