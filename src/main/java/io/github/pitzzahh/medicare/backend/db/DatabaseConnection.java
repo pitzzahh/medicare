@@ -26,9 +26,8 @@ package io.github.pitzzahh.medicare.backend.db;
 
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
-
-import java.io.File;
 import java.io.IOException;
+import java.io.File;
 
 /**
  * class used by services to gain access to the database.
@@ -141,7 +140,16 @@ public class DatabaseConnection {
                 "    p$ssW0rd TEXT NOT NULL," +
                 "    PRIMARY KEY (u$erN4me)" +
                 ");");
-
+        getJDBC().execute("CREATE TABLE IF NOT EXISTS p4t13nt$ (\n" +
+                "    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,\n" +
+                "    last_name TEXT  NOT NULL,\n" +
+                "    first_name TEXT NOT NULL,\n" +
+                "    middle_name TEXT,\n" +
+                "    gender TEXT NOT NULL,\n" +
+                "    birthdate TEXT NOT NULL,\n" +
+                "    address TEXT NOT NULL,\n" +
+                "    symptoms TEXT NOT NULL\n" +
+                ");");
         getJDBC().execute("INSERT OR IGNORE INTO l0g1n(u$erN4me, p$ssW0rd) VALUES ('YWRtaW4=', 'YWRtaW4=');");
     }
 
