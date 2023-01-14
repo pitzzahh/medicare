@@ -136,6 +136,10 @@ public interface ComponentUtil {
         dialogPane.setId("alert-dialog");
         alert.showAndWait();
     }
+
+    static DateTimeFormatter getDateFormatter() {
+        return ComponentUtilFields.formatter;
+    }
 }
 
 class ComponentUtilFields {
