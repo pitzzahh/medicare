@@ -38,7 +38,7 @@
     -fx-font-weight: bold;
 }
 
-.inputs, .inputs .text-field {
+.inputs, .inputs .text-field, .inputs .content {
     -fx-background-color: #D9D9D9;
     -fx-font-size: 16px;
     -fx-font-weight: bold;
