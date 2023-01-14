@@ -28,12 +28,16 @@ import static io.github.pitzzahh.medicare.util.ComponentUtil.getDateFormatter;
 import static io.github.pitzzahh.medicare.util.ToolTipUtil.initToolTip;
 import static io.github.pitzzahh.medicare.util.Style.normalStyle;
 import io.github.pitzzahh.medicare.backend.Gender;
+import io.github.pitzzahh.medicare.backend.patients.cache.PatientData;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+
+import java.time.LocalDate;
+import java.time.Period;
 
 public class PatientCardController {
 
@@ -51,6 +55,7 @@ public class PatientCardController {
 
     @FXML
     public void initialize() {
+
         updateButton.setTooltip(initToolTip("Click to Modify Patient", normalStyle()));
         removeButton.setTooltip(initToolTip("Click to Remove Patient", normalStyle()));
         id.setEditable(false);
@@ -64,6 +69,15 @@ public class PatientCardController {
         dateOfBirth.setDisable(true);
         dateOfBirth.getEditor().setText(dateString);
         gender.setDisable(true);
+
+        PatientData.getPatients().values().forEach(patient -> {
+            id.setText(String.valueOf(patient.getPatientId()));
+            name.setText(patient.getFirstName().concat(" ").concat(patient.getLastName()));
+            age.setText(String.valueOf(Period.between(patient.getBirthDate(), LocalDate.now())));
+            address.setText(patient.getAddress());
+            phoneNumber.setText(patient.getPhoneNumber());
+            symptoms.setText(patient.getSymptoms());
+        });
     }
 
     @FXML

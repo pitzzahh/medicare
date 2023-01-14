@@ -22,20 +22,28 @@
  * SOFTWARE.
  */
 
-package io.github.pitzzahh.medicare.controllers;
+package io.github.pitzzahh.medicare.backend.patients.cache;
 
-import static io.github.pitzzahh.medicare.util.WindowUtil.getParent;
-import javafx.scene.layout.VBox;
-import javafx.fxml.FXML;
+import io.github.pitzzahh.medicare.backend.patients.model.Patient;
+import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
+import java.util.function.Consumer;
+import java.util.HashMap;
+import java.util.Map;
 
-public class ViewPatientController {
+public final class PatientData {
 
-    @FXML
-    public VBox cardStorage;
+    private static final Map<Integer, Patient> PATIENTS = new HashMap<>();
 
-    @FXML
-    public void initialize() {
-        cardStorage.getChildrenUnmodifiable().addAll(getParent("patient_card"));
+    private static final ObservableList<Patient> MEMBERS_OBSERVABLE_LIST = FXCollections.observableArrayList();
+
+    public static Consumer<Map<Integer, Patient>> initPatients = PATIENTS::putAll;
+
+    public static Map<Integer, Patient> getPatients() {
+        return PATIENTS;
     }
 
+    public static ObservableList<Patient> getMembersDataSource() {
+        return MEMBERS_OBSERVABLE_LIST;
+    }
 }

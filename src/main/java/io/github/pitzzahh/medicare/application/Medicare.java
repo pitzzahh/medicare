@@ -24,6 +24,7 @@
 
 package io.github.pitzzahh.medicare.application;
 
+import static io.github.pitzzahh.medicare.backend.patients.cache.PatientData.initPatients;
 import static io.github.pitzzahh.medicare.backend.login.cache.AuthData.initAccounts;
 import static io.github.pitzzahh.medicare.util.ComponentUtil.getMainProgressBar;
 import io.github.pitzzahh.medicare.backend.patients.service.PatientService;
@@ -120,6 +121,7 @@ public class Medicare extends Application {
                 .setDataSource();
         createTables();
         initAccounts.accept(ACCOUNT_SERVICE.getAccounts());
+        initPatients.accept(PATIENT_SERVICE.getPatients());
         launch(args);
     }
 }
