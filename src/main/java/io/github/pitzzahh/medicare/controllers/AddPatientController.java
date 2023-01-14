@@ -24,9 +24,10 @@
 
 package io.github.pitzzahh.medicare.controllers;
 
-import io.github.pitzzahh.util.utilities.classes.enums.Gender;
-import javafx.scene.control.*;
+import static io.github.pitzzahh.medicare.util.ComponentUtil.initGenderChoiceBox;
+import io.github.pitzzahh.medicare.backend.Gender;
 import javafx.event.ActionEvent;
+import javafx.scene.control.*;
 import javafx.fxml.FXML;
 
 public class AddPatientController {
@@ -45,6 +46,12 @@ public class AddPatientController {
 
     @FXML
     public Button addPatient;
+
+    @FXML
+    public void initialize() {
+        addPatient.setTooltip(new Tooltip("Click to Add Patient"));
+        initGenderChoiceBox(gender);
+    }
 
     @FXML
     public void onAddPatient(ActionEvent actionEvent) {
