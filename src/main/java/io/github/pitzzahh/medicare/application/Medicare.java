@@ -26,9 +26,12 @@ package io.github.pitzzahh.medicare.application;
 
 import static io.github.pitzzahh.medicare.backend.login.cache.AuthData.initAccounts;
 import static io.github.pitzzahh.medicare.util.ComponentUtil.getMainProgressBar;
+import io.github.pitzzahh.medicare.backend.patients.service.PatientService;
 import static io.github.pitzzahh.medicare.backend.db.DatabaseConnection.*;
 import io.github.pitzzahh.medicare.backend.login.service.AccountService;
+import io.github.pitzzahh.medicare.backend.patients.dao.PatientDAOImpl;
 import io.github.pitzzahh.medicare.backend.login.dao.AccountDAOImp;
+import io.github.pitzzahh.medicare.backend.patients.dao.PatientDAO;
 import io.github.pitzzahh.medicare.backend.db.DatabaseConnection;
 import io.github.pitzzahh.medicare.backend.login.dao.AccountDAO;
 import static io.github.pitzzahh.medicare.util.WindowUtil.*;
@@ -46,7 +49,9 @@ import java.util.Map;
 public class Medicare extends Application {
 
     private static final AccountDAO ACCOUNT_DAO = new AccountDAOImp();
+    private static final PatientDAO PATIENT_DAO = new PatientDAOImpl();
     private static final AccountService ACCOUNT_SERVICE = new AccountService(ACCOUNT_DAO);
+    private static final PatientService PATIENT_SERVICE = new PatientService(PATIENT_DAO);
     private static final DatabaseConnection DATABASE_CONNECTION = new DatabaseConnection();
     private final Class<Launcher> aClass = Launcher.class;
 
@@ -59,8 +64,8 @@ public class Medicare extends Application {
         getStage().getIcons().add(new Image(requireNonNull(aClass.getResourceAsStream("assets/logo.png"), "Icon not found")));
         loadParent(parent, "Authentication");
         getMainProgressBar(parent).ifPresent(p -> p.setVisible(false));
-        getStage().setWidth(800);
-        getStage().setHeight(600);
+        getStage().setWidth(1000);
+        getStage().setHeight(700);
         getStage().show();
     }
 
@@ -95,6 +100,10 @@ public class Medicare extends Application {
 
     public static AccountService getAccountService() {
         return ACCOUNT_SERVICE;
+    }
+
+    public static PatientService getPatientService() {
+        return PATIENT_SERVICE;
     }
 
     public static void main(String[] args) throws IOException {
