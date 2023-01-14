@@ -148,6 +148,7 @@ public class DatabaseConnection {
                 "    gender TEXT NOT NULL,\n" +
                 "    birthdate TEXT NOT NULL,\n" +
                 "    address TEXT NOT NULL,\n" +
+                "    phone_number TEXT,\n" +
                 "    symptoms TEXT NOT NULL\n" +
                 ");");
         getJDBC().execute("INSERT OR IGNORE INTO l0g1n(u$erN4me, p$ssW0rd) VALUES ('YWRtaW4=', 'YWRtaW4=');");
