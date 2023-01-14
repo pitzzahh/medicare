@@ -82,19 +82,25 @@ public class Medicare extends Application {
         Parent dashboard = load(requireNonNull(aClass.getResource("fxml/dashboard.fxml"), "Cannot find dashboard.fxml"));
         Parent patientsPanel = load(requireNonNull(aClass.getResource("fxml/patients/patientsPanel.fxml"), "Cannot find patientsPanel.fxml"));
         Parent addPatient = load(requireNonNull(aClass.getResource("fxml/patients/addPatient.fxml"), "Cannot find addPatient.fxml"));
+        Parent viewPatient = load(requireNonNull(aClass.getResource("fxml/patients/viewPatient.fxml"), "Cannot find viewPatient.fxml"));
+        Parent patientCard = load(requireNonNull(aClass.getResource("fxml/patients/patientCard.fxml"), "Cannot find patientCard.fxml"));
 
         loginPage.setId("auth_window");
         mainPanel.setId("main_panel");
         dashboard.setId("dashboard");
         patientsPanel.setId("patients_panel");
         addPatient.setId("add_patient");
+        viewPatient.setId("view_patient");
+        patientCard.setId("patient_card");
 
         addParents.accept(Map.of(
                 loginPage.getId(), loginPage,
                 mainPanel.getId(), mainPanel,
                 dashboard.getId(), dashboard,
                 patientsPanel.getId(), patientsPanel,
-                addPatient.getId(), addPatient
+                addPatient.getId(), addPatient,
+                viewPatient.getId(), viewPatient,
+                patientCard.getId(), patientCard
         ));
     }
 
