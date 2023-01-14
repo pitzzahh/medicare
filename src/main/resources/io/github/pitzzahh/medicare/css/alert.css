@@ -1,0 +1,7 @@
+#alert-dialog {
+    -fx-padding: 12px;
+    -fx-background-color: #e5e5e5;
+    -fx-background-radius: 5px;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
