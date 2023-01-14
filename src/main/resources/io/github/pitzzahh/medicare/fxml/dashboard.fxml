@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane style="-fx-background-color: #293241;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.pitzzahh.medicare.controllers.DashboardController">
+<BorderPane style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.pitzzahh.medicare.controllers.DashboardController">
     <center>
         <VBox alignment="CENTER" BorderPane.alignment="CENTER">
             <HBox alignment="CENTER" prefHeight="104.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
