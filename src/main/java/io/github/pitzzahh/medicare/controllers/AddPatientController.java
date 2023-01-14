@@ -24,5 +24,31 @@
 
 package io.github.pitzzahh.medicare.controllers;
 
+import io.github.pitzzahh.util.utilities.classes.enums.Gender;
+import javafx.scene.control.*;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+
 public class AddPatientController {
+
+    @FXML
+    public TextField lastName, firstName, middleName, address;
+
+    @FXML
+    public ChoiceBox<Gender> gender;
+
+    @FXML
+    public DatePicker birthDate;
+
+    @FXML
+    public TextArea symptoms;
+
+    @FXML
+    public Button addPatient;
+
+    @FXML
+    public void onAddPatient(ActionEvent actionEvent) {
+        actionEvent.consume();
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 }
