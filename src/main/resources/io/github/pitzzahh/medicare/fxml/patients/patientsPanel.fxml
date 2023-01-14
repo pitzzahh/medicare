@@ -37,13 +37,13 @@
                 <Insets top="20.0" />
             </padding>
             <HBox alignment="CENTER" prefHeight="41.0" prefWidth="167.0">
-                <Button mnemonicParsing="false" prefWidth="150.0" styleClass="main-button" stylesheets="@../../css/patients/patients.css" text="ADD PATIENT" />
+                <Button mnemonicParsing="false" onAction="#onAddPatient" prefWidth="150.0" styleClass="main-button" stylesheets="@../../css/patients/patients.css" text="ADD PATIENT" />
                 <VBox.margin>
                     <Insets bottom="10.0" />
                 </VBox.margin>
             </HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="41.0" prefWidth="167.0">
-                <Button mnemonicParsing="false" prefWidth="150.0" styleClass="main-button" stylesheets="@../../css/patients/patients.css" text="VIEW PATIENTS" />
+                <Button mnemonicParsing="false" onAction="#onViewPatients" prefWidth="150.0" styleClass="main-button" stylesheets="@../../css/patients/patients.css" text="VIEW PATIENTS" />
                 <VBox.margin>
                     <Insets bottom="10.0" />
                 </VBox.margin>
