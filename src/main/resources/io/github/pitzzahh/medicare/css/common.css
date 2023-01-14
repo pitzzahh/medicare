@@ -40,7 +40,25 @@
 
 .inputs, .inputs .text-field, .inputs .textarea {
     -fx-background-color: #D9D9D9;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
 }
 
 .add-button {
+    -fx-font-size: 18px;
+    -fx-background-color: transparent;
+    -fx-border-color: #fff;
+    -fx-border-radius: 5px;
+    -fx-text-fill: #fff;
+    -fx-border-width: 2px;
+}
+
+.add-button:hover {
+    -fx-background-color: #fff;
+    -fx-text-fill: #000;
+    -fx-font-weight: bold;
+}
+
+.add-button:armed {
+    -fx-opacity: 0.5;
 }
