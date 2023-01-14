@@ -26,14 +26,17 @@ package io.github.pitzzahh.medicare.util;
 
 import static io.github.pitzzahh.medicare.util.WindowUtil.getParent;
 import javafx.scene.control.cell.PropertyValueFactory;
+import io.github.pitzzahh.medicare.backend.Gender;
 import java.time.format.DateTimeFormatter;
 import javafx.scene.effect.GaussianBlur;
+import javafx.collections.FXCollections;
 import static java.lang.String.format;
 import java.time.format.FormatStyle;
 import java.util.stream.IntStream;
 import javafx.scene.control.*;
 import javafx.scene.Parent;
 import java.util.Optional;
+import java.util.Arrays;
 
 public interface ComponentUtil {
     /**
@@ -89,6 +92,11 @@ public interface ComponentUtil {
         GaussianBlur gaussianBlur = new GaussianBlur();
         gaussianBlur.setRadius(radius);
         return gaussianBlur;
+    }
+
+    static void initGenderChoiceBox(ChoiceBox<Gender> choiceBox) {
+        choiceBox.getItems().addAll(FXCollections.observableArrayList(Arrays.asList(Gender.values())));
+        choiceBox.getSelectionModel().selectFirst();
     }
 
 }
