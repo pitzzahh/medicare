@@ -40,6 +40,6 @@ public class PatientsPanelController {
     @FXML
     public void onViewPatients(ActionEvent actionEvent) {
         actionEvent.consume();
-        throw new UnsupportedOperationException("Not yet implemented");
+        loadPage("patients_panel", "view_patient");
     }
 }
