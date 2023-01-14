@@ -24,15 +24,22 @@
 
 package io.github.pitzzahh.medicare.backend.patients.model;
 
-import io.github.pitzzahh.util.utilities.classes.Person;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-import lombok.Data;
+import io.github.pitzzahh.medicare.backend.Gender;
+import java.time.LocalDate;
+import lombok.*;
 
 @Data
 @ToString
-@EqualsAndHashCode(callSuper = false)
-public class Patient extends Person {
+@EqualsAndHashCode()
+@AllArgsConstructor
+@NoArgsConstructor
+public class Patient  {
     private int patientId;
+    private String lastName;
+    private String firstName;
+    private String middleName;
+    private Gender gender;
+    private LocalDate birthDate;
+    private String address;
     private String symptoms;
 }
