@@ -24,5 +24,14 @@
 
 package io.github.pitzzahh.medicare.backend.patients.dao;
 
+import io.github.pitzzahh.medicare.backend.patients.model.Patient;
+import java.util.function.Consumer;
+import java.util.Map;
+
 public interface PatientDAO {
+
+    Map<Integer, Patient> getPatients();
+
+    Consumer<Patient> addPatient();
+
 }
