@@ -24,11 +24,15 @@
 
 package io.github.pitzzahh.medicare.controllers;
 
-import static io.github.pitzzahh.medicare.util.ComponentUtil.initGenderChoiceBox;
-import static io.github.pitzzahh.medicare.util.ComponentUtil.resetInputs;
+import static io.github.pitzzahh.medicare.application.Medicare.getPatientService;
+import static io.github.pitzzahh.medicare.util.WindowUtil.getParent;
+import static io.github.pitzzahh.medicare.util.WindowUtil.loadPage;
+import io.github.pitzzahh.medicare.backend.patients.model.Patient;
+import static io.github.pitzzahh.medicare.util.ComponentUtil.*;
 import io.github.pitzzahh.medicare.backend.Gender;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
+import java.util.Optional;
 import javafx.fxml.FXML;
 
 public class AddPatientController {
@@ -58,7 +62,62 @@ public class AddPatientController {
     @FXML
     public void onAddPatient(ActionEvent actionEvent) {
         actionEvent.consume();
+
+        if (requiredInput()) return;
+
+        Patient patient = new Patient(
+                lastName.getText().trim(),
+                firstName.getText().trim(),
+                middleName.getText().trim(),
+                gender.getSelectionModel().getSelectedItem(),
+                birthDate.getValue(),
+                address.getText().trim(),
+                phoneNumber.getText().trim(),
+                symptoms.getText().trim()
+        );
+
+        if (getPatientService().doesPatientAlreadyExists(patient)) {
+            showAlert("Patient Already Exists", "Patient Already Exists", "Patient already exists in the database");
+            return;
+        }
+
+        getPatientService().addPatient().accept(patient);
+        showAlert("Patient Added", "Patient Added", "Patient has been added successfully");
+
+        int size = getPatientService().getPatients().size();
+        Optional<Label> label = getLabel(getParent("dashboard"), "patientsCount");
+        label.ifPresent(l -> l.setText(String.valueOf(size)));
+        loadPage("patients_panel", "dashboard");
         resetInputs(lastName, firstName, middleName, address, phoneNumber, gender, birthDate);
-        throw new UnsupportedOperationException("Not yet implemented");
+        symptoms.clear();
+    }
+
+    private boolean requiredInput() {
+        if (firstName.getText().trim().isEmpty()) {
+            showAlert("First Name is Required", "First Name is Required", "First name is required");
+            return true;
+        }
+
+        if (lastName.getText().trim().isEmpty()) {
+            showAlert("Last Name is Required", "Last Name is Required", "Last name is required");
+            return true;
+        }
+
+        if (birthDate.getValue() == null) {
+            showAlert("Birth Date is Required", "Birth Date is Required", "Birth date is required");
+            return true;
+        }
+
+        if (address.getText().trim().isEmpty()) {
+            showAlert("Address is Required", "Address is Required", "Address is required");
+            return true;
+        }
+
+        if (symptoms.getText().trim().isEmpty()) {
+            showAlert("Symptoms is Required", "Symptoms is Required", "Symptoms is required");
+            return true;
+        }
+
+        return false;
     }
 }
