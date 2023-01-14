@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.pitzzahh.medicare.controllers.DashboardController">
+<BorderPane style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <center>
         <VBox alignment="CENTER" BorderPane.alignment="CENTER">
             <HBox alignment="CENTER" prefHeight="104.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
@@ -33,7 +33,7 @@
                             <padding>
                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                             </padding>
-                            <Label styleClass="card-count" stylesheets="@../css/common.css" text="0" />
+                            <Label fx:id="patientsCount" styleClass="card-count" stylesheets="@../css/common.css" text="0" />
                         </HBox>
                     </VBox>
                 </HBox>
@@ -58,7 +58,7 @@
                             <padding>
                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                             </padding>
-                            <Label styleClass="card-count" stylesheets="@../css/common.css" text="0" />
+                            <Label fx:id="doctorsCount" styleClass="card-count" stylesheets="@../css/common.css" text="0" />
                         </HBox>
                     </VBox>
                 </HBox>
