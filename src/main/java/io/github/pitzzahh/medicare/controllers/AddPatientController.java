@@ -25,6 +25,7 @@
 package io.github.pitzzahh.medicare.controllers;
 
 import static io.github.pitzzahh.medicare.util.ComponentUtil.initGenderChoiceBox;
+import static io.github.pitzzahh.medicare.util.ComponentUtil.resetInputs;
 import io.github.pitzzahh.medicare.backend.Gender;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
@@ -33,7 +34,7 @@ import javafx.fxml.FXML;
 public class AddPatientController {
 
     @FXML
-    public TextField lastName, firstName, middleName, address;
+    public TextField lastName, firstName, middleName, address, phoneNumber;
 
     @FXML
     public ChoiceBox<Gender> gender;
@@ -51,11 +52,13 @@ public class AddPatientController {
     public void initialize() {
         addPatient.setTooltip(new Tooltip("Click to Add Patient"));
         initGenderChoiceBox(gender);
+        resetInputs(lastName, firstName, middleName, address, phoneNumber, gender, birthDate);
     }
 
     @FXML
     public void onAddPatient(ActionEvent actionEvent) {
         actionEvent.consume();
+        resetInputs(lastName, firstName, middleName, address, phoneNumber, gender, birthDate);
         throw new UnsupportedOperationException("Not yet implemented");
     }
 }
