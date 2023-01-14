@@ -27,12 +27,16 @@ package io.github.pitzzahh.medicare.util;
 import static io.github.pitzzahh.medicare.util.WindowUtil.getParent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import io.github.pitzzahh.medicare.backend.Gender;
+import static java.util.Objects.requireNonNull;
+import io.github.pitzzahh.medicare.Launcher;
 import java.time.format.DateTimeFormatter;
 import javafx.scene.effect.GaussianBlur;
 import javafx.collections.FXCollections;
 import static java.lang.String.format;
+import javafx.scene.image.ImageView;
 import java.time.format.FormatStyle;
 import java.util.stream.IntStream;
+import javafx.scene.image.Image;
 import javafx.scene.control.*;
 import javafx.scene.Parent;
 import java.util.Optional;
@@ -115,6 +119,22 @@ public interface ComponentUtil {
         phoneNumber.clear();
         gender.getSelectionModel().selectFirst();
         birthDate.setValue(null);
+    }
+
+    // TODO: refactor to show different graphics
+    static void showAlert(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        ImageView graphic = new ImageView(new Image(requireNonNull(Launcher.class.getResourceAsStream("assets/error.png"), "Error graphic not found")));
+        graphic.setFitWidth(50);
+        graphic.setFitHeight(50);
+        alert.setGraphic(graphic);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(requireNonNull(Launcher.class.getResource("css/alert.css"), "Cannot find alert.css").toExternalForm());
+        dialogPane.setId("alert-dialog");
+        alert.showAndWait();
     }
 }
 
