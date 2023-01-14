@@ -24,18 +24,35 @@
 
 package io.github.pitzzahh.medicare.backend.patients.dao;
 
+import static io.github.pitzzahh.medicare.backend.db.DatabaseConnection.getJDBC;
+import io.github.pitzzahh.medicare.backend.patients.mapper.PatientMapper;
+import static io.github.pitzzahh.util.utilities.SecurityUtil.encrypt;
 import io.github.pitzzahh.medicare.backend.patients.model.Patient;
 import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.Map;
 
 public class PatientDAOImpl implements PatientDAO {
     @Override
     public Map<Integer, Patient> getPatients() {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return getJDBC().query("SELECT * FROM p4t13nt$", new PatientMapper())
+                .stream()
+                .collect(Collectors.toMap(Patient::getPatientId, Function.identity()));
     }
 
     @Override
     public Consumer<Patient> addPatient() {
-        throw new UnsupportedOperationException("Not yet implemented");
+        final String QUERY = "INSERT INTO p4t13nt$( last_name, first_name, middle_name, gender, birthdate, address, symptoms) VALUES (?,?,?,?,?,?,?)";
+        return patient -> getJDBC().update(
+                QUERY,
+                encrypt(patient.getLastName()),
+                encrypt(patient.getFirstName()),
+                encrypt(patient.getMiddleName()),
+                encrypt(patient.getGender().name()),
+                encrypt(patient.getBirthDate().toString()),
+                encrypt(patient.getAddress()),
+                encrypt(patient.getSymptoms())
+        );
     }
 }
