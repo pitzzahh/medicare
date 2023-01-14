@@ -25,33 +25,39 @@
 package io.github.pitzzahh.medicare.backend.patients.model;
 
 import io.github.pitzzahh.medicare.backend.Gender;
+import io.github.pitzzahh.medicare.backend.Person;
 import java.time.LocalDate;
 import lombok.*;
 
 @Data
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
-public class Patient  {
+public class Patient extends Person {
     private int patientId;
-    private String lastName;
-    private String firstName;
-    private String middleName;
-    private Gender gender;
-    private LocalDate birthDate;
-    private String address;
-    private String phoneNumber;
     private String symptoms;
 
+    public Patient(int patientId, String lastName, String firstName, String middleName, Gender gender, LocalDate birthDate, String address, String phoneNumber, String symptoms) {
+        this.patientId = patientId;
+        super.setLastName(lastName);
+        super.setFirstName(firstName);
+        super.setMiddleName(middleName);
+        super.setGender(gender);
+        super.setBirthDate(birthDate);
+        super.setAddress(address);
+        super.setPhoneNumber(phoneNumber);
+        this.symptoms = symptoms;
+    }
+
     public Patient(String lastName, String firstName, String middleName, Gender gender, LocalDate birthDate, String address, String phoneNumber, String symptoms) {
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.gender = gender;
-        this.birthDate = birthDate;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
+        super.setLastName(lastName);
+        super.setFirstName(firstName);
+        super.setMiddleName(middleName);
+        super.setGender(gender);
+        super.setBirthDate(birthDate);
+        super.setAddress(address);
+        super.setPhoneNumber(phoneNumber);
         this.symptoms = symptoms;
     }
 }
