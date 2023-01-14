@@ -24,5 +24,33 @@
 
 package io.github.pitzzahh.medicare.backend.patients.service;
 
-public class AccountService {
+import io.github.pitzzahh.medicare.backend.patients.dao.PatientDAO;
+import io.github.pitzzahh.medicare.backend.patients.model.Patient;
+import java.util.function.Consumer;
+import lombok.AllArgsConstructor;
+import java.util.Map;
+
+@AllArgsConstructor
+public class PatientService {
+
+    private final PatientDAO DAO;
+
+    public Map<Integer, Patient> getPatients() {
+        return DAO.getPatients();
+    }
+
+    public Consumer<Patient> addPatient() {
+        return DAO.addPatient();
+    }
+
+
+    // TODO: test
+    public boolean doesPatientAlreadyExists(Patient patient) {
+        return DAO.getPatients()
+                .values()
+                .stream()
+                .anyMatch(p -> p.getFirstName().equals(patient.getFirstName()) || p.getLastName().equals(patient.getLastName()));
+    }
+
+
 }
