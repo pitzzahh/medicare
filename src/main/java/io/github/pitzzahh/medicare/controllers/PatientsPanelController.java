@@ -24,6 +24,22 @@
 
 package io.github.pitzzahh.medicare.controllers;
 
+import static io.github.pitzzahh.medicare.util.WindowUtil.loadPage;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+
 public class PatientsPanelController {
 
+
+    @FXML
+    public void onAddPatient(ActionEvent actionEvent) {
+        actionEvent.consume();
+        loadPage("patients_panel", "add_patient");
+    }
+
+    @FXML
+    public void onViewPatients(ActionEvent actionEvent) {
+        actionEvent.consume();
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 }
