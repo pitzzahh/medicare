@@ -51,11 +51,13 @@ public class MainPanelController {
 
     @FXML
     public void onClickDoctors(ActionEvent actionEvent) {
+        actionEvent.consume();
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
     @FXML
     public void onClickAbout(ActionEvent actionEvent) {
+        actionEvent.consume();
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
