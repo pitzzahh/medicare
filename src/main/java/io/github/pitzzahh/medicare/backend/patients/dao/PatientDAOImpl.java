@@ -43,15 +43,16 @@ public class PatientDAOImpl implements PatientDAO {
 
     @Override
     public Consumer<Patient> addPatient() {
-        final String QUERY = "INSERT INTO p4t13nt$( last_name, first_name, middle_name, gender, birthdate, address, symptoms) VALUES (?,?,?,?,?,?,?)";
+        final String QUERY = "INSERT INTO p4t13nt$(last_name, first_name, middle_name, gender, birthdate, address, phone_number, symptoms) VALUES (?,?,?,?,?,?,?,?)";
         return patient -> getJDBC().update(
                 QUERY,
                 encrypt(patient.getLastName()),
                 encrypt(patient.getFirstName()),
-                encrypt(patient.getMiddleName()),
+                patient.getMiddleName().trim().isEmpty() ? null : encrypt(patient.getMiddleName()),
                 encrypt(patient.getGender().name()),
                 encrypt(patient.getBirthDate().toString()),
                 encrypt(patient.getAddress()),
+                patient.getPhoneNumber().trim().isEmpty() ? null : encrypt(patient.getPhoneNumber()),
                 encrypt(patient.getSymptoms())
         );
     }
