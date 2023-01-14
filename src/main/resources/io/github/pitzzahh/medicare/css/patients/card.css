@@ -1,0 +1,27 @@
+.box {
+    -fx-background-color: #293241;
+    -fx-border-radius: 30px;
+    -fx-background-radius: 30px;
+}
+
+.card-label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+}
+
+.update-button {
+    -fx-background-color: #093F68;
+    -fx-background-radius: 5px;
+    -fx-text-fill: #fff;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.remove-button {
+    -fx-background-color: #E74C3C;
+    -fx-background-radius: 5px;
+    -fx-text-fill: #fff;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
