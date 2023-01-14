@@ -8,72 +8,67 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="365.0"
-            prefWidth="542.0" style="-fx-background-color: #3D5A80;"
-            xmlns="http://javafx.com/javafx/19"
-            fx:controller="io.github.pitzzahh.medicare.controllers.DashboardController"
-            xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane style="-fx-background-color: #293241;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.pitzzahh.medicare.controllers.DashboardController">
     <center>
         <VBox alignment="CENTER" BorderPane.alignment="CENTER">
             <HBox alignment="CENTER" prefHeight="104.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
                 <VBox.margin>
-                    <Insets top="10.0"/>
+                    <Insets top="10.0" />
                 </VBox.margin>
                 <padding>
-                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                 </padding>
                 <HBox alignment="CENTER" styleClass="card" stylesheets="@../css/common.css" HBox.hgrow="ALWAYS">
                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                     </HBox.margin>
                     <VBox alignment="CENTER">
                         <HBox alignment="CENTER">
                             <padding>
-                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                             </padding>
-                            <Label styleClass="card-title" stylesheets="@../css/common.css" text="NUMBER OF PATIENTS"/>
+                            <Label styleClass="card-title" stylesheets="@../css/common.css" text="NUMBER OF PATIENTS" />
                         </HBox>
                         <HBox alignment="TOP_CENTER">
                             <padding>
-                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                             </padding>
-                            <Label styleClass="card-count" stylesheets="@../css/common.css" text="0"/>
+                            <Label styleClass="card-count" stylesheets="@../css/common.css" text="0" />
                         </HBox>
                     </VBox>
                 </HBox>
                 <HBox alignment="CENTER" styleClass="card" stylesheets="@../css/common.css" HBox.hgrow="ALWAYS">
                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                     </HBox.margin>
                     <VBox alignment="CENTER">
                         <HBox alignment="CENTER">
                             <VBox.margin>
-                                <Insets/>
+                                <Insets />
                             </VBox.margin>
                             <padding>
-                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                             </padding>
-                            <Label styleClass="card-title" stylesheets="@../css/common.css" text="NUMBER OF DOCTORS"/>
+                            <Label styleClass="card-title" stylesheets="@../css/common.css" text="NUMBER OF DOCTORS" />
                         </HBox>
                         <HBox alignment="CENTER">
                             <VBox.margin>
-                                <Insets/>
+                                <Insets />
                             </VBox.margin>
                             <padding>
-                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                             </padding>
-                            <Label styleClass="card-count" stylesheets="@../css/common.css" text="0"/>
+                            <Label styleClass="card-count" stylesheets="@../css/common.css" text="0" />
                         </HBox>
                     </VBox>
                 </HBox>
             </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="209.0" prefWidth="600.0"
-                  VBox.vgrow="ALWAYS">
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="209.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
                 <VBox.margin>
-                    <Insets bottom="20.0"/>
+                    <Insets bottom="20.0" />
                 </VBox.margin>
                 <ImageView fitHeight="185.0" fitWidth="246.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../assets/logo.png"/>
+                    <Image url="@../assets/logo.png" />
                 </ImageView>
             </HBox>
         </VBox>
