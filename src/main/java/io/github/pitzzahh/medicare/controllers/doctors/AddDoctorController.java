@@ -24,8 +24,16 @@
 
 package io.github.pitzzahh.medicare.controllers.doctors;
 
+import static io.github.pitzzahh.medicare.application.Medicare.getDoctorService;
+import io.github.pitzzahh.medicare.backend.doctors.model.Specialization;
+import static io.github.pitzzahh.medicare.util.WindowUtil.loadPage;
+import io.github.pitzzahh.medicare.backend.doctors.model.Doctor;
 import static io.github.pitzzahh.medicare.util.ComponentUtil.*;
 import io.github.pitzzahh.medicare.backend.Gender;
+import static java.util.Objects.requireNonNull;
+import io.github.pitzzahh.medicare.Launcher;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
@@ -36,7 +44,9 @@ public class AddDoctorController {
     public TextField lastName, firstName, middleName, address, phoneNumber;
 
     @FXML
-    public ChoiceBox<Gender> gender, specialization;
+    public ChoiceBox<Gender> gender;
+
+    @FXML ChoiceBox<Specialization> specialization;
 
     @FXML
     public DatePicker birthDate;
@@ -48,6 +58,7 @@ public class AddDoctorController {
     public void initialize() {
         addDoctor.setTooltip(new Tooltip("Click to Add Doctors Data"));
         initGenderChoiceBox(gender);
+        initSpecializationChoiceBox(specialization);
         resetInputs(lastName, firstName, middleName, address, phoneNumber, gender, birthDate);
     }
 
@@ -61,9 +72,46 @@ public class AddDoctorController {
                 address,
                 birthDate,
                 null,
-                true
+                false
         )) return;
 
+        // TODO: finish
 
+        Doctor doctor = new Doctor(
+                lastName.getText().trim(),
+                firstName.getText().trim(),
+                middleName.getText().trim(),
+                gender.getSelectionModel().getSelectedItem(),
+                birthDate.getValue(),
+                address.getText().trim(),
+                phoneNumber.getText().trim(),
+                specialization.getValue()
+        );
+
+        if (getDoctorService().doesDoctorAlreadyExists(doctor)) {
+            Alert alert = showAlert("Doctor Already Exists", "Doctor Already Exists", "Doctor already exists in the database");
+            showAlertInfo("assets/error.png", "Error graphic not found", alert);
+            return;
+        }
+
+        getDoctorService().addDoctor().accept(doctor);
+        Alert alert = showAlert("Doctor Added", "Doctor Added", "Doctor has been added successfully");
+        showAlertInfo("assets/success.png", "Success graphic not found", alert);
+
+        setDashBoardData();
+
+        loadPage("patients_panel", "dashboard");
+        resetInputs(lastName, firstName, middleName, address, phoneNumber, gender, birthDate);
+        getDoctorService().getDoctors().put(doctor.getId(), doctor);
+        initGenderChoiceBox(gender);
+        initSpecializationChoiceBox(specialization);
+    }
+
+    private static void showAlertInfo(String name, String Success_graphic_not_found, Alert alert) {
+        ImageView graphic = new ImageView(new Image(requireNonNull(Launcher.class.getResourceAsStream(name), Success_graphic_not_found)));
+        graphic.setFitWidth(50);
+        graphic.setFitHeight(50);
+        alert.setGraphic(graphic);
+        alert.showAndWait();
     }
 }
