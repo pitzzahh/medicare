@@ -25,7 +25,6 @@
 package io.github.pitzzahh.medicare.controllers.patients;
 
 import static io.github.pitzzahh.medicare.application.Medicare.getPatientService;
-import static io.github.pitzzahh.medicare.util.WindowUtil.getParent;
 import static io.github.pitzzahh.medicare.util.WindowUtil.loadPage;
 import io.github.pitzzahh.medicare.backend.patients.model.Patient;
 import static io.github.pitzzahh.medicare.util.ComponentUtil.*;
@@ -36,7 +35,6 @@ import javafx.scene.image.ImageView;
 import javafx.event.ActionEvent;
 import javafx.scene.image.Image;
 import javafx.scene.control.*;
-import java.util.Optional;
 import javafx.fxml.FXML;
 
 public class AddPatientController {
@@ -105,13 +103,13 @@ public class AddPatientController {
         alert.setGraphic(graphic);
         alert.showAndWait();
 
-        int size = getPatientService().getPatients().size();
-        Optional<Label> label = getLabel(getParent("dashboard"), "patientsCount");
-        label.ifPresent(l -> l.setText(String.valueOf(size)));
+        setDashBoardData();
+
         loadPage("patients_panel", "dashboard");
         resetInputs(lastName, firstName, middleName, address, phoneNumber, gender, birthDate);
         getPatientService().getPatients().put(patient.getPatientId(), patient);
         symptoms.clear();
+        initGenderChoiceBox(gender);
     }
 
 }
