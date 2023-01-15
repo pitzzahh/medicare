@@ -151,6 +151,16 @@ public class DatabaseConnection {
                 "    phone_number TEXT,\n" +
                 "    symptoms TEXT NOT NULL\n" +
                 ");");
+        getJDBC().execute("CREATE TABLE IF NOT EXISTS d0ct0r$ (\n" +
+                "    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,\n" +
+                "    last_name TEXT  NOT NULL,\n" +
+                "    first_name TEXT NOT NULL,\n" +
+                "    middle_name TEXT,\n" +
+                "    gender TEXT NOT NULL,\n" +
+                "    birthdate TEXT NOT NULL,\n" +
+                "    address TEXT NOT NULL,\n" +
+                "    specialization TEXT NOT NULL\n" +
+                ");\n");
         getJDBC().execute("INSERT OR IGNORE INTO l0g1n(u$erN4me, p$ssW0rd) VALUES ('YWRtaW4=', 'YWRtaW4=');");
     }
 
