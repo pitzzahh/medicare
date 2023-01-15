@@ -24,6 +24,7 @@
 
 package io.github.pitzzahh.medicare.controllers;
 
+import static io.github.pitzzahh.medicare.backend.patients.cache.PatientData.getPatients;
 import static io.github.pitzzahh.medicare.application.Medicare.getPatientService;
 import static io.github.pitzzahh.medicare.util.WindowUtil.getParent;
 import static io.github.pitzzahh.medicare.util.WindowUtil.loadPage;
@@ -84,11 +85,12 @@ public class AddPatientController {
         getPatientService().addPatient().accept(patient);
         showAlert("Patient Added", "Patient Added", "Patient has been added successfully");
 
-        int size = getPatientService().getPatients().size();
+        int size = getPatients().size();
         Optional<Label> label = getLabel(getParent("dashboard"), "patientsCount");
         label.ifPresent(l -> l.setText(String.valueOf(size)));
         loadPage("patients_panel", "dashboard");
         resetInputs(lastName, firstName, middleName, address, phoneNumber, gender, birthDate);
+        getPatients().put(patient.getPatientId(), patient);
         symptoms.clear();
     }
 
