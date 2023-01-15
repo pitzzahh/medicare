@@ -24,8 +24,11 @@
 
 package io.github.pitzzahh.medicare.controllers.doctors;
 
+import static io.github.pitzzahh.medicare.util.ComponentUtil.setCommonData;
+import io.github.pitzzahh.medicare.backend.doctors.model.Specialization;
 import static io.github.pitzzahh.medicare.util.ToolTipUtil.initToolTip;
 import static io.github.pitzzahh.medicare.util.Style.normalStyle;
+import io.github.pitzzahh.medicare.backend.doctors.model.Doctor;
 import io.github.pitzzahh.medicare.backend.Gender;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -39,7 +42,10 @@ public class DoctorCardController {
     private TextField name, age, address, phoneNumber;
 
     @FXML
-    private ChoiceBox<Gender> gender, specialization;
+    private ChoiceBox<Gender> gender;
+
+    @FXML
+    private ChoiceBox<Specialization> specialization;
 
     @FXML
     private DatePicker dateOfBirth;
@@ -49,8 +55,8 @@ public class DoctorCardController {
 
     @FXML
     public void initialize() {
-        updateButton.setTooltip(initToolTip("Click to Modify Patient", normalStyle()));
-        removeButton.setTooltip(initToolTip("Click to Remove Patient", normalStyle()));
+        updateButton.setTooltip(initToolTip("Click to Modify Doctor", normalStyle()));
+        removeButton.setTooltip(initToolTip("Click to Remove Doctor", normalStyle()));
         name.setEditable(false);
         age.setEditable(false);
         gender.setMouseTransparent(true);
@@ -58,5 +64,13 @@ public class DoctorCardController {
         phoneNumber.setEditable(false);
         specialization.setMouseTransparent(true);
         dateOfBirth.setEditable(false);
+        dateOfBirth.setMouseTransparent(false);
     }
+
+    public void setData(Doctor doctor) {
+        setCommonData(doctor, name, age, gender, dateOfBirth, address, phoneNumber);
+        specialization.setValue(doctor.getSpecialization());
+    }
+
+
 }
