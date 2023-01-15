@@ -44,7 +44,7 @@ public class DoctorDAOImpl implements DoctorDAO {
 
     @Override
     public Consumer<Doctor> addDoctor() {
-        final String QUERY = "INSERT INTO d0ct0r$$(last_name, first_name, middle_name, gender, birthdate, address, phone_number, specialization) VALUES (?,?,?,?,?,?,?,?)";
+        final String QUERY = "INSERT INTO d0ct0r$(last_name, first_name, middle_name, gender, birthdate, address, phone_number, specialization) VALUES (?,?,?,?,?,?,?,?)";
         return doctor -> getJDBC().update(
                 QUERY,
                 encrypt(doctor.getLastName()),
