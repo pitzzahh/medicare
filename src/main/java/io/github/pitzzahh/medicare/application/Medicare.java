@@ -84,6 +84,7 @@ public class Medicare extends Application {
         Parent patientsPanel = load(requireNonNull(aClass.getResource("fxml/patients/patientsPanel.fxml"), "Cannot find patientsPanel.fxml"));
         Parent addPatient = load(requireNonNull(aClass.getResource("fxml/patients/addPatient.fxml"), "Cannot find addPatient.fxml"));
         Parent viewPatient = load(requireNonNull(aClass.getResource("fxml/patients/viewPatient.fxml"), "Cannot find viewPatient.fxml"));
+        Parent doctorsPanel = load(requireNonNull(aClass.getResource("fxml/doctors/doctorsPanel.fxml"), "Cannot find doctorsPanel.fxml"));
 
         loginPage.setId("auth_window");
         mainPanel.setId("main_panel");
@@ -91,6 +92,7 @@ public class Medicare extends Application {
         patientsPanel.setId("patients_panel");
         addPatient.setId("add_patient");
         viewPatient.setId("view_patient");
+        doctorsPanel.setId("doctors_panel");
 
         addParents.accept(Map.of(
                 loginPage.getId(), loginPage,
@@ -98,7 +100,8 @@ public class Medicare extends Application {
                 dashboard.getId(), dashboard,
                 patientsPanel.getId(), patientsPanel,
                 addPatient.getId(), addPatient,
-                viewPatient.getId(), viewPatient
+                viewPatient.getId(), viewPatient,
+                doctorsPanel.getId(), doctorsPanel
         ));
     }
 
