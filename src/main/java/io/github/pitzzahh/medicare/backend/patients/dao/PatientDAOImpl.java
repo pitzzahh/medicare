@@ -59,6 +59,6 @@ public class PatientDAOImpl implements PatientDAO {
 
     @Override
     public Consumer<Integer> removePatientById() {
-        return id -> getJDBC().update("DELETE FROM p4t13nt$ id = ?", id);
+        return id -> getJDBC().update("DELETE FROM p4t13nt$ WHERE id = ?", id);
     }
 }
