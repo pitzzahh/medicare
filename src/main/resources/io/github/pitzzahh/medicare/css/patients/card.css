@@ -4,8 +4,23 @@
     -fx-background-radius: 30px;
 }
 
+.id {
+    -fx-background-color: transparent;
+    -fx-border-radius: 30px;
+    -fx-background-radius: 30px;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.inputs, .inputs .text-field, .inputs .content {
+    -fx-background-color: #D9D9D9;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
 .card-label {
-    -fx-font-size: 20px;
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-text-fill: #ffffff;
 }
@@ -16,6 +31,10 @@
     -fx-text-fill: #fff;
     -fx-font-size: 20px;
     -fx-font-weight: bold;
+}
+
+.update-button:armed, .remove-button:armed {
+    -fx-opacity: 0.5;
 }
 
 .remove-button {
