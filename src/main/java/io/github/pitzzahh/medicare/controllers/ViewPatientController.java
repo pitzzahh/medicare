@@ -24,18 +24,25 @@
 
 package io.github.pitzzahh.medicare.controllers;
 
-import static io.github.pitzzahh.medicare.util.WindowUtil.getParent;
+import javafx.fxml.Initializable;
 import javafx.scene.layout.VBox;
+import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import java.net.URL;
 
-public class ViewPatientController {
+public class ViewPatientController implements Initializable {
 
     @FXML
     public VBox cardStorage;
+    public static VBox cardStorageCopy;
 
     @FXML
-    public void initialize() {
-        cardStorage.getChildrenUnmodifiable().addAll(getParent("patient_card"));
+    public void initialize(URL location, ResourceBundle resources) {
+        cardStorageCopy = cardStorage;
+    }
+
+    public static VBox getCardStorage() {
+        return cardStorageCopy;
     }
 
 }
