@@ -2,21 +2,12 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="386.0" prefWidth="467.0"
-            style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/19"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="io.github.pitzzahh.medicare.controllers.ViewPatientController">
-    <VBox fx:id="cardStorage" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="386.0" prefWidth="467.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.pitzzahh.medicare.controllers.ViewPatientController">
+    <VBox fx:id="cardStorage" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </padding>
-        <HBox prefHeight="100.0" prefWidth="200.0">
-            <VBox.margin>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-            </VBox.margin>
-        </HBox>
     </VBox>
 </ScrollPane>
