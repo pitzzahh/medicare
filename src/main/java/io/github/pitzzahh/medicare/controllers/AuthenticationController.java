@@ -24,10 +24,10 @@
 
 package io.github.pitzzahh.medicare.controllers;
 
-import static io.github.pitzzahh.medicare.application.Medicare.getPatientService;
-import static io.github.pitzzahh.medicare.util.ComponentUtil.getLabel;
+import static io.github.pitzzahh.medicare.backend.patients.cache.PatientData.getPatients;
 import static io.github.pitzzahh.medicare.util.ComponentUtil.getMainProgressBar;
 import static io.github.pitzzahh.medicare.util.ToolTipUtil.initToolTip;
+import static io.github.pitzzahh.medicare.util.ComponentUtil.getLabel;
 import io.github.pitzzahh.medicare.backend.login.cache.AuthData;
 import io.github.pitzzahh.medicare.backend.login.model.Account;
 import static io.github.pitzzahh.medicare.util.WindowUtil.*;
@@ -36,9 +36,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
+import java.util.Optional;
 import javafx.fxml.FXML;
 import java.util.Map;
-import java.util.Optional;
 
 public class AuthenticationController {
 
@@ -85,7 +85,7 @@ public class AuthenticationController {
                     errorMessage.setText("");
                     loadParent(getParent("main_panel"), "MEDiCARE");
                     loadPage("main_panel", "dashboard");
-                    int size = getPatientService().getPatients().size();
+                    int size = getPatients().size();
                     Optional<Label> label = getLabel(getParent("dashboard"), "patientsCount");
                     label.ifPresent(l -> l.setText(String.valueOf(size)));
                 }
