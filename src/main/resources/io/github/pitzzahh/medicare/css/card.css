@@ -29,8 +29,12 @@
     -fx-background-color: #093F68;
     -fx-background-radius: 5px;
     -fx-text-fill: #fff;
-    -fx-font-size: 20px;
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
+}
+
+.update-button:hover {
+    -fx-background-color: #043c64;
 }
 
 .update-button:armed, .remove-button:armed {
@@ -41,6 +45,10 @@
     -fx-background-color: #E74C3C;
     -fx-background-radius: 5px;
     -fx-text-fill: #fff;
-    -fx-font-size: 20px;
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
+}
+
+.remove-button:hover {
+    -fx-background-color: #be3d2e;
 }
