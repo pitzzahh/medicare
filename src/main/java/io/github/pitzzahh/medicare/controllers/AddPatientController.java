@@ -31,7 +31,11 @@ import static io.github.pitzzahh.medicare.util.WindowUtil.loadPage;
 import io.github.pitzzahh.medicare.backend.patients.model.Patient;
 import static io.github.pitzzahh.medicare.util.ComponentUtil.*;
 import io.github.pitzzahh.medicare.backend.Gender;
+import static java.util.Objects.requireNonNull;
+import io.github.pitzzahh.medicare.Launcher;
+import javafx.scene.image.ImageView;
 import javafx.event.ActionEvent;
+import javafx.scene.image.Image;
 import javafx.scene.control.*;
 import java.util.Optional;
 import javafx.fxml.FXML;
@@ -78,12 +82,22 @@ public class AddPatientController {
         );
 
         if (getPatientService().doesPatientAlreadyExists(patient)) {
-            showAlert("Patient Already Exists", "Patient Already Exists", "Patient already exists in the database");
+            Alert alert = showAlert("Patient Already Exists", "Patient Already Exists", "Patient already exists in the database");
+            ImageView graphic = new ImageView(new Image(requireNonNull(Launcher.class.getResourceAsStream("assets/error.png"), "Error graphic not found")));
+            graphic.setFitWidth(50);
+            graphic.setFitHeight(50);
+            alert.setGraphic(graphic);
+            alert.showAndWait();
             return;
         }
 
         getPatientService().addPatient().accept(patient);
-        showAlert("Patient Added", "Patient Added", "Patient has been added successfully");
+        Alert alert = showAlert("Patient Added", "Patient Added", "Patient has been added successfully");
+        ImageView graphic = new ImageView(new Image(requireNonNull(Launcher.class.getResourceAsStream("assets/success.png"), "Success graphic not found")));
+        graphic.setFitWidth(50);
+        graphic.setFitHeight(50);
+        alert.setGraphic(graphic);
+        alert.showAndWait();
 
         int size = getPatients().size();
         Optional<Label> label = getLabel(getParent("dashboard"), "patientsCount");
@@ -96,27 +110,52 @@ public class AddPatientController {
 
     private boolean requiredInput() {
         if (firstName.getText().trim().isEmpty()) {
-            showAlert("First Name is Required", "First Name is Required", "First name is required");
+            Alert alert = showAlert("First Name is Required", "First Name is Required", "First name is required");
+            ImageView graphic = new ImageView(new Image(requireNonNull(Launcher.class.getResourceAsStream("assets/error.png"), "Error graphic not found")));
+            graphic.setFitWidth(50);
+            graphic.setFitHeight(50);
+            alert.setGraphic(graphic);
+            alert.showAndWait();
             return true;
         }
 
         if (lastName.getText().trim().isEmpty()) {
-            showAlert("Last Name is Required", "Last Name is Required", "Last name is required");
+            Alert alert = showAlert("Last Name is Required", "Last Name is Required", "Last name is required");
+            ImageView graphic = new ImageView(new Image(requireNonNull(Launcher.class.getResourceAsStream("assets/error.png"), "Error graphic not found")));
+            graphic.setFitWidth(50);
+            graphic.setFitHeight(50);
+            alert.setGraphic(graphic);
+            alert.showAndWait();
             return true;
         }
 
         if (birthDate.getValue() == null) {
-            showAlert("Birth Date is Required", "Birth Date is Required", "Birth date is required");
+            Alert alert = showAlert("Birth Date is Required", "Birth Date is Required", "Birth date is required");
+            ImageView graphic = new ImageView(new Image(requireNonNull(Launcher.class.getResourceAsStream("assets/error.png"), "Error graphic not found")));
+            graphic.setFitWidth(50);
+            graphic.setFitHeight(50);
+            alert.setGraphic(graphic);
+            alert.showAndWait();
             return true;
         }
 
         if (address.getText().trim().isEmpty()) {
-            showAlert("Address is Required", "Address is Required", "Address is required");
+            Alert alert = showAlert("Address is Required", "Address is Required", "Address is required");
+            ImageView graphic = new ImageView(new Image(requireNonNull(Launcher.class.getResourceAsStream("assets/error.png"), "Error graphic not found")));
+            graphic.setFitWidth(50);
+            graphic.setFitHeight(50);
+            alert.setGraphic(graphic);
+            alert.showAndWait();
             return true;
         }
 
         if (symptoms.getText().trim().isEmpty()) {
-            showAlert("Symptoms is Required", "Symptoms is Required", "Symptoms is required");
+            Alert alert = showAlert("Symptoms is Required", "Symptoms is Required", "Symptoms is required");
+            ImageView graphic = new ImageView(new Image(requireNonNull(Launcher.class.getResourceAsStream("assets/error.png"), "Error graphic not found")));
+            graphic.setFitWidth(50);
+            graphic.setFitHeight(50);
+            alert.setGraphic(graphic);
+            alert.showAndWait();
             return true;
         }
 
