@@ -22,20 +22,28 @@
  * SOFTWARE.
  */
 
-package io.github.pitzzahh.medicare.backend.login.cache;
+package io.github.pitzzahh.medicare.backend.patients.cache;
 
-import io.github.pitzzahh.medicare.backend.login.model.Account;
+import io.github.pitzzahh.medicare.backend.patients.model.Patient;
+import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
 import java.util.function.Consumer;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class AuthData {
+public final class PatientData {
 
-    private static final Map<String, Account> ACCOUNTS = new HashMap<>();
+    private static final Map<Integer, Patient> PATIENTS = new HashMap<>();
 
-    public static Consumer<Map<String, Account>> initAccounts = ACCOUNTS::putAll;
+    private static final ObservableList<Patient> MEMBERS_OBSERVABLE_LIST = FXCollections.observableArrayList();
 
-    public static Map<String, Account> getAccounts() {
-        return ACCOUNTS;
+    public static Consumer<Map<Integer, Patient>> initPatients = PATIENTS::putAll;
+
+    public static Map<Integer, Patient> getPatients() {
+        return PATIENTS;
+    }
+
+    public static ObservableList<Patient> getMembersDataSource() {
+        return MEMBERS_OBSERVABLE_LIST;
     }
 }
