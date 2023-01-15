@@ -137,7 +137,7 @@ public interface ComponentUtil {
         return alert;
     }
 
-    static void initPatientCards(VBox cardStorage) {
+    static void initPatientCards(VBox cardStorage) { // TODO: fix bug
         getPatients()
                 .values()
                 .forEach(patient -> {
