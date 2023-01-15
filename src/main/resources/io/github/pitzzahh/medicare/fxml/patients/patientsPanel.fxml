@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane style="-fx-background-color: #E0FBFC;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.pitzzahh.medicare.controllers.PatientsPanelController">
+<BorderPane style="-fx-background-color: #E0FBFC;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.pitzzahh.medicare.controllers.patients.PatientsPanelController">
     <top>
         <HBox prefHeight="56.0" prefWidth="600.0" styleClass="header-box" stylesheets="@../../css/common.css" BorderPane.alignment="CENTER">
             <HBox alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="506.0">

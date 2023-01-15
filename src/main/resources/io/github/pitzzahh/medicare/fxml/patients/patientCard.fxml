@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER" styleClass="box" stylesheets="@../../css/card.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.pitzzahh.medicare.controllers.PatientCardController">
+<HBox alignment="CENTER" styleClass="box" stylesheets="@../../css/card.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.pitzzahh.medicare.controllers.patients.PatientCardController">
      <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
          <padding>
              <Insets bottom="40.0" left="40.0" top="40.0" />

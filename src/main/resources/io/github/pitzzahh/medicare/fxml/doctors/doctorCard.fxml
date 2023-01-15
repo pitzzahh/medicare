@@ -12,7 +12,7 @@
 
 <HBox alignment="CENTER" prefHeight="329.0" prefWidth="561.0" styleClass="box"
       stylesheets="@../../css/card.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="io.github.pitzzahh.medicare.controllers.DoctorCardController">
+      fx:controller="io.github.pitzzahh.medicare.controllers.doctors.DoctorCardController">
     <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
         <padding>
             <Insets bottom="10.0" left="40.0" top="10.0"/>

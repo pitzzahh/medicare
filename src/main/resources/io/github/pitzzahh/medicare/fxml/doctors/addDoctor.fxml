@@ -12,7 +12,7 @@
 
 <ScrollPane fitToHeight="true" fitToWidth="true" prefWidth="502.0" style="-fx-background-color: transparent;"
             xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="io.github.pitzzahh.medicare.controllers.AddDoctorController">
+            fx:controller="io.github.pitzzahh.medicare.controllers.doctors.AddDoctorController">
     <VBox alignment="TOP_CENTER" prefWidth="521.0" style="-fx-background-color: transparent;">
         <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
