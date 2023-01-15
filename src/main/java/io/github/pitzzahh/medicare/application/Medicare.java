@@ -65,6 +65,7 @@ public class Medicare extends Application {
         getMainProgressBar(parent).ifPresent(p -> p.setVisible(false));
         getStage().setWidth(1000);
         getStage().setHeight(700);
+        getStage().centerOnScreen();
         getStage().show();
     }
 
