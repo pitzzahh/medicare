@@ -41,7 +41,7 @@ public class PatientsPanelController {
     @FXML
     public void onViewPatients(ActionEvent actionEvent) {
         actionEvent.consume();
-        loadPage("patients_panel", "view_patient");
+        loadPage("patients_panel", "card_holder");
         initPatientCards(getCardStorage());
     }
 }
