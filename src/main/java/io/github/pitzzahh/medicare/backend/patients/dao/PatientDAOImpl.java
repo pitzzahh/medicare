@@ -56,4 +56,9 @@ public class PatientDAOImpl implements PatientDAO {
                 encrypt(patient.getSymptoms())
         );
     }
+
+    @Override
+    public Consumer<Integer> removePatientById() {
+        return id -> getJDBC().update("DELETE FROM p4t13nt$ id = ?", id);
+    }
 }
