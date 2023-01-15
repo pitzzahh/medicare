@@ -67,7 +67,14 @@ public class AddPatientController {
     public void onAddPatient(ActionEvent actionEvent) {
         actionEvent.consume();
 
-        if (requiredInput()) return;
+        if (requiredInput(
+                firstName,
+                lastName,
+                address,
+                birthDate,
+                symptoms,
+                true
+        )) return;
 
         Patient patient = new Patient(
                 lastName.getText().trim(),
@@ -107,57 +114,4 @@ public class AddPatientController {
         symptoms.clear();
     }
 
-    private boolean requiredInput() {
-        if (firstName.getText().trim().isEmpty()) {
-            Alert alert = showAlert("First Name is Required", "First Name is Required", "First name is required");
-            ImageView graphic = new ImageView(new Image(requireNonNull(Launcher.class.getResourceAsStream("assets/error.png"), "Error graphic not found")));
-            graphic.setFitWidth(50);
-            graphic.setFitHeight(50);
-            alert.setGraphic(graphic);
-            alert.showAndWait();
-            return true;
-        }
-
-        if (lastName.getText().trim().isEmpty()) {
-            Alert alert = showAlert("Last Name is Required", "Last Name is Required", "Last name is required");
-            ImageView graphic = new ImageView(new Image(requireNonNull(Launcher.class.getResourceAsStream("assets/error.png"), "Error graphic not found")));
-            graphic.setFitWidth(50);
-            graphic.setFitHeight(50);
-            alert.setGraphic(graphic);
-            alert.showAndWait();
-            return true;
-        }
-
-        if (birthDate.getValue() == null) {
-            Alert alert = showAlert("Birth Date is Required", "Birth Date is Required", "Birth date is required");
-            ImageView graphic = new ImageView(new Image(requireNonNull(Launcher.class.getResourceAsStream("assets/error.png"), "Error graphic not found")));
-            graphic.setFitWidth(50);
-            graphic.setFitHeight(50);
-            alert.setGraphic(graphic);
-            alert.showAndWait();
-            return true;
-        }
-
-        if (address.getText().trim().isEmpty()) {
-            Alert alert = showAlert("Address is Required", "Address is Required", "Address is required");
-            ImageView graphic = new ImageView(new Image(requireNonNull(Launcher.class.getResourceAsStream("assets/error.png"), "Error graphic not found")));
-            graphic.setFitWidth(50);
-            graphic.setFitHeight(50);
-            alert.setGraphic(graphic);
-            alert.showAndWait();
-            return true;
-        }
-
-        if (symptoms.getText().trim().isEmpty()) {
-            Alert alert = showAlert("Symptoms is Required", "Symptoms is Required", "Symptoms is required");
-            ImageView graphic = new ImageView(new Image(requireNonNull(Launcher.class.getResourceAsStream("assets/error.png"), "Error graphic not found")));
-            graphic.setFitWidth(50);
-            graphic.setFitHeight(50);
-            alert.setGraphic(graphic);
-            alert.showAndWait();
-            return true;
-        }
-
-        return false;
-    }
 }
