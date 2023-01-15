@@ -25,6 +25,10 @@
 package io.github.pitzzahh.medicare.application;
 
 import static io.github.pitzzahh.medicare.util.ComponentUtil.getMainProgressBar;
+
+import io.github.pitzzahh.medicare.backend.doctors.dao.DoctorDAO;
+import io.github.pitzzahh.medicare.backend.doctors.dao.DoctorDAOImpl;
+import io.github.pitzzahh.medicare.backend.doctors.service.DoctorService;
 import io.github.pitzzahh.medicare.backend.patients.service.PatientService;
 import static io.github.pitzzahh.medicare.backend.db.DatabaseConnection.*;
 import io.github.pitzzahh.medicare.backend.login.service.AccountService;
@@ -49,8 +53,11 @@ public class Medicare extends Application {
 
     private static final AccountDAO ACCOUNT_DAO = new AccountDAOImp();
     private static final PatientDAO PATIENT_DAO = new PatientDAOImpl();
+    private static final DoctorDAO DOCTOR_DAO = new DoctorDAOImpl();
     private static final AccountService ACCOUNT_SERVICE = new AccountService(ACCOUNT_DAO);
     private static final PatientService PATIENT_SERVICE = new PatientService(PATIENT_DAO);
+    private static final DoctorService DOCTOR_SERVICE = new DoctorService(DOCTOR_DAO);
+
     private static final DatabaseConnection DATABASE_CONNECTION = new DatabaseConnection();
     private final Class<Launcher> aClass = Launcher.class;
 
@@ -113,6 +120,10 @@ public class Medicare extends Application {
 
     public static PatientService getPatientService() {
         return PATIENT_SERVICE;
+    }
+
+    public static DoctorService getDoctorService() {
+        return DOCTOR_SERVICE;
     }
 
     public static void main(String[] args) throws IOException {
