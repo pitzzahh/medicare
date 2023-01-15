@@ -24,15 +24,21 @@
 
 package io.github.pitzzahh.medicare.controllers;
 
+import static io.github.pitzzahh.medicare.controllers.ViewPatientController.getCardStorage;
+import static io.github.pitzzahh.medicare.util.ComponentUtil.initDoctorCards;
+import static io.github.pitzzahh.medicare.util.WindowUtil.loadPage;
 import javafx.event.ActionEvent;
 
 public class DoctorsPanelController {
 
     public void onAddDoctor(ActionEvent actionEvent) {
-
+        actionEvent.consume();
+        loadPage("doctors_panel", "add_doctor");
     }
 
     public void onViewDoctors(ActionEvent actionEvent) {
-
+        actionEvent.consume();
+        loadPage("doctors_panel", "card_holder");
+        initDoctorCards(getCardStorage());
     }
 }
