@@ -60,7 +60,7 @@
                 <Button mnemonicParsing="false" onAction="#onClickPatients" prefWidth="150.0" styleClass="main-button" stylesheets="@../css/main.css" text="PATIENTS">
                     <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                            <Image url="@../assets/patient-logo.png" />
+                            <Image url="@../assets/patients/patient-logo.png" />
                         </ImageView>
                     </graphic>
                 </Button>
@@ -72,7 +72,7 @@
                 <Button mnemonicParsing="false" onAction="#onClickDoctors" prefWidth="150.0" styleClass="main-button" stylesheets="@../css/main.css" text="DOCTORS">
                     <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                            <Image url="@../assets/doctor-logo.png" />
+                            <Image url="@../assets/doctors/doctor-logo.png" />
                         </ImageView>
                     </graphic>
                 </Button>

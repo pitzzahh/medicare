@@ -17,7 +17,7 @@
                     <Insets bottom="2.0" left="20.0" right="2.0" top="2.0" />
                 </padding>
                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../assets/doctor-logo-light.png" />
+                    <Image url="@../../assets/doctors/doctor-logo-light.png" />
                     <HBox.margin>
                         <Insets right="20.0" />
                     </HBox.margin>
