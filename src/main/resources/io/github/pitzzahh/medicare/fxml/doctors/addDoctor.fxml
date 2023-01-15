@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" prefWidth="502.0" style="-fx-background-color: transparent;"
+            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="io.github.pitzzahh.medicare.controllers.AddDoctorController">
+    <VBox alignment="TOP_CENTER" prefWidth="521.0" style="-fx-background-color: transparent;">
+        <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+        </padding>
+        <HBox alignment="CENTER" maxWidth="1000.0" prefHeight="100.0">
+            <VBox prefHeight="135.0" prefWidth="244.0" HBox.hgrow="ALWAYS">
+                <HBox prefHeight="28.0" prefWidth="230.0">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <Label styleClass="input-labels" stylesheets="@../../css/common.css" text="LAST NAME"/>
+                </HBox>
+                <HBox prefHeight="35.0" prefWidth="230.0">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <TextField fx:id="lastName" styleClass="inputs" stylesheets="@../../css/common.css"
+                               HBox.hgrow="ALWAYS"/>
+                </HBox>
+            </VBox>
+            <VBox prefHeight="135.0" prefWidth="244.0" HBox.hgrow="ALWAYS">
+                <HBox prefHeight="28.0" prefWidth="230.0">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <Label styleClass="input-labels" stylesheets="@../../css/common.css" text="MIDDLE NAME"/>
+                </HBox>
+                <HBox prefHeight="35.0" prefWidth="230.0">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <TextField fx:id="middleName" styleClass="inputs" stylesheets="@../../css/common.css"
+                               HBox.hgrow="ALWAYS"/>
+                </HBox>
+            </VBox>
+        </HBox>
+        <HBox alignment="CENTER" layoutX="30.0" layoutY="30.0" maxWidth="1000.0" prefHeight="100.0">
+            <VBox prefHeight="135.0" prefWidth="244.0" HBox.hgrow="ALWAYS">
+                <HBox prefHeight="28.0" prefWidth="230.0">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <Label styleClass="input-labels" stylesheets="@../../css/common.css" text="FIRST NAME"/>
+                </HBox>
+                <HBox prefHeight="35.0" prefWidth="230.0">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <TextField fx:id="firstName" styleClass="inputs" stylesheets="@../../css/common.css"
+                               HBox.hgrow="ALWAYS"/>
+                </HBox>
+            </VBox>
+            <VBox prefHeight="135.0" prefWidth="244.0" HBox.hgrow="ALWAYS">
+                <HBox prefHeight="28.0" prefWidth="230.0">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <Label styleClass="input-labels" stylesheets="@../../css/common.css" text="GENDER"/>
+                </HBox>
+                <HBox prefHeight="35.0" prefWidth="230.0">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <ChoiceBox fx:id="gender" prefWidth="1200.0" styleClass="inputs" stylesheets="@../../css/common.css"
+                               HBox.hgrow="ALWAYS"/>
+                </HBox>
+            </VBox>
+        </HBox>
+        <HBox alignment="CENTER" layoutX="30.0" layoutY="30.0" maxWidth="1000.0" prefHeight="100.0">
+            <VBox prefHeight="135.0" prefWidth="244.0" HBox.hgrow="ALWAYS">
+                <HBox prefHeight="28.0" prefWidth="230.0">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <Label styleClass="input-labels" stylesheets="@../../css/common.css" text="BIRTH DATE"/>
+                </HBox>
+                <HBox prefHeight="35.0" prefWidth="230.0" styleClass="inputs">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <DatePicker fx:id="birthDate" prefWidth="1200.0" stylesheets="@../../css/common.css"
+                                HBox.hgrow="ALWAYS"/>
+                </HBox>
+            </VBox>
+            <VBox prefHeight="135.0" prefWidth="244.0" HBox.hgrow="ALWAYS">
+                <HBox prefHeight="28.0" prefWidth="230.0">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <Label styleClass="input-labels" stylesheets="@../../css/common.css" text="ADDRESS"/>
+                </HBox>
+                <HBox prefHeight="35.0" prefWidth="230.0">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <TextField fx:id="address" styleClass="inputs" stylesheets="@../../css/common.css"
+                               HBox.hgrow="ALWAYS"/>
+                </HBox>
+            </VBox>
+        </HBox>
+        <HBox alignment="CENTER" layoutX="30.0" layoutY="240.0" maxWidth="1000.0" prefHeight="100.0">
+            <VBox prefHeight="135.0" prefWidth="244.0" HBox.hgrow="ALWAYS">
+                <HBox prefHeight="28.0" prefWidth="230.0">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <Label styleClass="input-labels" stylesheets="@../../css/common.css" text="PHONE NUMBER"/>
+                </HBox>
+                <HBox prefHeight="69.0" prefWidth="230.0">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <TextField fx:id="phoneNumber" styleClass="inputs" stylesheets="@../../css/common.css"
+                               HBox.hgrow="ALWAYS"/>
+                </HBox>
+            </VBox>
+            <VBox layoutX="10.0" layoutY="10.0" prefHeight="135.0" prefWidth="244.0" HBox.hgrow="ALWAYS">
+                <HBox prefHeight="28.0" prefWidth="230.0">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <Label styleClass="input-labels" stylesheets="@../../css/common.css" text="SPECIALIZATION"/>
+                </HBox>
+                <HBox prefHeight="35.0" prefWidth="230.0">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <ChoiceBox fx:id="specialization" prefWidth="1200.0" styleClass="inputs"
+                               stylesheets="@../../css/common.css"/>
+                </HBox>
+            </VBox>
+        </HBox>
+        <HBox alignment="CENTER" layoutX="30.0" layoutY="276.0" maxWidth="1000.0" prefWidth="460.0">
+            <Button fx:id="addDoctor" mnemonicParsing="false" onAction="#onAddDoctor" prefHeight="43.0"
+                    prefWidth="167.0" styleClass="add-button" stylesheets="@../../css/common.css" text="ADD DOCTOR"/>
+        </HBox>
+    </VBox>
+</ScrollPane>
