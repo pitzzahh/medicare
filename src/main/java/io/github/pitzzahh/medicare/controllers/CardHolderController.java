@@ -30,7 +30,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import java.net.URL;
 
-public class ViewPatientController implements Initializable {
+public class CardHolderController implements Initializable {
 
     @FXML
     public VBox cardStorage;
