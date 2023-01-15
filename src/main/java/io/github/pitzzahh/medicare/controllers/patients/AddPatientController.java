@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package io.github.pitzzahh.medicare.controllers;
+package io.github.pitzzahh.medicare.controllers.patients;
 
 import static io.github.pitzzahh.medicare.application.Medicare.getPatientService;
 import static io.github.pitzzahh.medicare.util.WindowUtil.getParent;

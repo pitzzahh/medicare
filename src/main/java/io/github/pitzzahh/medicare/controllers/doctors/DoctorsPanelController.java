@@ -22,41 +22,26 @@
  * SOFTWARE.
  */
 
-package io.github.pitzzahh.medicare.controllers;
+package io.github.pitzzahh.medicare.controllers.doctors;
 
-import static io.github.pitzzahh.medicare.util.ToolTipUtil.initToolTip;
-import static io.github.pitzzahh.medicare.util.Style.normalStyle;
-import io.github.pitzzahh.medicare.backend.Gender;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Button;
+import static io.github.pitzzahh.medicare.controllers.CardHolderController.getCardStorage;
+import static io.github.pitzzahh.medicare.util.ComponentUtil.initDoctorCards;
+import static io.github.pitzzahh.medicare.util.WindowUtil.loadPage;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
-public class DoctorCardController {
+public class DoctorsPanelController {
 
     @FXML
-    private TextField name, age, address, phoneNumber;
+    public void onAddDoctor(ActionEvent actionEvent) {
+        actionEvent.consume();
+        loadPage("doctors_panel", "add_doctor");
+    }
 
     @FXML
-    private ChoiceBox<Gender> gender, specialization;
-
-    @FXML
-    private DatePicker dateOfBirth;
-
-    @FXML
-    public Button updateButton, removeButton;
-
-    @FXML
-    public void initialize() {
-        updateButton.setTooltip(initToolTip("Click to Modify Patient", normalStyle()));
-        removeButton.setTooltip(initToolTip("Click to Remove Patient", normalStyle()));
-        name.setEditable(false);
-        age.setEditable(false);
-        gender.setMouseTransparent(true);
-        address.setEditable(false);
-        phoneNumber.setEditable(false);
-        specialization.setMouseTransparent(true);
-        dateOfBirth.setEditable(false);
+    public void onViewDoctors(ActionEvent actionEvent) {
+        actionEvent.consume();
+        loadPage("doctors_panel", "card_holder");
+        initDoctorCards(getCardStorage());
     }
 }

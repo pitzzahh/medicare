@@ -22,26 +22,26 @@
  * SOFTWARE.
  */
 
-package io.github.pitzzahh.medicare.controllers;
+package io.github.pitzzahh.medicare.controllers.patients;
 
-import static io.github.pitzzahh.medicare.controllers.ViewPatientController.getCardStorage;
-import static io.github.pitzzahh.medicare.util.ComponentUtil.initDoctorCards;
+import static io.github.pitzzahh.medicare.controllers.CardHolderController.getCardStorage;
+import static io.github.pitzzahh.medicare.util.ComponentUtil.initPatientCards;
 import static io.github.pitzzahh.medicare.util.WindowUtil.loadPage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
-public class DoctorsPanelController {
+public class PatientsPanelController {
 
     @FXML
-    public void onAddDoctor(ActionEvent actionEvent) {
+    public void onAddPatient(ActionEvent actionEvent) {
         actionEvent.consume();
-        loadPage("doctors_panel", "add_doctor");
+        loadPage("patients_panel", "add_patient");
     }
 
     @FXML
-    public void onViewDoctors(ActionEvent actionEvent) {
+    public void onViewPatients(ActionEvent actionEvent) {
         actionEvent.consume();
-        loadPage("doctors_panel", "card_holder");
-        initDoctorCards(getCardStorage());
+        loadPage("patients_panel", "card_holder");
+        initPatientCards(getCardStorage());
     }
 }

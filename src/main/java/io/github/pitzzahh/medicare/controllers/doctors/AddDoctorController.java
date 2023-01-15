@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package io.github.pitzzahh.medicare.controllers;
+package io.github.pitzzahh.medicare.controllers.doctors;
 
 import static io.github.pitzzahh.medicare.util.ComponentUtil.*;
 import io.github.pitzzahh.medicare.backend.Gender;
