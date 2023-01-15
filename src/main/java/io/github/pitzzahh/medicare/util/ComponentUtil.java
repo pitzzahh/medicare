@@ -25,6 +25,7 @@
 package io.github.pitzzahh.medicare.util;
 
 import static io.github.pitzzahh.medicare.application.Medicare.getPatientService;
+import static io.github.pitzzahh.medicare.util.ComponentUtilFields.fxmlLoader;
 import io.github.pitzzahh.medicare.controllers.PatientCardController;
 import io.github.pitzzahh.medicare.backend.Gender;
 import static java.util.Objects.requireNonNull;
@@ -101,8 +102,6 @@ public interface ComponentUtil {
     }
 
     static void initPatientCards(VBox cardStorage) {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(requireNonNull(Launcher.class.getResource("fxml/patients/patientCard.fxml"), "Cannot find patientCard.fxml"));
         cardStorage.getChildren().clear();
         getPatientService().getPatients()
                 .values()
@@ -126,7 +125,7 @@ public interface ComponentUtil {
     }
 
     static void initDoctorCards(VBox cardStorage) { // TODO: finish, add CardController first for doctors
-
+        cardStorage.getChildren().clear();
     }
 
     public static boolean requiredInput(
