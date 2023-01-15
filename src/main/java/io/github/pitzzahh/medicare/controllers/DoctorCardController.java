@@ -24,12 +24,14 @@
 
 package io.github.pitzzahh.medicare.controllers;
 
+import static io.github.pitzzahh.medicare.util.ToolTipUtil.initToolTip;
+import static io.github.pitzzahh.medicare.util.Style.normalStyle;
 import io.github.pitzzahh.medicare.backend.Gender;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Button;
+import javafx.fxml.FXML;
 
 public class DoctorCardController {
 
@@ -44,4 +46,17 @@ public class DoctorCardController {
 
     @FXML
     public Button updateButton, removeButton;
+
+    @FXML
+    public void initialize() {
+        updateButton.setTooltip(initToolTip("Click to Modify Patient", normalStyle()));
+        removeButton.setTooltip(initToolTip("Click to Remove Patient", normalStyle()));
+        name.setEditable(false);
+        age.setEditable(false);
+        gender.setMouseTransparent(true);
+        address.setEditable(false);
+        phoneNumber.setEditable(false);
+        specialization.setMouseTransparent(true);
+        dateOfBirth.setEditable(false);
+    }
 }
