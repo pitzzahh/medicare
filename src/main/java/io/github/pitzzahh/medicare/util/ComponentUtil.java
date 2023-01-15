@@ -28,6 +28,8 @@ import static io.github.pitzzahh.medicare.application.Medicare.getPatientService
 import static io.github.pitzzahh.medicare.application.Medicare.getDoctorService;
 import io.github.pitzzahh.medicare.controllers.patients.PatientCardController;
 import io.github.pitzzahh.medicare.controllers.doctors.DoctorCardController;
+import io.github.pitzzahh.medicare.backend.doctors.model.Specialization;
+import static io.github.pitzzahh.medicare.util.WindowUtil.getParent;
 import io.github.pitzzahh.medicare.backend.Person;
 import io.github.pitzzahh.medicare.backend.Gender;
 import static java.util.Objects.requireNonNull;
@@ -72,6 +74,11 @@ public interface ComponentUtil {
 
     static void initGenderChoiceBox(ChoiceBox<Gender> choiceBox) {
         choiceBox.getItems().addAll(FXCollections.observableArrayList(Arrays.asList(Gender.values())));
+        choiceBox.getSelectionModel().selectFirst();
+    }
+
+    static void initSpecializationChoiceBox(ChoiceBox<Specialization> choiceBox) {
+        choiceBox.getItems().addAll(FXCollections.observableArrayList(Arrays.asList(Specialization.values())));
         choiceBox.getSelectionModel().selectFirst();
     }
 
@@ -232,6 +239,16 @@ public interface ComponentUtil {
         dateOfBirth.getEditor().setText(dateString);
         address.setText(person.getAddress());
         phoneNumber.setText(person.getPhoneNumber());
+    }
+
+    static void setDashBoardData() {
+        int patientCount = getPatientService().getPatients().size();
+        Optional<Label> patientsCountLabel = getLabel(getParent("dashboard"), "patientsCount");
+        patientsCountLabel.ifPresent(l -> l.setText(String.valueOf(patientCount)));
+
+        int doctorsCount = getDoctorService().getDoctors().size();
+        Optional<Label> doctorsCountLabel = getLabel(getParent("dashboard"), "doctorsCount");
+        doctorsCountLabel.ifPresent(l -> l.setText(String.valueOf(doctorsCount)));
     }
 
     static DateTimeFormatter getDateFormatter() {
