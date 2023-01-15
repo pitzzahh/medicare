@@ -22,28 +22,39 @@
  * SOFTWARE.
  */
 
-package io.github.pitzzahh.medicare.backend.patients.cache;
+package io.github.pitzzahh.medicare.controllers;
 
-import io.github.pitzzahh.medicare.backend.patients.model.Patient;
-import javafx.collections.ObservableList;
-import javafx.collections.FXCollections;
-import java.util.function.Consumer;
-import java.util.HashMap;
-import java.util.Map;
+import static io.github.pitzzahh.medicare.util.ComponentUtil.initGenderChoiceBox;
+import static io.github.pitzzahh.medicare.util.ComponentUtil.resetInputs;
+import io.github.pitzzahh.medicare.backend.Gender;
+import javafx.event.ActionEvent;
+import javafx.scene.control.*;
+import javafx.fxml.FXML;
 
-public final class PatientData {
+public class AddDoctorController {
 
-    private static final Map<Integer, Patient> PATIENTS = new HashMap<>();
+    @FXML
+    public TextField lastName, firstName, middleName, address, phoneNumber;
 
-    private static final ObservableList<Patient> MEMBERS_OBSERVABLE_LIST = FXCollections.observableArrayList();
+    @FXML
+    public ChoiceBox<Gender> gender, specialization;
 
-    public static Consumer<Map<Integer, Patient>> initPatients = PATIENTS::putAll;
+    @FXML
+    public DatePicker birthDate;
 
-    public static Map<Integer, Patient> getPatients() {
-        return PATIENTS;
+    @FXML
+    public Button addDoctor;
+
+    @FXML
+    public void initialize() {
+        addDoctor.setTooltip(new Tooltip("Click to Add Doctors Data"));
+        initGenderChoiceBox(gender);
+        resetInputs(lastName, firstName, middleName, address, phoneNumber, gender, birthDate);
     }
 
-    public static ObservableList<Patient> getMembersDataSource() {
-        return MEMBERS_OBSERVABLE_LIST;
+    @FXML
+    public void onAddDoctor(ActionEvent actionEvent) {
+        actionEvent.consume();
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 }
