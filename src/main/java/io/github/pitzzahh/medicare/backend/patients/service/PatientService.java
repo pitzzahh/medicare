@@ -47,14 +47,11 @@ public class PatientService {
         return DAO.removePatientById();
     }
 
-
-    // TODO: test
     public boolean doesPatientAlreadyExists(Patient patient) {
         return DAO.getPatients()
                 .values()
                 .stream()
                 .anyMatch(p -> p.getFirstName().equals(patient.getFirstName()) || p.getLastName().equals(patient.getLastName()));
     }
-
 
 }
