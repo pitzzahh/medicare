@@ -26,6 +26,7 @@ package io.github.pitzzahh.medicare.backend.doctors.dao;
 
 import static io.github.pitzzahh.medicare.backend.db.DatabaseConnection.getJDBC;
 import io.github.pitzzahh.medicare.backend.doctors.mapper.DoctorMapper;
+import static io.github.pitzzahh.util.utilities.SecurityUtil.encrypt;
 import io.github.pitzzahh.medicare.backend.doctors.model.Doctor;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -43,11 +44,22 @@ public class DoctorDAOImpl implements DoctorDAO {
 
     @Override
     public Consumer<Doctor> addDoctor() {
-        throw new UnsupportedOperationException("Not yet implemented");
+        final String QUERY = "INSERT INTO d0ct0r$$(last_name, first_name, middle_name, gender, birthdate, address, phone_number, specialization) VALUES (?,?,?,?,?,?,?,?)";
+        return doctor -> getJDBC().update(
+                QUERY,
+                encrypt(doctor.getLastName()),
+                encrypt(doctor.getFirstName()),
+                doctor.getMiddleName().trim().isEmpty() ? null : encrypt(doctor.getMiddleName()),
+                encrypt(doctor.getGender().name()),
+                encrypt(doctor.getBirthDate().toString()),
+                encrypt(doctor.getAddress()),
+                doctor.getPhoneNumber().trim().isEmpty() ? null : encrypt(doctor.getPhoneNumber()),
+                encrypt(doctor.getSpecialization())
+        );
     }
 
     @Override
     public Consumer<Integer> removeDoctorById() {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return id -> getJDBC().update("DELETE FROM d0ct0r$ WHERE id = ?", id);
     }
 }
