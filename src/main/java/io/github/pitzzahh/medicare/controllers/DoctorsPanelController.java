@@ -28,14 +28,17 @@ import static io.github.pitzzahh.medicare.controllers.ViewPatientController.getC
 import static io.github.pitzzahh.medicare.util.ComponentUtil.initDoctorCards;
 import static io.github.pitzzahh.medicare.util.WindowUtil.loadPage;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 
 public class DoctorsPanelController {
 
+    @FXML
     public void onAddDoctor(ActionEvent actionEvent) {
         actionEvent.consume();
         loadPage("doctors_panel", "add_doctor");
     }
 
+    @FXML
     public void onViewDoctors(ActionEvent actionEvent) {
         actionEvent.consume();
         loadPage("doctors_panel", "card_holder");
