@@ -24,7 +24,6 @@
 
 package io.github.pitzzahh.medicare.util;
 
-import static io.github.pitzzahh.medicare.backend.patients.cache.PatientData.getPatients;
 import static io.github.pitzzahh.medicare.application.Medicare.getPatientService;
 import io.github.pitzzahh.medicare.controllers.PatientCardController;
 import static io.github.pitzzahh.medicare.util.WindowUtil.getParent;
@@ -90,18 +89,6 @@ public interface ComponentUtil {
         });
     }
 
-    /**
-     * Used to create a gaussian blur effect.
-     *
-     * @param radius the radius of the blur.
-     * @return a {@code GaussianBlur}.
-     */
-    static GaussianBlur gaussianBlur(double radius) {
-        GaussianBlur gaussianBlur = new GaussianBlur();
-        gaussianBlur.setRadius(radius);
-        return gaussianBlur;
-    }
-
     static void initGenderChoiceBox(ChoiceBox<Gender> choiceBox) {
         choiceBox.getItems().addAll(FXCollections.observableArrayList(Arrays.asList(Gender.values())));
         choiceBox.getSelectionModel().selectFirst();
@@ -138,19 +125,20 @@ public interface ComponentUtil {
     }
 
     static void initPatientCards(VBox cardStorage) { // TODO: fix bug
-        getPatients()
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(requireNonNull(Launcher.class.getResource("fxml/patients/patientCard.fxml"), "Cannot find patientCard.fxml"));
+        cardStorage.getChildren().clear();
+        getPatientService().getPatients()
                 .values()
                 .forEach(patient -> {
                     try {
-                        FXMLLoader fxmlLoader = new FXMLLoader();
-                        fxmlLoader.setLocation(requireNonNull(Launcher.class.getResource("fxml/patients/patientCard.fxml"), "Cannot find patientCard.fxml"));
                         HBox patientCard = fxmlLoader.load();
                         PatientCardController patientCardController = fxmlLoader.getController();
                         patientCardController.setData(patient);
 
                         patientCardController.removeButton.setOnAction(actionEvent -> {
                             actionEvent.consume();
-                            getPatients().remove(patient.getPatientId());
+                            getPatientService().getPatients().remove(patient.getPatientId());
                             cardStorage.getChildren().remove(patientCard);
                             getPatientService().removePatientById().accept(patient.getPatientId());
                         });

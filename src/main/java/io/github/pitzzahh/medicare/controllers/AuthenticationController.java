@@ -24,11 +24,11 @@
 
 package io.github.pitzzahh.medicare.controllers;
 
-import static io.github.pitzzahh.medicare.backend.patients.cache.PatientData.getPatients;
+import static io.github.pitzzahh.medicare.application.Medicare.getAccountService;
+import static io.github.pitzzahh.medicare.application.Medicare.getPatientService;
 import static io.github.pitzzahh.medicare.util.ComponentUtil.getMainProgressBar;
 import static io.github.pitzzahh.medicare.util.ToolTipUtil.initToolTip;
 import static io.github.pitzzahh.medicare.util.ComponentUtil.getLabel;
-import io.github.pitzzahh.medicare.backend.login.cache.AuthData;
 import io.github.pitzzahh.medicare.backend.login.model.Account;
 import static io.github.pitzzahh.medicare.util.WindowUtil.*;
 import static io.github.pitzzahh.medicare.util.Style.*;
@@ -73,7 +73,7 @@ public class AuthenticationController {
     }
 
     private void signIn(String username, String password) {
-        Map<String, Account> accounts = AuthData.getAccounts();
+        Map<String, Account> accounts = getAccountService().getAccounts();
 
         if (!accounts.isEmpty()) {
             boolean containsUsername = accounts.containsKey(username);
@@ -85,7 +85,7 @@ public class AuthenticationController {
                     errorMessage.setText("");
                     loadParent(getParent("main_panel"), "MEDiCARE");
                     loadPage("main_panel", "dashboard");
-                    int size = getPatients().size();
+                    int size = getPatientService().getPatients().size();
                     Optional<Label> label = getLabel(getParent("dashboard"), "patientsCount");
                     label.ifPresent(l -> l.setText(String.valueOf(size)));
                 }
