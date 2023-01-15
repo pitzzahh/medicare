@@ -15,7 +15,7 @@
 <BorderPane style="-fx-background-color: #3D5A80;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.pitzzahh.medicare.controllers.AuthenticationController">
     <center>
         <HBox alignment="CENTER" BorderPane.alignment="CENTER">
-            <VBox alignment="CENTER" styleClass="left-side" stylesheets="@../../css/auth/auth.css" HBox.hgrow="ALWAYS">
+            <VBox alignment="CENTER" styleClass="left-side" stylesheets="@../../css/auth.css" HBox.hgrow="ALWAYS">
                 <ImageView fitHeight="347.0" fitWidth="292.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                     <Image url="@../../assets/auth/illustration.png" />
                 </ImageView>
@@ -23,7 +23,7 @@
                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </padding>
             </VBox>
-            <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" styleClass="right-side" stylesheets="@../../css/auth/auth.css" HBox.hgrow="ALWAYS">
+            <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" styleClass="right-side" stylesheets="@../../css/auth.css" HBox.hgrow="ALWAYS">
                 <HBox alignment="CENTER">
                     <VBox.margin>
                         <Insets />
@@ -36,14 +36,14 @@
                     <VBox.margin>
                         <Insets bottom="50.0" />
                     </VBox.margin>
-                    <Label styleClass="brand-name" stylesheets="@../../css/auth/auth.css" text="MED" />
-                    <Label layoutX="179.0" layoutY="78.0" stylesheets="@../../css/auth/auth.css" text="i">
+                    <Label styleClass="brand-name" stylesheets="@../../css/auth.css" text="MED" />
+                    <Label layoutX="179.0" layoutY="78.0" stylesheets="@../../css/auth.css" text="i">
                         <styleClass>
                             <String fx:value="brand-name" />
                             <String fx:value="i" />
                         </styleClass>
                     </Label>
-                    <Label layoutX="206.0" layoutY="78.0" stylesheets="@../../css/auth/auth.css" text="CARE">
+                    <Label layoutX="206.0" layoutY="78.0" stylesheets="@../../css/auth.css" text="CARE">
                         <styleClass>
                             <String fx:value="brand-name" />
                             <String fx:value="care" />
@@ -55,12 +55,12 @@
                         <padding>
                             <Insets left="20.0" right="20.0" />
                         </padding>
-                        <TextField fx:id="username" onKeyTyped="#onType" promptText="Username" styleClass="inputs" stylesheets="@../../css/auth/auth.css">
+                        <TextField fx:id="username" onKeyTyped="#onType" promptText="Username" styleClass="inputs" stylesheets="@../../css/auth.css">
                             <VBox.margin>
                                 <Insets bottom="10.0" />
                             </VBox.margin>
                         </TextField>
-                        <PasswordField fx:id="password" onKeyTyped="#onType" promptText="Password" styleClass="inputs" stylesheets="@../../css/auth/auth.css" />
+                        <PasswordField fx:id="password" onKeyTyped="#onType" promptText="Password" styleClass="inputs" stylesheets="@../../css/auth.css" />
                         <HBox.margin>
                             <Insets bottom="20.0" />
                         </HBox.margin>
@@ -74,7 +74,7 @@
                         <Insets />
                     </VBox.margin>
                     <VBox alignment="CENTER" prefHeight="36.0" prefWidth="350.0">
-                        <Button fx:id="loginButton" mnemonicParsing="false" onAction="#onLogin" prefHeight="47.0" prefWidth="133.0" styleClass="login-button" stylesheets="@../../css/auth/auth.css" text="LOGIN">
+                        <Button fx:id="loginButton" mnemonicParsing="false" onAction="#onLogin" prefHeight="47.0" prefWidth="133.0" styleClass="login-button" stylesheets="@../../css/auth.css" text="LOGIN">
                             <VBox.margin>
                                 <Insets bottom="5.0" />
                             </VBox.margin>
