@@ -24,6 +24,7 @@
 
 package io.github.pitzzahh.medicare.backend.doctors.mapper;
 
+import io.github.pitzzahh.medicare.backend.doctors.model.Specialization;
 import static io.github.pitzzahh.util.utilities.SecurityUtil.decrypt;
 import io.github.pitzzahh.medicare.backend.doctors.model.Doctor;
 import io.github.pitzzahh.medicare.backend.Gender;
@@ -47,7 +48,7 @@ public class DoctorMapper implements RowMapper<Doctor> {
                 LocalDate.of(parseInt(date[0]), parseInt(date[1]), parseInt(date[2])),
                 decrypt(rs.getString("address")),
                 rs.getString("phone_number") != null ? decrypt(rs.getString("phone_number")) : "",
-                decrypt(rs.getString("specialization"))
+                Specialization.valueOf(decrypt(rs.getString("specialization")))
         );
     }
 }
