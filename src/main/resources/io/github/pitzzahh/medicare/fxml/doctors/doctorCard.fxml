@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox alignment="CENTER" prefHeight="329.0" prefWidth="561.0" styleClass="box"
+      stylesheets="@../../css/card.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="io.github.pitzzahh.medicare.controllers.DoctorCardController">
+    <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+        <padding>
+            <Insets bottom="10.0" left="40.0" top="10.0"/>
+        </padding>
+        <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="50.0">
+            <VBox.margin>
+                <Insets bottom="5.0"/>
+            </VBox.margin>
+            <Label alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="0.0" styleClass="card-label"
+                   stylesheets="@../../css/card.css" text="NAME:" HBox.hgrow="ALWAYS">
+                <font>
+                    <Font size="16.0"/>
+                </font>
+                <HBox.margin>
+                    <Insets right="100.0"/>
+                </HBox.margin>
+            </Label>
+            <TextField fx:id="name" prefWidth="200.0" styleClass="inputs" stylesheets="@../../css/card.css"
+                       HBox.hgrow="ALWAYS"/>
+        </HBox>
+        <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="80.0">
+            <VBox.margin>
+                <Insets bottom="5.0"/>
+            </VBox.margin>
+            <Label contentDisplay="RIGHT" graphicTextGap="0.0" styleClass="card-label"
+                   stylesheets="@../../css/card.css" text="AGE:">
+                <HBox.margin>
+                    <Insets right="118.0"/>
+                </HBox.margin>
+            </Label>
+            <TextField fx:id="age" prefWidth="200.0" styleClass="inputs" stylesheets="@../../css/card.css"
+                       HBox.hgrow="ALWAYS"/>
+        </HBox>
+        <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="110.0">
+            <VBox.margin>
+                <Insets bottom="5.0"/>
+            </VBox.margin>
+            <Label contentDisplay="RIGHT" graphicTextGap="0.0" styleClass="card-label"
+                   stylesheets="@../../css/card.css" text="GENDER:">
+                <HBox.margin>
+                    <Insets right="85.0"/>
+                </HBox.margin>
+            </Label>
+            <ChoiceBox fx:id="gender" maxWidth="1200.0" prefWidth="200.0" styleClass="inputs"
+                       stylesheets="@../../css/card.css" HBox.hgrow="ALWAYS"/>
+        </HBox>
+        <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="140.0">
+            <VBox.margin>
+                <Insets bottom="5.0"/>
+            </VBox.margin>
+            <Label contentDisplay="RIGHT" graphicTextGap="0.0" styleClass="card-label"
+                   stylesheets="@../../css/card.css" text="DATE OF BIRTH:">
+                <HBox.margin>
+                    <Insets right="30.0"/>
+                </HBox.margin>
+            </Label>
+            <DatePicker fx:id="dateOfBirth" maxWidth="1200.0" prefWidth="200.0" styleClass="inputs"
+                        stylesheets="@../../css/card.css" HBox.hgrow="ALWAYS"/>
+        </HBox>
+        <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="170.0">
+            <VBox.margin>
+                <Insets bottom="5.0"/>
+            </VBox.margin>
+            <Label contentDisplay="RIGHT" graphicTextGap="0.0" styleClass="card-label"
+                   stylesheets="@../../css/card.css" text="ADDRESS:">
+                <HBox.margin>
+                    <Insets right="75.0"/>
+                </HBox.margin>
+            </Label>
+            <TextField fx:id="address" prefWidth="200.0" styleClass="inputs" stylesheets="@../../css/card.css"
+                       HBox.hgrow="ALWAYS"/>
+        </HBox>
+        <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="200.0">
+            <VBox.margin>
+                <Insets bottom="5.0"/>
+            </VBox.margin>
+            <Label contentDisplay="RIGHT" graphicTextGap="0.0" styleClass="card-label"
+                   stylesheets="@../../css/card.css" text="PHONE NUMBER:">
+                <HBox.margin>
+                    <Insets right="20.0"/>
+                </HBox.margin>
+            </Label>
+            <TextField fx:id="phoneNumber" prefWidth="200.0" styleClass="inputs"
+                       stylesheets="@../../css/card.css" HBox.hgrow="ALWAYS"/>
+        </HBox>
+        <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="230.0">
+            <VBox.margin>
+                <Insets bottom="5.0"/>
+            </VBox.margin>
+            <Label contentDisplay="RIGHT" graphicTextGap="0.0" styleClass="card-label"
+                   stylesheets="@../../css/card.css" text="SPECIALIZATION:">
+                <HBox.margin>
+                    <Insets right="20.0"/>
+                </HBox.margin>
+            </Label>
+            <ChoiceBox fx:id="specialization" maxWidth="1200.0" prefWidth="200.0" styleClass="inputs"
+                       stylesheets="@../../css/card.css" HBox.hgrow="ALWAYS"/>
+        </HBox>
+    </VBox>
+    <VBox alignment="CENTER" prefHeight="400.0" prefWidth="167.0" HBox.hgrow="ALWAYS">
+        <HBox alignment="CENTER" prefHeight="61.0" prefWidth="177.0"/>
+        <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="61.0" prefWidth="177.0"/>
+        <HBox alignment="CENTER" layoutX="10.0" layoutY="71.0" prefHeight="61.0" prefWidth="177.0"/>
+        <HBox alignment="CENTER" layoutX="10.0" layoutY="254.0" prefHeight="61.0" prefWidth="177.0"/>
+        <HBox alignment="CENTER" layoutX="10.0" layoutY="132.0">
+            <Button fx:id="updateButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0"
+                    styleClass="update-button" stylesheets="@../../css/card.css" text="UPDATE"/>
+            <VBox.margin>
+                <Insets bottom="10.0"/>
+            </VBox.margin>
+        </HBox>
+        <HBox alignment="CENTER" layoutX="10.0" layoutY="193.0">
+            <Button fx:id="removeButton" mnemonicParsing="false" prefWidth="150.0" styleClass="remove-button"
+                    stylesheets="@../../css/card.css" text="REMOVE"/>
+            <VBox.margin>
+                <Insets/>
+            </VBox.margin>
+        </HBox>
+        <HBox alignment="CENTER" layoutX="10.0" layoutY="332.0" prefHeight="40.0" prefWidth="167.0"/>
+    </VBox>
+</HBox>
