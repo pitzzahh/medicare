@@ -25,12 +25,33 @@
 package io.github.pitzzahh.medicare.backend.doctors.service;
 
 import io.github.pitzzahh.medicare.backend.doctors.dao.DoctorDAO;
+import io.github.pitzzahh.medicare.backend.doctors.model.Doctor;
+import java.util.function.Consumer;
 import lombok.AllArgsConstructor;
+import java.util.Map;
 
 @AllArgsConstructor
 public class DoctorService {
 
     private final DoctorDAO DAO;
 
-    // TODO: call dao methods
+
+    public Map<Integer, Doctor> getDoctors() {
+        return DAO.getDoctors();
+    }
+
+    public Consumer<Doctor> addDoctor() {
+        return DAO.addDoctor();
+    }
+
+    public Consumer<Integer> removeDoctorById() {
+        return DAO.removeDoctorById();
+    }
+
+    public boolean doesDoctorAlreadyExists(Doctor patient) {
+        return DAO.getDoctors()
+                .values()
+                .stream()
+                .anyMatch(d -> d.getFirstName().equals(patient.getFirstName()) || d.getLastName().equals(patient.getLastName()));
+    }
 }
