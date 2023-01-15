@@ -129,6 +129,7 @@ public interface ComponentUtil {
                             getPatientService().getPatients().remove(patient.getPatientId());
                             cardStorage.getChildren().remove(patientCard);
                             getPatientService().removePatientById().accept(patient.getPatientId());
+                            setDashBoardData();
                         });
                         cardStorage.getChildren().add(patientCard);
                     } catch (Exception e) {
@@ -153,6 +154,7 @@ public interface ComponentUtil {
                             getDoctorService().getDoctors().remove(doctor.getId());
                             cardStorage.getChildren().remove(doctorCard);
                             getPatientService().removePatientById().accept(doctor.getId());
+                            setDashBoardData();
                         });
                         cardStorage.getChildren().add(doctorCard);
                     } catch (Exception e) {
