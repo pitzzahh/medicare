@@ -26,17 +26,15 @@ package io.github.pitzzahh.medicare.util;
 
 import static io.github.pitzzahh.medicare.application.Medicare.getPatientService;
 import io.github.pitzzahh.medicare.controllers.PatientCardController;
-import static io.github.pitzzahh.medicare.util.WindowUtil.getParent;
-import javafx.scene.control.cell.PropertyValueFactory;
 import io.github.pitzzahh.medicare.backend.Gender;
 import static java.util.Objects.requireNonNull;
 import io.github.pitzzahh.medicare.Launcher;
 import java.time.format.DateTimeFormatter;
-import javafx.scene.effect.GaussianBlur;
 import javafx.collections.FXCollections;
 import static java.lang.String.format;
 import java.time.format.FormatStyle;
-import java.util.stream.IntStream;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.fxml.FXMLLoader;
@@ -46,16 +44,6 @@ import java.util.Optional;
 import java.util.Arrays;
 
 public interface ComponentUtil {
-    /**
-     * Used to get a table from a parent node.
-     *
-     * @param parentId the parent parentId.
-     * @param tableId  the id of the table.
-     * @return an {@code Optional<TableView<?>>}.
-     */
-    static Optional<TableView<?>> getTable(String parentId, String tableId) {
-        return Optional.ofNullable((TableView<?>) getParent(parentId).lookup(format("#%s", tableId)));
-    }
 
     /**
      * Used to modify the progress bar from the main window.
@@ -75,18 +63,6 @@ public interface ComponentUtil {
      */
     static Optional<Label> getLabel(Parent parent, String id) {
         return Optional.ofNullable((Label) parent.lookup(format("#%s", id)));
-    }
-
-    static Optional<ChoiceBox<?>> getChoiceBox(Parent parent, String name) {
-        return Optional.ofNullable((ChoiceBox<?>) parent.lookup(format("#%s", name)));
-    }
-
-    static void initTableColumns(TableView<?> table, String[] columns) {
-        IntStream.range(0, columns.length).forEachOrdered(i -> {
-            TableColumn<?, ?> column = table.getColumns().get(i);
-            column.setStyle("-fx-alignment: center;");
-            column.setCellValueFactory(new PropertyValueFactory<>(columns[i]));
-        });
     }
 
     static void initGenderChoiceBox(ChoiceBox<Gender> choiceBox) {
@@ -124,7 +100,7 @@ public interface ComponentUtil {
         return alert;
     }
 
-    static void initPatientCards(VBox cardStorage) { // TODO: fix bug
+    static void initPatientCards(VBox cardStorage) {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(requireNonNull(Launcher.class.getResource("fxml/patients/patientCard.fxml"), "Cannot find patientCard.fxml"));
         cardStorage.getChildren().clear();
@@ -149,6 +125,73 @@ public interface ComponentUtil {
                 });
     }
 
+    static void initDoctorCards(VBox cardStorage) { // TODO: finish, add CardController first for doctors
+
+    }
+
+    public static boolean requiredInput(
+            TextField firstName,
+            TextField lastName,
+            TextField address,
+            DatePicker birthDate,
+            TextArea symptoms,
+            boolean isAddPatient
+    ) {
+        if (firstName.getText().trim().isEmpty()) {
+            Alert alert = showAlert("First Name is Required", "First Name is Required", "First name is required");
+            ImageView graphic = new ImageView(new Image(requireNonNull(Launcher.class.getResourceAsStream("assets/error.png"), "Error graphic not found")));
+            graphic.setFitWidth(50);
+            graphic.setFitHeight(50);
+            alert.setGraphic(graphic);
+            alert.showAndWait();
+            return true;
+        }
+
+        if (lastName.getText().trim().isEmpty()) {
+            Alert alert = showAlert("Last Name is Required", "Last Name is Required", "Last name is required");
+            ImageView graphic = new ImageView(new Image(requireNonNull(Launcher.class.getResourceAsStream("assets/error.png"), "Error graphic not found")));
+            graphic.setFitWidth(50);
+            graphic.setFitHeight(50);
+            alert.setGraphic(graphic);
+            alert.showAndWait();
+            return true;
+        }
+
+        if (birthDate.getValue() == null) {
+            Alert alert = showAlert("Birth Date is Required", "Birth Date is Required", "Birth date is required");
+            ImageView graphic = new ImageView(new Image(requireNonNull(Launcher.class.getResourceAsStream("assets/error.png"), "Error graphic not found")));
+            graphic.setFitWidth(50);
+            graphic.setFitHeight(50);
+            alert.setGraphic(graphic);
+            alert.showAndWait();
+            return true;
+        }
+
+        if (address.getText().trim().isEmpty()) {
+            Alert alert = showAlert("Address is Required", "Address is Required", "Address is required");
+            ImageView graphic = new ImageView(new Image(requireNonNull(Launcher.class.getResourceAsStream("assets/error.png"), "Error graphic not found")));
+            graphic.setFitWidth(50);
+            graphic.setFitHeight(50);
+            alert.setGraphic(graphic);
+            alert.showAndWait();
+            return true;
+        }
+
+        if (isAddPatient) {
+            if (symptoms.getText().trim().isEmpty()) {
+                Alert alert = showAlert("Symptoms is Required", "Symptoms is Required", "Symptoms is required");
+                ImageView graphic = new ImageView(new Image(requireNonNull(Launcher.class.getResourceAsStream("assets/error.png"), "Error graphic not found")));
+                graphic.setFitWidth(50);
+                graphic.setFitHeight(50);
+                alert.setGraphic(graphic);
+                alert.showAndWait();
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     static DateTimeFormatter getDateFormatter() {
         return ComponentUtilFields.formatter;
     }
@@ -156,4 +199,5 @@ public interface ComponentUtil {
 
 class ComponentUtilFields {
     static DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG);
+    static FXMLLoader fxmlLoader = new FXMLLoader(requireNonNull(Launcher.class.getResource("fxml/patients/patientCard.fxml"), "Cannot find patientCard.fxml"));
 }
