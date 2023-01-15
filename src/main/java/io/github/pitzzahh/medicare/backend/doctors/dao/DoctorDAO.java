@@ -24,15 +24,15 @@
 
 package io.github.pitzzahh.medicare.backend.doctors.dao;
 
-import io.github.pitzzahh.medicare.backend.patients.model.Patient;
+import io.github.pitzzahh.medicare.backend.doctors.model.Doctor;
 import java.util.function.Consumer;
 import java.util.Map;
 
 public interface DoctorDAO {
 
-    Map<Integer, Patient> getPatients();
+    Map<Integer, Doctor> getDoctors();
 
-    Consumer<Patient> addPatient();
+    Consumer<Doctor> addDoctor();
 
-    Consumer<Integer> removePatientById();
+    Consumer<Integer> removeDoctorById();
 }
