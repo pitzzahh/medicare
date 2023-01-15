@@ -24,7 +24,7 @@
 
 package io.github.pitzzahh.medicare.controllers.patients;
 
-import static io.github.pitzzahh.medicare.util.ComponentUtil.getDateFormatter;
+import static io.github.pitzzahh.medicare.util.ComponentUtil.setCommonData;
 import static io.github.pitzzahh.medicare.util.ToolTipUtil.initToolTip;
 import io.github.pitzzahh.medicare.backend.patients.model.Patient;
 import static io.github.pitzzahh.medicare.util.Style.normalStyle;
@@ -33,9 +33,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
-import java.time.LocalDate;
 import javafx.fxml.FXML;
-import java.time.Period;
 
 public class PatientCardController {
 
@@ -62,18 +60,13 @@ public class PatientCardController {
         address.setEditable(false);
         phoneNumber.setEditable(false);
         symptoms.setEditable(false);
+        dateOfBirth.setEditable(false);
         dateOfBirth.setMouseTransparent(false);
     }
 
     public void setData(Patient patient) {
         id.setText(String.valueOf(patient.getPatientId()));
-        name.setText(patient.getFirstName().concat(" ").concat(patient.getLastName()));
-        age.setText(String.valueOf(Period.between(patient.getBirthDate(), LocalDate.now()).getYears()));
-        gender.setValue(patient.getGender());
-        String dateString = patient.getBirthDate().format(getDateFormatter());
-        dateOfBirth.getEditor().setText(dateString);
-        address.setText(patient.getAddress());
-        phoneNumber.setText(patient.getPhoneNumber());
+        setCommonData(patient, name, age, gender, dateOfBirth, address, phoneNumber);
         symptoms.setText(patient.getSymptoms());
     }
 
