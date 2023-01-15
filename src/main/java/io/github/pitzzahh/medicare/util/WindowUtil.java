@@ -73,7 +73,6 @@ public interface WindowUtil {
         Optional<Scene> scene = Optional.ofNullable(parent.getScene());
         getStage().setScene(scene.orElseGet(() -> new Scene(parent)));
         getStage().setTitle(stageTitle);
-        if (!isFullScreen) getStage().centerOnScreen();
         getStage().addEventHandler(KeyEvent.KEY_PRESSED, fullScreenEvent);
         getStage().toFront();
         getStage().setFullScreen(isFullScreen);
