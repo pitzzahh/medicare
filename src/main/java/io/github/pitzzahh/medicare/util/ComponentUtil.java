@@ -25,7 +25,10 @@
 package io.github.pitzzahh.medicare.util;
 
 import static io.github.pitzzahh.medicare.application.Medicare.getPatientService;
+import static io.github.pitzzahh.medicare.application.Medicare.getDoctorService;
 import io.github.pitzzahh.medicare.controllers.patients.PatientCardController;
+import io.github.pitzzahh.medicare.controllers.doctors.DoctorCardController;
+import io.github.pitzzahh.medicare.backend.Person;
 import io.github.pitzzahh.medicare.backend.Gender;
 import static java.util.Objects.requireNonNull;
 import io.github.pitzzahh.medicare.Launcher;
@@ -40,7 +43,9 @@ import javafx.scene.layout.VBox;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.Parent;
+import java.time.LocalDate;
 import java.util.Optional;
+import java.time.Period;
 import java.util.Arrays;
 
 public interface ComponentUtil {
@@ -125,10 +130,28 @@ public interface ComponentUtil {
                 });
     }
 
-    static void initDoctorCards(VBox cardStorage) { // TODO: finish, add CardController first for doctors
+    static void initDoctorCards(VBox cardStorage) { // TODO: test
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(requireNonNull(Launcher.class.getResource("fxml/doctors/doctorCard.fxml"), "Cannot find doctorCard.fxml"));
         cardStorage.getChildren().clear();
+        getDoctorService().getDoctors()
+                .values()
+                .forEach(doctor -> {
+                    try {
+                        HBox doctorCard = fxmlLoader.load();
+                        DoctorCardController doctorCardController = fxmlLoader.getController();
+                        doctorCardController.setData(doctor);
+                        doctorCardController.removeButton.setOnAction(actionEvent -> {
+                            actionEvent.consume();
+                            getDoctorService().getDoctors().remove(doctor.getId());
+                            cardStorage.getChildren().remove(doctorCard);
+                            getPatientService().removePatientById().accept(doctor.getId());
+                        });
+                        cardStorage.getChildren().add(doctorCard);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
     }
 
     static boolean requiredInput(
@@ -192,6 +215,23 @@ public interface ComponentUtil {
         }
 
         return false;
+    }
+
+    static void setCommonData(Person person,
+                                     TextField name,
+                                     TextField age,
+                                     ChoiceBox<Gender> gender,
+                                     DatePicker dateOfBirth,
+                                     TextField address,
+                                     TextField phoneNumber
+    ) {
+        name.setText(person.getFirstName().concat(" ").concat(person.getLastName()));
+        age.setText(String.valueOf(Period.between(person.getBirthDate(), LocalDate.now()).getYears()));
+        gender.setValue(person.getGender());
+        String dateString = person.getBirthDate().format(getDateFormatter());
+        dateOfBirth.getEditor().setText(dateString);
+        address.setText(person.getAddress());
+        phoneNumber.setText(person.getPhoneNumber());
     }
 
     static DateTimeFormatter getDateFormatter() {
