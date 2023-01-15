@@ -43,6 +43,10 @@ public class PatientService {
         return DAO.addPatient();
     }
 
+    public Consumer<Integer> removePatientById() {
+        return DAO.removePatientById();
+    }
+
 
     // TODO: test
     public boolean doesPatientAlreadyExists(Patient patient) {
