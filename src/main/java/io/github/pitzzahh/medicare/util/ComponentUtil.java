@@ -24,6 +24,9 @@
 
 package io.github.pitzzahh.medicare.util;
 
+import static io.github.pitzzahh.medicare.backend.patients.cache.PatientData.getPatients;
+import static io.github.pitzzahh.medicare.application.Medicare.getPatientService;
+import io.github.pitzzahh.medicare.controllers.PatientCardController;
 import static io.github.pitzzahh.medicare.util.WindowUtil.getParent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import io.github.pitzzahh.medicare.backend.Gender;
@@ -37,6 +40,9 @@ import javafx.scene.image.ImageView;
 import java.time.format.FormatStyle;
 import java.util.stream.IntStream;
 import javafx.scene.image.Image;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.Parent;
 import java.util.Optional;
@@ -135,6 +141,32 @@ public interface ComponentUtil {
         dialogPane.getStylesheets().add(requireNonNull(Launcher.class.getResource("css/alert.css"), "Cannot find alert.css").toExternalForm());
         dialogPane.setId("alert-dialog");
         alert.showAndWait();
+    }
+
+    // TODO: fix bug where cards are loaded twice
+    static void initPatientCards(VBox cardStorage) {
+        cardStorage.getChildren().removeAll();
+        getPatients()
+                .values()
+                .forEach(patient -> {
+                    try {
+                        FXMLLoader fxmlLoader = new FXMLLoader();
+                        fxmlLoader.setLocation(requireNonNull(Launcher.class.getResource("fxml/patients/patientCard.fxml"), "Cannot find patientCard.fxml"));
+                        HBox patientCard = fxmlLoader.load();
+                        PatientCardController patientCardController = fxmlLoader.getController();
+                        patientCardController.setData(patient);
+
+                        patientCardController.removeButton.setOnAction(actionEvent -> {
+                            actionEvent.consume();
+                            getPatients().remove(patient.getPatientId());
+                            cardStorage.getChildren().remove(patientCard);
+                            getPatientService().removePatientById().accept(patient.getPatientId());
+                        });
+                        cardStorage.getChildren().add(patientCard);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
     }
 
     static DateTimeFormatter getDateFormatter() {
