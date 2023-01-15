@@ -42,6 +42,7 @@ public class PatientsPanelController {
     public void onViewPatients(ActionEvent actionEvent) {
         actionEvent.consume();
         loadPage("patients_panel", "view_patient");
+        getCardStorage().getChildren().removeAll();
         initPatientCards(getCardStorage());
     }
 }
