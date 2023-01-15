@@ -24,12 +24,13 @@
 
 package io.github.pitzzahh.medicare.controllers;
 
+import static io.github.pitzzahh.medicare.controllers.ViewPatientController.getCardStorage;
+import static io.github.pitzzahh.medicare.util.ComponentUtil.initPatientCards;
 import static io.github.pitzzahh.medicare.util.WindowUtil.loadPage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 public class PatientsPanelController {
-
 
     @FXML
     public void onAddPatient(ActionEvent actionEvent) {
@@ -41,5 +42,6 @@ public class PatientsPanelController {
     public void onViewPatients(ActionEvent actionEvent) {
         actionEvent.consume();
         loadPage("patients_panel", "view_patient");
+        initPatientCards(getCardStorage());
     }
 }
