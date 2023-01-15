@@ -34,4 +34,6 @@ public interface PatientDAO {
 
     Consumer<Patient> addPatient();
 
+    Consumer<Integer> removePatientById();
+
 }
