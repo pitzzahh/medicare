@@ -37,9 +37,9 @@ import lombok.*;
 public class Doctor extends Person {
 
     private int id;
-    private String specialization;
+    private Specialization specialization;
 
-    public Doctor(int id, String lastName, String firstName, String middleName, Gender gender, LocalDate birthDate, String address, String phoneNumber, String specialization) {
+    public Doctor(int id, String lastName, String firstName, String middleName, Gender gender, LocalDate birthDate, String address, String phoneNumber, Specialization specialization) {
         this.id = id;
         super.setLastName(lastName);
         super.setFirstName(firstName);
@@ -51,7 +51,7 @@ public class Doctor extends Person {
         this.specialization = specialization;
     }
 
-    public Doctor(String lastName, String firstName, String middleName, Gender gender, LocalDate birthDate, String address, String phoneNumber, String specialization) {
+    public Doctor(String lastName, String firstName, String middleName, Gender gender, LocalDate birthDate, String address, String phoneNumber, Specialization specialization) {
         super.setLastName(lastName);
         super.setFirstName(firstName);
         super.setMiddleName(middleName);
