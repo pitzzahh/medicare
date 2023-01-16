@@ -153,7 +153,7 @@ public interface ComponentUtil {
                             actionEvent.consume();
                             getDoctorService().getDoctors().remove(doctor.getId());
                             cardStorage.getChildren().remove(doctorCard);
-                            getPatientService().removePatientById().accept(doctor.getId());
+                            getDoctorService().removeDoctorById().accept(doctor.getId());
                             setDashBoardData();
                         });
                         cardStorage.getChildren().add(doctorCard);
