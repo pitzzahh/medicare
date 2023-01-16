@@ -58,7 +58,7 @@ public class MainPanelController {
     @FXML
     public void onClickAbout(ActionEvent actionEvent) {
         actionEvent.consume();
-        throw new UnsupportedOperationException("Not yet implemented");
+        loadPage("main_panel", "about");
     }
 
     @FXML
