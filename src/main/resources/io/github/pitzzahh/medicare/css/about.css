@@ -9,26 +9,27 @@
 }
 
 .care {
-    -fx-text-fill: #3D5A80;
+    -fx-text-fill: #E0FBFC;
 }
 
 .about-box {
-    -fx-background-color: #3D5A80;
+    -fx-background-color: #E0FBFC;
     -fx-background-radius: 20px;
 }
 
 .about-title {
     -fx-font-size: 20px;
-    -fx-text-fill: #fff;
+    -fx-text-fill: #000;
     -fx-font-weight: bold;
 }
 
 .about-us {
     -fx-font-size: 16px;
-    -fx-text-fill: #fff;
+    -fx-text-fill: #000;
 }
 
 .names {
     -fx-font-size: 18px;
-    -fx-text-fill: #fff;
+    -fx-text-fill: #000;
+    -fx-font-weight: bold;
 }
