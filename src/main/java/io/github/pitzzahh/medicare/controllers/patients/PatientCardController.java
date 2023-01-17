@@ -62,7 +62,7 @@ public class PatientCardController {
         phoneNumber.setEditable(false);
         symptoms.setEditable(false);
         dateOfBirth.setEditable(false);
-        dateOfBirth.setMouseTransparent(false);
+        dateOfBirth.setMouseTransparent(true);
     }
 
     public void setData(Patient patient) {
