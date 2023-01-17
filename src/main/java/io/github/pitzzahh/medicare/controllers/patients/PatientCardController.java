@@ -24,26 +24,20 @@
 
 package io.github.pitzzahh.medicare.controllers.patients;
 
-import static io.github.pitzzahh.medicare.util.ComponentUtil.setCommonData;
-import static io.github.pitzzahh.medicare.util.ToolTipUtil.initToolTip;
-import io.github.pitzzahh.medicare.backend.patients.model.Patient;
-import static io.github.pitzzahh.medicare.util.Style.normalStyle;
 import io.github.pitzzahh.medicare.backend.Gender;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import io.github.pitzzahh.medicare.backend.patients.model.Patient;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
+
+import static io.github.pitzzahh.medicare.util.ComponentUtil.setCommonData;
+import static io.github.pitzzahh.medicare.util.Style.normalStyle;
+import static io.github.pitzzahh.medicare.util.ToolTipUtil.initToolTip;
 
 public class PatientCardController {
 
-    @FXML
-    public VBox buttonsParent;
-
-    @FXML
-    public HBox updateButtonBox;
 
     @FXML
     private TextField id, name, age, address, phoneNumber, symptoms;
@@ -55,11 +49,10 @@ public class PatientCardController {
     private DatePicker dateOfBirth;
 
     @FXML
-    public Button updateButton, removeButton;
+    public Button removeButton;
 
     @FXML
     public void initialize() {
-        updateButton.setTooltip(initToolTip("Click to Modify Patient", normalStyle()));
         removeButton.setTooltip(initToolTip("Click to Remove Patient", normalStyle()));
         id.setEditable(false);
         name.setEditable(false);

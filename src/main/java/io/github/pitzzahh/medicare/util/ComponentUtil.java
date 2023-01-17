@@ -64,30 +64,10 @@ public interface ComponentUtil {
         return Optional.ofNullable((ProgressBar) parent.lookup("#progressBar"));
     }
 
-    static Optional<TextField> getTextField(Parent parent, String id) {
-        return Optional.ofNullable((TextField) parent.lookup(format("#%s", id)));
-    }
-
-    static Optional<DatePicker> getDatePicker(Parent parent, String id) {
-        return Optional.ofNullable((DatePicker) parent.lookup(format("#%s", id)));
-    }
-
-    @SuppressWarnings("unchecked")
-    static Optional<ChoiceBox<Object>> getChoiceBox(Parent parent, String id) {
-        return Optional.ofNullable((ChoiceBox<Object>) parent.lookup(format("#%s", id)));
-    }
-
     static Optional<Label> getLabel(Parent parent, String id) {
         return Optional.ofNullable((Label) parent.lookup(format("#%s", id)));
     }
 
-    static Optional<VBox> getVBox(Parent parent, String id) {
-        return Optional.ofNullable((VBox) parent.lookup(format("#%s", id)));
-    }
-
-    static Optional<HBox> getHBox(Parent parent, String id) {
-        return Optional.ofNullable((HBox) parent.lookup(format("#%s", id)));
-    }
     static void initGenderChoiceBox(ChoiceBox<Gender> choiceBox) {
         choiceBox.getItems().addAll(FXCollections.observableArrayList(Arrays.asList(Gender.values())));
         choiceBox.getSelectionModel().selectFirst();
@@ -129,25 +109,23 @@ public interface ComponentUtil {
     }
 
     static void initPatientCards(VBox cardStorage) {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(requireNonNull(Launcher.class.getResource("fxml/patients/patientCard.fxml"), "Cannot find patientCard.fxml"));
         cardStorage.getChildren().clear();
         getPatientService().getPatients()
                 .values()
                 .forEach(patient -> {
                     try {
+                        FXMLLoader fxmlLoader = new FXMLLoader();
+                        fxmlLoader.setLocation(requireNonNull(Launcher.class.getResource("fxml/patients/patientCard.fxml"), "Cannot find patientCard.fxml"));
                         HBox patientCard = fxmlLoader.load();
                         PatientCardController patientCardController = fxmlLoader.getController();
                         patientCardController.setData(patient);
 
                         patientCardController.removeButton.setOnAction(actionEvent -> {
                             actionEvent.consume();
-                            getPatientService().getPatients().remove(patient.getPatientId());
                             cardStorage.getChildren().remove(patientCard);
                             getPatientService().removePatientById().accept(patient.getPatientId());
                             setDashBoardData();
                         });
-
                         cardStorage.getChildren().add(patientCard);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -156,19 +134,19 @@ public interface ComponentUtil {
     }
 
     static void initDoctorCards(VBox cardStorage) {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(requireNonNull(Launcher.class.getResource("fxml/doctors/doctorCard.fxml"), "Cannot find doctorCard.fxml"));
         cardStorage.getChildren().clear();
         getDoctorService().getDoctors()
                 .values()
                 .forEach(doctor -> {
                     try {
+                        FXMLLoader fxmlLoader = new FXMLLoader();
+                        fxmlLoader.setLocation(requireNonNull(Launcher.class.getResource("fxml/doctors/doctorCard.fxml"), "Cannot find doctorCard.fxml"));
                         HBox doctorCard = fxmlLoader.load();
                         DoctorCardController doctorCardController = fxmlLoader.getController();
                         doctorCardController.setData(doctor);
+
                         doctorCardController.removeButton.setOnAction(actionEvent -> {
                             actionEvent.consume();
-                            getDoctorService().getDoctors().remove(doctor.getId());
                             cardStorage.getChildren().remove(doctorCard);
                             getDoctorService().removeDoctorById().accept(doctor.getId());
                             setDashBoardData();

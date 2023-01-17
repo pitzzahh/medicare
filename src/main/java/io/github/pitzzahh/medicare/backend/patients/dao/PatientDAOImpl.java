@@ -24,15 +24,16 @@
 
 package io.github.pitzzahh.medicare.backend.patients.dao;
 
-import static io.github.pitzzahh.medicare.backend.db.DatabaseConnection.getJDBC;
 import io.github.pitzzahh.medicare.backend.patients.mapper.PatientMapper;
-import static io.github.pitzzahh.util.utilities.SecurityUtil.encrypt;
 import io.github.pitzzahh.medicare.backend.patients.model.Patient;
-import java.util.function.BiConsumer;
+
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.Map;
+
+import static io.github.pitzzahh.medicare.backend.db.DatabaseConnection.getJDBC;
+import static io.github.pitzzahh.util.utilities.SecurityUtil.encrypt;
 
 public class PatientDAOImpl implements PatientDAO {
     @Override
@@ -63,19 +64,4 @@ public class PatientDAOImpl implements PatientDAO {
         return id -> getJDBC().update("DELETE FROM p4t13nt$ WHERE id = ?", id);
     }
 
-    @Override
-    public BiConsumer<Integer, Patient> updatePatientById() {
-        final String QUERY = "UPDATE p4t13nt$ SET last_name = ?, first_name = ?, middle_name = ?, gender = ?, birthdate = ?, address = ?, phone_number = ?, symptoms = ?  WHERE id = ?;";
-        return (id, patient) -> getJDBC().update(
-                QUERY,
-                encrypt(patient.getLastName()),
-                encrypt(patient.getFirstName()),
-                patient.getMiddleName().trim().isEmpty() ? null : encrypt(patient.getMiddleName()),
-                encrypt(patient.getGender().name()),
-                encrypt(patient.getBirthDate().toString()),
-                encrypt(patient.getAddress()),
-                patient.getPhoneNumber().trim().isEmpty() ? null : encrypt(patient.getPhoneNumber()),
-                encrypt(patient.getSymptoms())
-        );
-    }
 }
