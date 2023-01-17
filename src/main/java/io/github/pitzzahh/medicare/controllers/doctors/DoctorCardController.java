@@ -64,7 +64,7 @@ public class DoctorCardController {
         phoneNumber.setEditable(false);
         specialization.setMouseTransparent(true);
         dateOfBirth.setEditable(false);
-        dateOfBirth.setMouseTransparent(false);
+        dateOfBirth.setMouseTransparent(true);
     }
 
     public void setData(Doctor doctor) {
