@@ -24,6 +24,7 @@
 
 package io.github.pitzzahh.medicare.util;
 
+import static io.github.pitzzahh.medicare.controllers.CardHolderController.getCardStorage;
 import static io.github.pitzzahh.medicare.application.Medicare.getPatientService;
 import static io.github.pitzzahh.medicare.application.Medicare.getDoctorService;
 import io.github.pitzzahh.medicare.controllers.patients.PatientCardController;
@@ -151,15 +152,13 @@ public interface ComponentUtil {
 
                         patientCardController.updateButton.setOnAction(actionEvent -> {
                             actionEvent.consume();
-                            Optional<Patient> any = getPatientService()
+                            getPatientService()
                                     .getPatients()
                                     .values()
                                     .stream()
                                     .filter(p -> p.getPatientId() == patient.getPatientId())
-                                    .findAny();
-
-                            System.out.println(any);
-
+                                    .findAny()
+                                    .ifPresent(patientObject -> updatePatient(patientObject, patientCard));
                         });
                         cardStorage.getChildren().add(patientCard);
                     } catch (Exception e) {
@@ -195,8 +194,7 @@ public interface ComponentUtil {
                                     .stream()
                                     .filter(p -> p.getId() == doctor.getId())
                                     .findAny()
-                                    .ifPresent(d -> updateDoctor(d, doctorCard));
-
+                                    .ifPresent(doctorObject -> updateDoctor(doctorObject, doctorCard));
                         });
                         cardStorage.getChildren().add(doctorCard);
                     } catch (Exception e) {
@@ -207,15 +205,20 @@ public interface ComponentUtil {
 
     static void updateDoctor(Doctor doctor, HBox parent) {
         System.out.println("UPDATING DOCTOR");
-        getTextField(parent, "name").ifPresent(textField -> textField.setEditable(true));
-        getChoiceBox(parent, "gender").ifPresent(choiceBox -> choiceBox.setMouseTransparent(false));
-        getDatePicker(parent, "dateOfBirth").ifPresent(datePicker -> {
-            datePicker.setEditable(true);
-            datePicker.setMouseTransparent(false);
-        });
-        getTextField(parent, "address").ifPresent(textField -> textField.setEditable(true));
-        getTextField(parent, "phoneNumber").ifPresent(textField -> textField.setEditable(true));
+        changeCommonInputsState(parent);
         getChoiceBox(parent, "specialization").ifPresent(choiceBox -> choiceBox.setMouseTransparent(false));
+        update(null, doctor, parent, false);
+    }
+
+    static void updatePatient(Patient patient, HBox parent) {
+        System.out.println("UPDATING PATIENT");
+        changeCommonInputsState(parent);
+        getTextField(parent, "symptoms").ifPresent(textField -> textField.setEditable(true));
+        update(patient, null, parent, true);
+    }
+
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
+    private static void update(Patient patient, Doctor doctor, HBox parent, boolean isPatient) {
         Optional<VBox> buttonsParent = getVBox(parent, "buttonsParent");
         if (buttonsParent.isPresent()) {
             Optional<HBox> updateButtonBox = getHBox(buttonsParent.get(), "updateButtonBox");
@@ -240,24 +243,84 @@ public interface ComponentUtil {
                     .map(HBox::getChildren)
                     .ifPresent(ObservableList::clear);
 
-            updateButtonBox
-                    .map(HBox::getChildren)
-                    .ifPresent(hBox -> hBox.add(saveButton));
-
             saveButton.setOnAction(actionEvent -> {
                 actionEvent.consume();
+
                 updateButtonBox
                         .map(HBox::getChildren)
                         .ifPresent(ObservableList::clear);
                 updateButtonBox
                         .map(HBox::getChildren)
-                        .ifPresent(box -> box.add(updateButton.orElse(null)));
-                getDoctorService().updateDoctorById().accept(doctor.getId(), doctor);
+                        .ifPresent(box -> box.add(updateButton.orElseThrow(() -> new IllegalStateException("Update button Parent is not present"))));
 
-                Alert alert = showAlert("Doctor Updated", "Doctor Updated", "Doctor has been updated successfully");
-                showAlertInfo("assets/success.png", "Success graphic not found", alert);
+                TextField nameTextField = getTextField(parent, "name").get();
+
+                final String[] name = nameTextField.getText().split(" ");
+                Gender gender = (Gender) getChoiceBox(parent, "gender").get().getValue();
+                LocalDate dateOfBirth = getDatePicker(parent, "dateOfBirth").get().getValue();
+                String address = getTextField(parent, "address").get().getText();
+                String phoneNumber = getTextField(parent, "phoneNumber").get().getText();
+
+                System.out.println("name = " + Arrays.toString(name));
+                System.out.println("gender = " + gender);
+                System.out.println("dateOfBirth = " + dateOfBirth);
+                System.out.println("address = " + address);
+                System.out.println("phoneNumber = " + phoneNumber);
+
+                if (isPatient) {
+                    getPatientService().updatePatientById().accept(patient.getPatientId(),
+                            new Patient(
+                                    name.length == 4 ? name[3] : name.length == 3 ? name[2] : name.length == 2 ? name[1] : name[0],
+                                    name.length >= 4 ? name[0].concat(" ").concat(name[1]) : name[0],
+                                    name.length == 4 ? name[2] : name.length == 3 ? name[1] : "",
+                                    gender,
+                                    dateOfBirth == null ? patient.getBirthDate() : dateOfBirth,
+                                    address,
+                                    phoneNumber,
+                                    getTextField(parent, "symptoms").get().getText()
+                            )
+                    );
+
+                    Alert alert = showAlert("Patient Updated", "Patient Updated", "Patient has been updated successfully");
+                    showAlertInfo("assets/success.png", "Success graphic not found", alert);
+
+                } else {
+
+                    getDoctorService().updateDoctorById().accept(doctor.getId(),
+                            new Doctor(
+                                    name.length == 4 ? name[3] : name.length == 3 ? name[2] : name.length == 2 ? name[1] : name[0],
+                                    name.length >= 4 ? name[0].concat(" ").concat(name[1]) : name[0],
+                                    name.length == 4 ? name[2] : name.length == 3 ? name[1] : "",
+                                    gender,
+                                    dateOfBirth == null ? patient.getBirthDate() : dateOfBirth,
+                                    address,
+                                    phoneNumber,
+                                    (Specialization) getChoiceBox(parent, "specialization").get().getValue()
+                            )
+                    );
+                    Alert alert = showAlert("Doctor Updated", "Doctor Updated", "Doctor has been updated successfully");
+                    showAlertInfo("assets/success.png", "Success graphic not found", alert);
+                }
+                initDoctorCards(getCardStorage());
+                initPatientCards(getCardStorage());
             });
+
+            updateButtonBox
+                    .map(HBox::getChildren)
+                    .ifPresent(hBox -> hBox.add(saveButton));
+            setDashBoardData();
         }
+    }
+
+    private static void changeCommonInputsState(HBox parent) {
+        getTextField(parent, "name").ifPresent(textField -> textField.setEditable(true));
+        getChoiceBox(parent, "gender").ifPresent(choiceBox -> choiceBox.setMouseTransparent(false));
+        getDatePicker(parent, "dateOfBirth").ifPresent(datePicker -> {
+            datePicker.setEditable(true);
+            datePicker.setMouseTransparent(false);
+        });
+        getTextField(parent, "address").ifPresent(textField -> textField.setEditable(true));
+        getTextField(parent, "phoneNumber").ifPresent(textField -> textField.setEditable(true));
     }
 
     static boolean requiredInput(
