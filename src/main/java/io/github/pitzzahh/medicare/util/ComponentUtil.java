@@ -24,35 +24,33 @@
 
 package io.github.pitzzahh.medicare.util;
 
-import static io.github.pitzzahh.medicare.controllers.CardHolderController.getCardStorage;
-import static io.github.pitzzahh.medicare.application.Medicare.getPatientService;
-import static io.github.pitzzahh.medicare.application.Medicare.getDoctorService;
-import io.github.pitzzahh.medicare.controllers.patients.PatientCardController;
-import io.github.pitzzahh.medicare.controllers.doctors.DoctorCardController;
-import io.github.pitzzahh.medicare.backend.doctors.model.Specialization;
-import static io.github.pitzzahh.medicare.util.WindowUtil.getParent;
-import io.github.pitzzahh.medicare.backend.patients.model.Patient;
-import io.github.pitzzahh.medicare.backend.doctors.model.Doctor;
-import io.github.pitzzahh.medicare.backend.Person;
-import io.github.pitzzahh.medicare.backend.Gender;
-import static java.util.Objects.requireNonNull;
 import io.github.pitzzahh.medicare.Launcher;
-import java.time.format.DateTimeFormatter;
-import javafx.collections.ObservableList;
+import io.github.pitzzahh.medicare.backend.Gender;
+import io.github.pitzzahh.medicare.backend.Person;
+import io.github.pitzzahh.medicare.backend.doctors.model.Specialization;
+import io.github.pitzzahh.medicare.controllers.doctors.DoctorCardController;
+import io.github.pitzzahh.medicare.controllers.patients.PatientCardController;
 import javafx.collections.FXCollections;
-import static java.lang.String.format;
-import java.time.format.FormatStyle;
-import javafx.scene.image.ImageView;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.*;
-import javafx.scene.Parent;
+
 import java.time.LocalDate;
-import java.util.Optional;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Arrays;
+import java.util.Optional;
+
+import static io.github.pitzzahh.medicare.application.Medicare.getDoctorService;
+import static io.github.pitzzahh.medicare.application.Medicare.getPatientService;
+import static io.github.pitzzahh.medicare.util.WindowUtil.getParent;
+import static java.lang.String.format;
+import static java.util.Objects.requireNonNull;
 
 public interface ComponentUtil {
 
@@ -150,16 +148,6 @@ public interface ComponentUtil {
                             setDashBoardData();
                         });
 
-                        patientCardController.updateButton.setOnAction(actionEvent -> {
-                            actionEvent.consume();
-                            getPatientService()
-                                    .getPatients()
-                                    .values()
-                                    .stream()
-                                    .filter(p -> p.getPatientId() == patient.getPatientId())
-                                    .findAny()
-                                    .ifPresent(patientObject -> updatePatient(patientObject, patientCard));
-                        });
                         cardStorage.getChildren().add(patientCard);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -186,16 +174,6 @@ public interface ComponentUtil {
                             setDashBoardData();
                         });
 
-                        doctorCardController.updateButton.setOnAction(actionEvent -> {
-                            actionEvent.consume();
-                            getDoctorService()
-                                    .getDoctors()
-                                    .values()
-                                    .stream()
-                                    .filter(p -> p.getId() == doctor.getId())
-                                    .findAny()
-                                    .ifPresent(doctorObject -> updateDoctor(doctorObject, doctorCard));
-                        });
                         cardStorage.getChildren().add(doctorCard);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -203,125 +181,6 @@ public interface ComponentUtil {
                 });
     }
 
-    static void updateDoctor(Doctor doctor, HBox parent) {
-        System.out.println("UPDATING DOCTOR");
-        changeCommonInputsState(parent);
-        getChoiceBox(parent, "specialization").ifPresent(choiceBox -> choiceBox.setMouseTransparent(false));
-        update(null, doctor, parent, false);
-    }
-
-    static void updatePatient(Patient patient, HBox parent) {
-        System.out.println("UPDATING PATIENT");
-        changeCommonInputsState(parent);
-        getTextField(parent, "symptoms").ifPresent(textField -> textField.setEditable(true));
-        update(patient, null, parent, true);
-    }
-
-    @SuppressWarnings("OptionalGetWithoutIsPresent")
-    private static void update(Patient patient, Doctor doctor, HBox parent, boolean isPatient) {
-        Optional<VBox> buttonsParent = getVBox(parent, "buttonsParent");
-        if (buttonsParent.isPresent()) {
-            Optional<HBox> updateButtonBox = getHBox(buttonsParent.get(), "updateButtonBox");
-
-            Button saveButton = new Button();
-            saveButton.setMinWidth(150);
-            saveButton.setMinHeight(30);
-            saveButton.setText("SAVE");
-            saveButton.setStyle("-fx-background-color: #E0FBFC;\n" +
-                    "    -fx-background-radius: 5px;\n" +
-                    "    -fx-text-fill: #000;\n" +
-                    "    -fx-font-size: 16px;\n" +
-                    "    -fx-font-weight: bold;");
-
-            Optional<Button> updateButton = updateButtonBox
-                    .map(HBox::getChildren)
-                    .stream()
-                    .map(e -> (Button) e.get(0))
-                    .findAny();
-
-            updateButtonBox
-                    .map(HBox::getChildren)
-                    .ifPresent(ObservableList::clear);
-
-            saveButton.setOnAction(actionEvent -> {
-                actionEvent.consume();
-
-                updateButtonBox
-                        .map(HBox::getChildren)
-                        .ifPresent(ObservableList::clear);
-                updateButtonBox
-                        .map(HBox::getChildren)
-                        .ifPresent(box -> box.add(updateButton.orElseThrow(() -> new IllegalStateException("Update button Parent is not present"))));
-
-                TextField nameTextField = getTextField(parent, "name").get();
-
-                final String[] name = nameTextField.getText().split(" ");
-                Gender gender = (Gender) getChoiceBox(parent, "gender").get().getValue();
-                LocalDate dateOfBirth = getDatePicker(parent, "dateOfBirth").get().getValue();
-                String address = getTextField(parent, "address").get().getText();
-                String phoneNumber = getTextField(parent, "phoneNumber").get().getText();
-
-                System.out.println("name = " + Arrays.toString(name));
-                System.out.println("gender = " + gender);
-                System.out.println("dateOfBirth = " + dateOfBirth);
-                System.out.println("address = " + address);
-                System.out.println("phoneNumber = " + phoneNumber);
-
-                if (isPatient) {
-                    getPatientService().updatePatientById().accept(patient.getPatientId(),
-                            new Patient(
-                                    name.length == 4 ? name[3] : name.length == 3 ? name[2] : name.length == 2 ? name[1] : name[0],
-                                    name.length >= 4 ? name[0].concat(" ").concat(name[1]) : name[0],
-                                    name.length == 4 ? name[2] : name.length == 3 ? name[1] : "",
-                                    gender,
-                                    dateOfBirth == null ? patient.getBirthDate() : dateOfBirth,
-                                    address,
-                                    phoneNumber,
-                                    getTextField(parent, "symptoms").get().getText()
-                            )
-                    );
-
-                    Alert alert = showAlert("Patient Updated", "Patient Updated", "Patient has been updated successfully");
-                    showAlertInfo("assets/success.png", "Success graphic not found", alert);
-
-                } else {
-
-                    getDoctorService().updateDoctorById().accept(doctor.getId(),
-                            new Doctor(
-                                    name.length == 4 ? name[3] : name.length == 3 ? name[2] : name.length == 2 ? name[1] : name[0],
-                                    name.length >= 4 ? name[0].concat(" ").concat(name[1]) : name[0],
-                                    name.length == 4 ? name[2] : name.length == 3 ? name[1] : "",
-                                    gender,
-                                    dateOfBirth == null ? patient.getBirthDate() : dateOfBirth,
-                                    address,
-                                    phoneNumber,
-                                    (Specialization) getChoiceBox(parent, "specialization").get().getValue()
-                            )
-                    );
-                    Alert alert = showAlert("Doctor Updated", "Doctor Updated", "Doctor has been updated successfully");
-                    showAlertInfo("assets/success.png", "Success graphic not found", alert);
-                }
-                initDoctorCards(getCardStorage());
-                initPatientCards(getCardStorage());
-            });
-
-            updateButtonBox
-                    .map(HBox::getChildren)
-                    .ifPresent(hBox -> hBox.add(saveButton));
-            setDashBoardData();
-        }
-    }
-
-    private static void changeCommonInputsState(HBox parent) {
-        getTextField(parent, "name").ifPresent(textField -> textField.setEditable(true));
-        getChoiceBox(parent, "gender").ifPresent(choiceBox -> choiceBox.setMouseTransparent(false));
-        getDatePicker(parent, "dateOfBirth").ifPresent(datePicker -> {
-            datePicker.setEditable(true);
-            datePicker.setMouseTransparent(false);
-        });
-        getTextField(parent, "address").ifPresent(textField -> textField.setEditable(true));
-        getTextField(parent, "phoneNumber").ifPresent(textField -> textField.setEditable(true));
-    }
 
     static boolean requiredInput(
             TextField firstName,
