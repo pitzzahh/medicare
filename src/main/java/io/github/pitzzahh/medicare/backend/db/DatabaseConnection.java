@@ -36,8 +36,6 @@ public class DatabaseConnection {
 
     private String driverClassName;
     private String url;
-    private String username;
-    private String password;
     private static final String APP_DATA_DIR = System.getenv("LOCALAPPDATA") + "\\Programs";
     private static final File DIR = new File(APP_DATA_DIR, "Medicare");
 
@@ -70,34 +68,12 @@ public class DatabaseConnection {
     }
 
     /**
-     * Sets the username of the database.
-     * @param username the username.
-     * @return a {@code DatabaseConnection} object.
-     */
-    public DatabaseConnection setUsername(String username) {
-        this.username = username;
-        return this;
-    }
-
-    /**
-     * Sets the password of the database.
-     * @param password the password.
-     * @return a {@code DatabaseConnection} object.
-     */
-    public DatabaseConnection setPassword(String password) {
-        this.password = password;
-        return this;
-    }
-
-    /**
      * Creates a datasource
      */
     public void setDataSource() {
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
         driverManagerDataSource.setDriverClassName(this.driverClassName);
         driverManagerDataSource.setUrl(this.url);
-        driverManagerDataSource.setUsername(this.username);
-        driverManagerDataSource.setPassword(this.password);
         jdbcTemplate = new JdbcTemplate(driverManagerDataSource);
     }
 
