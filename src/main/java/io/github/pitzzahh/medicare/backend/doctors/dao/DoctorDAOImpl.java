@@ -28,6 +28,7 @@ import static io.github.pitzzahh.medicare.backend.db.DatabaseConnection.getJDBC;
 import io.github.pitzzahh.medicare.backend.doctors.mapper.DoctorMapper;
 import static io.github.pitzzahh.util.utilities.SecurityUtil.encrypt;
 import io.github.pitzzahh.medicare.backend.doctors.model.Doctor;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -61,5 +62,10 @@ public class DoctorDAOImpl implements DoctorDAO {
     @Override
     public Consumer<Integer> removeDoctorById() {
         return id -> getJDBC().update("DELETE FROM d0ct0r$ WHERE id = ?", id);
+    }
+
+    @Override
+    public BiConsumer<Integer, Doctor> updateDoctorById() {
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 }
