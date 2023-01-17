@@ -26,6 +26,7 @@ package io.github.pitzzahh.medicare.backend.doctors.service;
 
 import io.github.pitzzahh.medicare.backend.doctors.dao.DoctorDAO;
 import io.github.pitzzahh.medicare.backend.doctors.model.Doctor;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import lombok.AllArgsConstructor;
 import java.util.Map;
@@ -42,6 +43,10 @@ public class DoctorService {
 
     public Consumer<Doctor> addDoctor() {
         return DAO.addDoctor();
+    }
+
+    public BiConsumer<Integer, Doctor> updateDoctorById() {
+        return DAO.updateDoctorById();
     }
 
     public Consumer<Integer> removeDoctorById() {
