@@ -106,12 +106,4 @@ public class AddDoctorController {
         initGenderChoiceBox(gender);
         initSpecializationChoiceBox(specialization);
     }
-
-    private static void showAlertInfo(String name, String Success_graphic_not_found, Alert alert) {
-        ImageView graphic = new ImageView(new Image(requireNonNull(Launcher.class.getResourceAsStream(name), Success_graphic_not_found)));
-        graphic.setFitWidth(50);
-        graphic.setFitHeight(50);
-        alert.setGraphic(graphic);
-        alert.showAndWait();
-    }
 }
