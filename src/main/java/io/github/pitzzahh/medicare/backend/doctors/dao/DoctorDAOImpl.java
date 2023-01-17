@@ -66,7 +66,17 @@ public class DoctorDAOImpl implements DoctorDAO {
 
     @Override
     public BiConsumer<Integer, Doctor> updateDoctorById() {
-        final String QUERY = "UPDATE d0ct0r$ SET last_name = ?, first_name = ?, middle_name = ?, gender = ?, birthdate = ?, address = ?, phone_number = ?, specialization = ?  WHERE id = ?";
-        throw new UnsupportedOperationException("Not yet implemented");
+        final String QUERY = "UPDATE d0ct0r$ SET last_name = ?, first_name = ?, middle_name = ?, gender = ?, birthdate = ?, address = ?, phone_number = ?, specialization = ?  WHERE id = ?;";
+        return (id, doctor) -> getJDBC().update(
+                QUERY,
+                encrypt(doctor.getLastName()),
+                encrypt(doctor.getFirstName()),
+                doctor.getMiddleName().trim().isEmpty() ? null : encrypt(doctor.getMiddleName()),
+                encrypt(doctor.getGender().name()),
+                encrypt(doctor.getBirthDate().toString()),
+                encrypt(doctor.getAddress()),
+                doctor.getPhoneNumber().trim().isEmpty() ? null : encrypt(doctor.getPhoneNumber()),
+                encrypt(doctor.getSpecialization().name())
+        );
     }
 }
