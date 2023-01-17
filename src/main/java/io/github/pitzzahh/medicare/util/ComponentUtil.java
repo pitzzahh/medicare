@@ -30,11 +30,14 @@ import io.github.pitzzahh.medicare.controllers.patients.PatientCardController;
 import io.github.pitzzahh.medicare.controllers.doctors.DoctorCardController;
 import io.github.pitzzahh.medicare.backend.doctors.model.Specialization;
 import static io.github.pitzzahh.medicare.util.WindowUtil.getParent;
+import io.github.pitzzahh.medicare.backend.patients.model.Patient;
+import io.github.pitzzahh.medicare.backend.doctors.model.Doctor;
 import io.github.pitzzahh.medicare.backend.Person;
 import io.github.pitzzahh.medicare.backend.Gender;
 import static java.util.Objects.requireNonNull;
 import io.github.pitzzahh.medicare.Launcher;
 import java.time.format.DateTimeFormatter;
+import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 import static java.lang.String.format;
 import java.time.format.FormatStyle;
@@ -62,16 +65,30 @@ public interface ComponentUtil {
         return Optional.ofNullable((ProgressBar) parent.lookup("#progressBar"));
     }
 
-    /**
-     * Used to modify the message label from the main window.
-     *
-     * @param parent the main window parent.
-     * @return an {@code Optional<Label>}.
-     */
+    static Optional<TextField> getTextField(Parent parent, String id) {
+        return Optional.ofNullable((TextField) parent.lookup(format("#%s", id)));
+    }
+
+    static Optional<DatePicker> getDatePicker(Parent parent, String id) {
+        return Optional.ofNullable((DatePicker) parent.lookup(format("#%s", id)));
+    }
+
+    @SuppressWarnings("unchecked")
+    static Optional<ChoiceBox<Object>> getChoiceBox(Parent parent, String id) {
+        return Optional.ofNullable((ChoiceBox<Object>) parent.lookup(format("#%s", id)));
+    }
+
     static Optional<Label> getLabel(Parent parent, String id) {
         return Optional.ofNullable((Label) parent.lookup(format("#%s", id)));
     }
 
+    static Optional<VBox> getVBox(Parent parent, String id) {
+        return Optional.ofNullable((VBox) parent.lookup(format("#%s", id)));
+    }
+
+    static Optional<HBox> getHBox(Parent parent, String id) {
+        return Optional.ofNullable((HBox) parent.lookup(format("#%s", id)));
+    }
     static void initGenderChoiceBox(ChoiceBox<Gender> choiceBox) {
         choiceBox.getItems().addAll(FXCollections.observableArrayList(Arrays.asList(Gender.values())));
         choiceBox.getSelectionModel().selectFirst();
@@ -131,6 +148,19 @@ public interface ComponentUtil {
                             getPatientService().removePatientById().accept(patient.getPatientId());
                             setDashBoardData();
                         });
+
+                        patientCardController.updateButton.setOnAction(actionEvent -> {
+                            actionEvent.consume();
+                            Optional<Patient> any = getPatientService()
+                                    .getPatients()
+                                    .values()
+                                    .stream()
+                                    .filter(p -> p.getPatientId() == patient.getPatientId())
+                                    .findAny();
+
+                            System.out.println(any);
+
+                        });
                         cardStorage.getChildren().add(patientCard);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -138,7 +168,7 @@ public interface ComponentUtil {
                 });
     }
 
-    static void initDoctorCards(VBox cardStorage) { // TODO: test
+    static void initDoctorCards(VBox cardStorage) {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(requireNonNull(Launcher.class.getResource("fxml/doctors/doctorCard.fxml"), "Cannot find doctorCard.fxml"));
         cardStorage.getChildren().clear();
@@ -156,11 +186,78 @@ public interface ComponentUtil {
                             getDoctorService().removeDoctorById().accept(doctor.getId());
                             setDashBoardData();
                         });
+
+                        doctorCardController.updateButton.setOnAction(actionEvent -> {
+                            actionEvent.consume();
+                            getDoctorService()
+                                    .getDoctors()
+                                    .values()
+                                    .stream()
+                                    .filter(p -> p.getId() == doctor.getId())
+                                    .findAny()
+                                    .ifPresent(d -> updateDoctor(d, doctorCard));
+
+                        });
                         cardStorage.getChildren().add(doctorCard);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 });
+    }
+
+    static void updateDoctor(Doctor doctor, HBox parent) {
+        System.out.println("UPDATING DOCTOR");
+        getTextField(parent, "name").ifPresent(textField -> textField.setEditable(true));
+        getChoiceBox(parent, "gender").ifPresent(choiceBox -> choiceBox.setMouseTransparent(false));
+        getDatePicker(parent, "dateOfBirth").ifPresent(datePicker -> {
+            datePicker.setEditable(true);
+            datePicker.setMouseTransparent(false);
+        });
+        getTextField(parent, "address").ifPresent(textField -> textField.setEditable(true));
+        getTextField(parent, "phoneNumber").ifPresent(textField -> textField.setEditable(true));
+        getChoiceBox(parent, "specialization").ifPresent(choiceBox -> choiceBox.setMouseTransparent(false));
+        Optional<VBox> buttonsParent = getVBox(parent, "buttonsParent");
+        if (buttonsParent.isPresent()) {
+            Optional<HBox> updateButtonBox = getHBox(buttonsParent.get(), "updateButtonBox");
+
+            Button saveButton = new Button();
+            saveButton.setMinWidth(150);
+            saveButton.setMinHeight(30);
+            saveButton.setText("SAVE");
+            saveButton.setStyle("-fx-background-color: #E0FBFC;\n" +
+                    "    -fx-background-radius: 5px;\n" +
+                    "    -fx-text-fill: #000;\n" +
+                    "    -fx-font-size: 16px;\n" +
+                    "    -fx-font-weight: bold;");
+
+            Optional<Button> updateButton = updateButtonBox
+                    .map(HBox::getChildren)
+                    .stream()
+                    .map(e -> (Button) e.get(0))
+                    .findAny();
+
+            updateButtonBox
+                    .map(HBox::getChildren)
+                    .ifPresent(ObservableList::clear);
+
+            updateButtonBox
+                    .map(HBox::getChildren)
+                    .ifPresent(hBox -> hBox.add(saveButton));
+
+            saveButton.setOnAction(actionEvent -> {
+                actionEvent.consume();
+                updateButtonBox
+                        .map(HBox::getChildren)
+                        .ifPresent(ObservableList::clear);
+                updateButtonBox
+                        .map(HBox::getChildren)
+                        .ifPresent(box -> box.add(updateButton.orElse(null)));
+                getDoctorService().updateDoctorById().accept(doctor.getId(), doctor);
+
+                Alert alert = showAlert("Doctor Updated", "Doctor Updated", "Doctor has been updated successfully");
+                showAlertInfo("assets/success.png", "Success graphic not found", alert);
+            });
+        }
     }
 
     static boolean requiredInput(
@@ -227,12 +324,12 @@ public interface ComponentUtil {
     }
 
     static void setCommonData(Person person,
-                                     TextField name,
-                                     TextField age,
-                                     ChoiceBox<Gender> gender,
-                                     DatePicker dateOfBirth,
-                                     TextField address,
-                                     TextField phoneNumber
+                              TextField name,
+                              TextField age,
+                              ChoiceBox<Gender> gender,
+                              DatePicker dateOfBirth,
+                              TextField address,
+                              TextField phoneNumber
     ) {
         name.setText(person.getFirstName().concat(" ").concat(person.getLastName()));
         age.setText(String.valueOf(Period.between(person.getBirthDate(), LocalDate.now()).getYears()));
@@ -251,6 +348,13 @@ public interface ComponentUtil {
         int doctorsCount = getDoctorService().getDoctors().size();
         Optional<Label> doctorsCountLabel = getLabel(getParent("dashboard"), "doctorsCount");
         doctorsCountLabel.ifPresent(l -> l.setText(String.valueOf(doctorsCount)));
+    }
+    static void showAlertInfo(String name, String errorMessage, Alert alert) {
+        ImageView graphic = new ImageView(new Image(requireNonNull(Launcher.class.getResourceAsStream(name), errorMessage)));
+        graphic.setFitWidth(50);
+        graphic.setFitHeight(50);
+        alert.setGraphic(graphic);
+        alert.showAndWait();
     }
 
     static DateTimeFormatter getDateFormatter() {
