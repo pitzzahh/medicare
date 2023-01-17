@@ -110,11 +110,11 @@
          <TextField fx:id="symptoms" prefWidth="200.0" styleClass="inputs" stylesheets="@../../css/card.css" HBox.hgrow="ALWAYS" />
          </HBox>
      </VBox>
-     <VBox alignment="CENTER" prefHeight="400.0" prefWidth="167.0" HBox.hgrow="ALWAYS">
+     <VBox fx:id="buttonsParent" alignment="CENTER" prefHeight="400.0" prefWidth="167.0" HBox.hgrow="ALWAYS">
          <HBox alignment="CENTER" prefHeight="61.0" prefWidth="177.0" />
          <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="61.0" prefWidth="177.0" />
          <HBox alignment="CENTER" layoutX="10.0" layoutY="71.0" prefHeight="61.0" prefWidth="177.0" />
-         <HBox alignment="CENTER" layoutX="10.0" layoutY="132.0" prefHeight="61.0" prefWidth="177.0">
+         <HBox fx:id="updateButtonBox" alignment="CENTER" layoutX="10.0" layoutY="132.0" prefHeight="61.0" prefWidth="177.0">
              <Button fx:id="updateButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" styleClass="update-button" stylesheets="@../../css/card.css" text="UPDATE" />
          </HBox>
          <HBox alignment="CENTER" layoutX="10.0" layoutY="193.0" prefHeight="61.0" prefWidth="177.0">
