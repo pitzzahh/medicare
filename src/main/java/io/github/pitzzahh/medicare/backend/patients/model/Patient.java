@@ -30,7 +30,7 @@ import java.time.LocalDate;
 import lombok.*;
 
 @Data
-@ToString
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
