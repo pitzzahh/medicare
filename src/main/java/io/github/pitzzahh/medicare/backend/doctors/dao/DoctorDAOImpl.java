@@ -66,6 +66,7 @@ public class DoctorDAOImpl implements DoctorDAO {
 
     @Override
     public BiConsumer<Integer, Doctor> updateDoctorById() {
+        final String QUERY = "UPDATE d0ct0r$ SET last_name = ?, first_name = ?, middle_name = ?, gender = ?, birthdate = ?, address = ?, phone_number = ?, specialization = ?  WHERE id = ?";
         throw new UnsupportedOperationException("Not yet implemented");
     }
 }
