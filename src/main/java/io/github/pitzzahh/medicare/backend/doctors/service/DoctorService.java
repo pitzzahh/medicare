@@ -54,7 +54,7 @@ public class DoctorService {
     }
 
     public boolean doesDoctorAlreadyExists(Doctor patient) {
-        return DAO.getDoctors()
+        return getDoctors()
                 .values()
                 .stream()
                 .anyMatch(d -> d.getFirstName().equals(patient.getFirstName()) || d.getLastName().equals(patient.getLastName()));
