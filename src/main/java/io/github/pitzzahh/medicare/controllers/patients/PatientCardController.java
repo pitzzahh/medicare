@@ -33,9 +33,17 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.fxml.FXML;
 
 public class PatientCardController {
+
+    @FXML
+    public VBox buttonsParent;
+
+    @FXML
+    public HBox updateButtonBox;
 
     @FXML
     private TextField id, name, age, address, phoneNumber, symptoms;
