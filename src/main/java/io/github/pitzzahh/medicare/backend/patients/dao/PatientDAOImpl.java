@@ -24,7 +24,9 @@
 
 package io.github.pitzzahh.medicare.backend.patients.dao;
 
+import io.github.pitzzahh.medicare.backend.patients.mapper.DischargedPatientMapper;
 import static io.github.pitzzahh.medicare.backend.db.DatabaseConnection.getJDBC;
+import io.github.pitzzahh.medicare.backend.patients.model.DischargedPatient;
 import io.github.pitzzahh.medicare.backend.patients.mapper.PatientMapper;
 import static io.github.pitzzahh.util.utilities.SecurityUtil.encrypt;
 import io.github.pitzzahh.medicare.backend.patients.model.Patient;
@@ -57,9 +59,10 @@ public class PatientDAOImpl implements PatientDAO {
                 "doctor_id, " +
                 "doctor_name, " +
                 "doctor_specialization, " +
+                "date_confined, " +
                 "symptoms" +
                 ") " +
-                "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         return patient -> getJDBC().update(
                 QUERY,
                 encrypt(patient.getLastName()),
@@ -72,12 +75,40 @@ public class PatientDAOImpl implements PatientDAO {
                 patient.getAssignDoctor() == null ? "" : encrypt(valueOf(patient.getAssignDoctor().getId())),
                 patient.getAssignDoctor() == null ? "" : encrypt(patient.getAssignDoctor().getName()),
                 patient.getAssignDoctor() == null ? "" : encrypt(patient.getAssignDoctor().getSpecialization().name()),
+                encrypt(patient.getDateConfined().toString()),
                 encrypt(patient.getSymptoms().name())
         );
     }
 
     @Override
-    public Consumer<Integer> removePatientById() {
+    public Map<Integer, DischargedPatient> getDischargedPatients() {
+        return getJDBC().query("SELECT * FROM d1sch4rg3d_p4t13nt$", new DischargedPatientMapper())
+                .stream()
+                .collect(Collectors.toMap(DischargedPatient::getPatientId, Function.identity()));
+    }
+
+    @Override
+    public Consumer<DischargedPatient> addDischargedPatient() {
+        final String QUERY = "INSERT INTO d1sch4rg3d_p4t13nt$" +
+                "(" +
+                "id, " +
+                "patient_name, " +
+                "name_of_doctor, " +
+                "date_disconfined, " +
+                "date_discharged, " +
+                ") " +
+                "VALUES (?,?,?,?,?)";
+        return dischargedPatient -> getJDBC().update(
+                QUERY,
+                encrypt(String.valueOf(dischargedPatient.getPatientId())),
+                encrypt(dischargedPatient.getName()),
+                encrypt(dischargedPatient.getDateConfined().toString()),
+                encrypt(dischargedPatient.getDateDischarged().toString())
+        );
+    }
+
+    @Override
+    public Consumer<Integer> dischargePatientById() {
         return id -> getJDBC().update("DELETE FROM p4t13nt$ WHERE id = ?", id);
     }
 
@@ -93,6 +124,7 @@ public class PatientDAOImpl implements PatientDAO {
                 "doctor_id = ?, " +
                 "doctor_name = ?, " +
                 "doctor_specialization = ?, " +
+                "date_confined = ?, " +
                 "symptoms = ?  " +
                 "WHERE id = ?;";
         return (id, patient) -> getJDBC().update(
