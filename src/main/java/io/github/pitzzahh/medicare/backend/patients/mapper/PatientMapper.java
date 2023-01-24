@@ -24,8 +24,11 @@
 
 package io.github.pitzzahh.medicare.backend.patients.mapper;
 
+import io.github.pitzzahh.medicare.backend.doctors.model.Specialization;
 import static io.github.pitzzahh.util.utilities.SecurityUtil.decrypt;
+import io.github.pitzzahh.medicare.backend.patients.model.Symptoms;
 import io.github.pitzzahh.medicare.backend.patients.model.Patient;
+import io.github.pitzzahh.medicare.backend.AssignedDoctor;
 import io.github.pitzzahh.medicare.backend.Gender;
 import org.springframework.jdbc.core.RowMapper;
 import static java.lang.Integer.parseInt;
@@ -34,6 +37,7 @@ import java.time.LocalDate;
 import java.sql.ResultSet;
 
 public class PatientMapper implements RowMapper<Patient> {
+
     @Override
     public Patient mapRow(ResultSet rs, int rowNum) throws SQLException {
         String[] date = decrypt(rs.getString("birthdate")).split("-");
@@ -46,7 +50,13 @@ public class PatientMapper implements RowMapper<Patient> {
                 LocalDate.of(parseInt(date[0]), parseInt(date[1]), parseInt(date[2])),
                 decrypt(rs.getString("address")),
                 rs.getString("phone_number") != null ? decrypt(rs.getString("phone_number")) : "",
-                decrypt(rs.getString("symptoms"))
+                new AssignedDoctor(
+                        parseInt(rs.getString("doctor_id").isEmpty() ? "" : decrypt(rs.getString("doctor_id"))),
+                        rs.getString("doctor_name").isEmpty() ? "" : decrypt(rs.getString("doctor_name")),
+                        rs.getString("doctor_specialization").isEmpty() ? null :
+                                Specialization.valueOf(decrypt(rs.getString("doctor_specialization")))
+                ),
+                Symptoms.valueOf(decrypt(rs.getString("symptoms")))
         );
     }
 }
