@@ -32,6 +32,7 @@ import io.github.pitzzahh.medicare.backend.doctors.model.Specialization;
 import static io.github.pitzzahh.medicare.util.WindowUtil.getParent;
 import io.github.pitzzahh.medicare.backend.patients.model.Symptoms;
 import io.github.pitzzahh.medicare.backend.patients.model.Patient;
+import static io.github.pitzzahh.util.utilities.Print.printf;
 import io.github.pitzzahh.medicare.backend.AssignedDoctor;
 import io.github.pitzzahh.medicare.backend.Person;
 import io.github.pitzzahh.medicare.backend.Gender;
@@ -185,6 +186,7 @@ public interface ComponentUtil {
                                 cardStorage.getChildren().remove(patientCard);
                                 getPatientService().removePatientById().accept(patient.getPatientId());
                                 setDashBoardData();
+                                setCommonDashboardData("patient_dashboard", "patientsCount", false);
                             }
                         });
                         cardStorage.getChildren().add(patientCard);
@@ -211,8 +213,8 @@ public interface ComponentUtil {
                             cardStorage.getChildren().remove(doctorCard);
                             getDoctorService().removeDoctorById().accept(doctor.getId());
                             setDashBoardData();
+                            setCommonDashboardData("doctor_dashboard", "doctorsCount", false);
                         });
-
                         cardStorage.getChildren().add(doctorCard);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -264,19 +266,6 @@ public interface ComponentUtil {
 
         Alert alert = initAlert("Patient Updated", "Patient Updated", "Patient Updated Successfully");
         showAlertInfo("assets/success.png", "Success graphic not found", alert);
-    }
-
-    private static void changeCommonInputsState(HBox parent) {
-        getTextField(parent, "name").ifPresent(textField -> textField.setEditable(true));
-        getChoiceBox(parent, "gender").ifPresent(choiceBox -> choiceBox.setMouseTransparent(false));
-        getDatePicker(parent, "dateOfBirth").ifPresent(datePicker -> {
-            datePicker.setEditable(true);
-            datePicker.setMouseTransparent(false);
-        });
-        getTextField(parent, "address").ifPresent(textField -> textField.setEditable(true));
-        getTextField(parent, "phoneNumber").ifPresent(textField -> textField.setEditable(true));
-        getChoiceBox(parent, "doctor").ifPresent(choiceBox -> choiceBox.setMouseTransparent(false));
-        getChoiceBox(parent, "symptoms").ifPresent(choiceBox -> choiceBox.setMouseTransparent(false));
     }
 
     static boolean requiredInput(
@@ -335,12 +324,18 @@ public interface ComponentUtil {
 
     static void setDashBoardData() {
         int patientCount = getPatientService().getPatients().size();
-        Optional<Label> patientsCountLabel = getLabel(getParent("dashboard"), "patientsCount");
-        patientsCountLabel.ifPresent(l -> l.setText(String.valueOf(patientCount)));
+        getLabel(getParent("dashboard"), "patientsCount")
+                .ifPresentOrElse(l -> l.setText(String.valueOf(patientCount)), () -> printf("Label [%s] not found", "patientsCount"));
 
         int doctorsCount = getDoctorService().getDoctors().size();
-        Optional<Label> doctorsCountLabel = getLabel(getParent("dashboard"), "doctorsCount");
-        doctorsCountLabel.ifPresent(l -> l.setText(String.valueOf(doctorsCount)));
+        getLabel(getParent("dashboard"), "doctorsCount")
+                .ifPresentOrElse(l -> l.setText(String.valueOf(doctorsCount)), () -> printf("Label [%s] not found", "doctorsCount"));
+    }
+
+    static void setCommonDashboardData(String dashboardName, String countName, boolean isPatient) {
+        int count = isPatient ? getPatientService().getPatients().size() : getDoctorService().getDoctors().size();
+        getLabel(getParent(dashboardName), countName)
+                .ifPresentOrElse(l -> l.setText(String.valueOf(count)), () ->  printf("Label [%s] not found", countName));
     }
 
     static Alert initAlert(String title, String header, String content) {
