@@ -56,6 +56,7 @@ public class PatientCardController {
 
     @FXML
     public void initialize() {
+        updateOrSaveButton.setTooltip(initToolTip("Click to Update Patient", normalStyle()));
         removeButton.setTooltip(initToolTip("Click to Remove Patient", normalStyle()));
         id.setEditable(false);
         name.setEditable(false);
