@@ -43,19 +43,20 @@ public class DoctorCardController {
     public TextField firstName, middleName, lastName, age, address, phoneNumber;
 
     @FXML
-    private ChoiceBox<Gender> gender;
+    public ChoiceBox<Gender> gender;
 
     @FXML
-    private ChoiceBox<Specialization> specialization;
+    public ChoiceBox<Specialization> specialization;
 
     @FXML
-    private DatePicker dateOfBirth;
+    public DatePicker dateOfBirth;
 
     @FXML
-    public Button removeButton;
+    public Button updateOrSaveButton, removeButton;
 
     @FXML
     public void initialize() {
+        updateOrSaveButton.setTooltip(initToolTip("Click to Update Doctor", normalStyle()));
         removeButton.setTooltip(initToolTip("Click to Remove Doctor", normalStyle()));
         firstName.setEditable(false);
         middleName.setEditable(false);

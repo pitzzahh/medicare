@@ -24,9 +24,10 @@
 
 package io.github.pitzzahh.medicare.backend.doctors.service;
 
-import io.github.pitzzahh.medicare.backend.AssignedDoctor;
 import io.github.pitzzahh.medicare.backend.doctors.dao.DoctorDAO;
 import io.github.pitzzahh.medicare.backend.doctors.model.Doctor;
+import io.github.pitzzahh.medicare.backend.AssignedDoctor;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import lombok.AllArgsConstructor;
@@ -71,5 +72,9 @@ public class DoctorService {
                 .values()
                 .stream()
                 .anyMatch(d -> d.getFirstName().equals(patient.getFirstName()) || d.getLastName().equals(patient.getLastName()));
+    }
+
+    public BiConsumer<Integer, Doctor> updateDoctorById() {
+        return DAO.updateDoctorById();
     }
 }
