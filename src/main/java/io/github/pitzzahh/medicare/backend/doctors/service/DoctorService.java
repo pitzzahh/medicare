@@ -24,10 +24,9 @@
 
 package io.github.pitzzahh.medicare.backend.doctors.service;
 
-import io.github.pitzzahh.medicare.backend.AssignedDoctor;
 import io.github.pitzzahh.medicare.backend.doctors.dao.DoctorDAO;
 import io.github.pitzzahh.medicare.backend.doctors.model.Doctor;
-
+import io.github.pitzzahh.medicare.backend.AssignedDoctor;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
