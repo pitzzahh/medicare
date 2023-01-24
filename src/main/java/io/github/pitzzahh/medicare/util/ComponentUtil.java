@@ -29,9 +29,11 @@ import static io.github.pitzzahh.medicare.application.Medicare.getDoctorService;
 import io.github.pitzzahh.medicare.controllers.patients.PatientCardController;
 import io.github.pitzzahh.medicare.controllers.doctors.DoctorCardController;
 import io.github.pitzzahh.medicare.backend.doctors.model.Specialization;
+import static io.github.pitzzahh.medicare.util.ToolTipUtil.initToolTip;
 import static io.github.pitzzahh.medicare.util.WindowUtil.getParent;
 import io.github.pitzzahh.medicare.backend.patients.model.Symptoms;
 import io.github.pitzzahh.medicare.backend.patients.model.Patient;
+import static io.github.pitzzahh.medicare.util.Style.normalStyle;
 import io.github.pitzzahh.medicare.backend.doctors.model.Doctor;
 import static io.github.pitzzahh.util.utilities.Print.printf;
 import io.github.pitzzahh.medicare.backend.AssignedDoctor;
@@ -162,7 +164,18 @@ public interface ComponentUtil {
 
                         controller.updateOrSaveButton.setOnAction(event ->{
                             event.consume();
-                            if (controller.updateOrSaveButton.getText().equals("UPDATE")) allowPatientInput(controller);
+                            if (controller.updateOrSaveButton.getText().equals("UPDATE")) {
+                                allowPatientInput(controller);
+                                controller.gender
+                                        .getSelectionModel()
+                                        .select(patient.getGender().ordinal());
+                                controller.doctor
+                                        .getSelectionModel()
+                                        .select(patient.getAssignDoctor());
+                                controller.symptoms
+                                        .getSelectionModel()
+                                        .select(patient.getSymptoms().ordinal());
+                            }
                             else {
                                 getPatientService()
                                         .getPatients()
@@ -211,7 +224,15 @@ public interface ComponentUtil {
 
                         controller.updateOrSaveButton.setOnAction(event ->{
                             event.consume();
-                            if (controller.updateOrSaveButton.getText().equals("UPDATE")) allowDoctorInput(controller);
+                            if (controller.updateOrSaveButton.getText().equals("UPDATE")) {
+                                allowDoctorInput(controller);
+                                controller.gender
+                                        .getSelectionModel()
+                                        .select(doctor.getGender().ordinal());
+                                controller.specialization
+                                        .getSelectionModel()
+                                        .select(doctor.getSpecialization().ordinal());
+                            }
                             else {
                                 getDoctorService()
                                         .getDoctors()
@@ -255,6 +276,8 @@ public interface ComponentUtil {
         controller.symptoms.setMouseTransparent(false); // EDITABLE
         controller.updateOrSaveButton.setText("SAVE");
         controller.removeButton.setText("CANCEL");
+        controller.updateOrSaveButton.setTooltip(initToolTip("Click to Save Doctor", normalStyle()));
+        controller.removeButton.setTooltip(initToolTip("Click to Cancel Edit", normalStyle()));
     }
 
     static void allowCommonInputs(TextField firstName, TextField middleName, TextField lastName, ChoiceBox<Gender> gender, DatePicker dateOfBirth, TextField address, TextField phoneNumber) {
@@ -275,6 +298,8 @@ public interface ComponentUtil {
         controller.specialization.setMouseTransparent(false); // EDITABLE
         controller.updateOrSaveButton.setText("SAVE");
         controller.removeButton.setText("CANCEL");
+        controller.updateOrSaveButton.setTooltip(initToolTip("Click to Save Doctor", normalStyle()));
+        controller.removeButton.setTooltip(initToolTip("Click to Cancel Edit", normalStyle()));
     }
 
 
@@ -289,6 +314,8 @@ public interface ComponentUtil {
 
         controller.updateOrSaveButton.setText("UPDATE");
         controller.removeButton.setText("REMOVE");
+        controller.updateOrSaveButton.setTooltip(initToolTip("Click to Update Patient", normalStyle()));
+        controller.removeButton.setTooltip(initToolTip("Click to Remove Patient", normalStyle()));
 
         getPatientService()
                 .updatePatientById()
@@ -320,7 +347,8 @@ public interface ComponentUtil {
 
         controller.updateOrSaveButton.setText("UPDATE");
         controller.removeButton.setText("REMOVE");
-
+        controller.updateOrSaveButton.setTooltip(initToolTip("Click to Update Doctor", normalStyle()));
+        controller.removeButton.setTooltip(initToolTip("Click to Remove Doctor", normalStyle()));
         getDoctorService()
                 .updateDoctorById()
                 .accept(doctor.getId(),
@@ -335,6 +363,23 @@ public interface ComponentUtil {
                                 controller.specialization.getValue()
                         )
                 );
+
+        Optional<Patient> patientWithDoctorBeingUpdated = getPatientService() // TODO: ALso update patient with doctor being updated
+                .getPatients()
+                .values()
+                .stream()
+                .filter(d -> d.getAssignDoctor().getId() == doctor.getId())
+                .findAny();
+
+        patientWithDoctorBeingUpdated
+                .ifPresent(patient -> patient.setAssignDoctor(new AssignedDoctor(
+                doctor.getId(),
+                doctor.getMiddleName().isEmpty() ? doctor.getFirstName().concat(" ").concat(doctor.getLastName()) :
+                        doctor.getFirstName().concat(" ").concat(doctor.getMiddleName()).concat(" ").concat(doctor.getLastName()),
+                doctor.getSpecialization())
+        ));
+
+        patientWithDoctorBeingUpdated.ifPresent(patient -> getPatientService().updatePatientById().accept(patient.getPatientId(), patient));
 
         Alert alert = initAlert("Doctor Updated", "Doctor Updated", "Doctor Updated Successfully");
         showAlertInfo("assets/success.png", "Success graphic not found", alert);
