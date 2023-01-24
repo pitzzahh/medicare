@@ -85,7 +85,8 @@ public interface ComponentUtil {
 
     static void initAssignedDoctorChoiceBox(ChoiceBox<AssignedDoctor> choiceBox) {
         choiceBox.getItems().clear();
-        choiceBox.getItems().addAll(
+        if (getDoctorService().getDoctors().isEmpty()) choiceBox.setValue(new AssignedDoctor());
+        else choiceBox.getItems().addAll(
                 getDoctorService()
                         .getDoctors()
                         .values()
