@@ -31,6 +31,7 @@ import io.github.pitzzahh.medicare.controllers.doctors.DoctorCardController;
 import io.github.pitzzahh.medicare.backend.doctors.model.Specialization;
 import static io.github.pitzzahh.medicare.util.WindowUtil.getParent;
 import io.github.pitzzahh.medicare.backend.patients.model.Symptoms;
+import io.github.pitzzahh.medicare.backend.patients.model.Patient;
 import io.github.pitzzahh.medicare.backend.AssignedDoctor;
 import io.github.pitzzahh.medicare.backend.Person;
 import io.github.pitzzahh.medicare.backend.Gender;
@@ -71,6 +72,22 @@ public interface ComponentUtil {
 
     static Optional<ChoiceBox<?>> getChoiceBox(Parent parent, String id) {
         return Optional.ofNullable((ChoiceBox<?>) parent.lookup(format("#%s", id)));
+    }
+
+    static Optional<TextField> getTextField(Parent parent, String id) {
+        return Optional.ofNullable((TextField) parent.lookup(format("#%s", id)));
+    }
+
+    static Optional<DatePicker> getDatePicker(Parent parent, String id) {
+        return Optional.ofNullable((DatePicker) parent.lookup(format("#%s", id)));
+    }
+
+    static Optional<VBox> getVBox(Parent parent, String id) {
+        return Optional.ofNullable((VBox) parent.lookup(format("#%s", id)));
+    }
+
+    static Optional<HBox> getHBox(Parent parent, String id) {
+        return Optional.ofNullable((HBox) parent.lookup(format("#%s", id)));
     }
 
     static void initGenderChoiceBox(ChoiceBox<Gender> choiceBox) {
@@ -138,14 +155,37 @@ public interface ComponentUtil {
                         FXMLLoader fxmlLoader = new FXMLLoader();
                         fxmlLoader.setLocation(requireNonNull(Launcher.class.getResource("fxml/patients/patientCard.fxml"), "Cannot find patientCard.fxml"));
                         HBox patientCard = fxmlLoader.load();
-                        PatientCardController patientCardController = fxmlLoader.getController();
-                        patientCardController.setData(patient);
+                        PatientCardController controller = fxmlLoader.getController();
+                        controller.setData(patient);
 
-                        patientCardController.removeButton.setOnAction(actionEvent -> {
+                        controller.updateOrSaveButton.setOnAction(event ->{
+                            event.consume();
+                            if (controller.updateOrSaveButton.getText().equals("UPDATE")) allowInput(controller);
+                            else {
+                                getPatientService()
+                                        .getPatients()
+                                        .values()
+                                        .stream()
+                                        .filter(p -> p.getPatientId() == patient.getPatientId())
+                                        .findAny()
+                                        .ifPresent(p -> updatePatient(patient, controller));
+                            }
+                        });
+
+                        controller.removeButton.setOnAction(actionEvent -> {
                             actionEvent.consume();
-                            cardStorage.getChildren().remove(patientCard);
-                            getPatientService().removePatientById().accept(patient.getPatientId());
-                            setDashBoardData();
+
+                            if (controller.removeButton.getText().equals("CANCEL")) {
+                                System.out.println("CANCELING");
+                                controller.updateOrSaveButton.setText("UPDATE");
+                                controller.removeButton.setText("REMOVE");
+                                initPatientCards(cardStorage);
+                            } else {
+                                System.out.println("REMOVING");
+                                cardStorage.getChildren().remove(patientCard);
+                                getPatientService().removePatientById().accept(patient.getPatientId());
+                                setDashBoardData();
+                            }
                         });
                         cardStorage.getChildren().add(patientCard);
                     } catch (Exception e) {
@@ -180,6 +220,64 @@ public interface ComponentUtil {
                 });
     }
 
+    private static void allowInput(PatientCardController controller) {
+        controller.firstName.setEditable(true);
+        controller.middleName.setEditable(true);
+        controller.lastName.setEditable(true);
+        controller.gender.setMouseTransparent(false);
+        controller.dateOfBirth.setEditable(true);
+        controller.dateOfBirth.setMouseTransparent(false);
+        controller.address.setEditable(true);
+        controller.phoneNumber.setEditable(true);
+        controller.doctor.setMouseTransparent(false);
+        controller.symptoms.setMouseTransparent(false);
+        controller.updateOrSaveButton.setText("SAVE");
+        controller.removeButton.setText("CANCEL");
+
+    }
+
+    private static void updatePatient(Patient patient, PatientCardController controller) {
+
+        if (requiredInput(
+                controller.firstName,
+                controller.lastName,
+                controller.address,
+                controller.dateOfBirth
+        )) return;
+        controller.updateOrSaveButton.setText("UPDATE");
+        controller.removeButton.setText("REMOVE");
+        getPatientService()
+                .updatePatientById()
+                .accept(patient.getPatientId(),
+                        new Patient(
+                                controller.firstName.getText().trim(),
+                                controller.middleName.getText().trim().isEmpty() ? "" : controller.middleName.getText().trim(),
+                                controller.lastName.getText().trim(),
+                                controller.gender.getValue(),
+                                controller.dateOfBirth.getValue(),
+                                controller.address.getText().trim(),
+                                controller.phoneNumber.getText().trim(),
+                                controller.doctor.getValue() == null ? new AssignedDoctor() : controller.doctor.getValue(),
+                                controller.symptoms.getValue()
+                        )
+                );
+
+        Alert alert = initAlert("Patient Updated", "Patient Updated", "Patient Updated Successfully");
+        showAlertInfo("assets/success.png", "Success graphic not found", alert);
+    }
+
+    private static void changeCommonInputsState(HBox parent) {
+        getTextField(parent, "name").ifPresent(textField -> textField.setEditable(true));
+        getChoiceBox(parent, "gender").ifPresent(choiceBox -> choiceBox.setMouseTransparent(false));
+        getDatePicker(parent, "dateOfBirth").ifPresent(datePicker -> {
+            datePicker.setEditable(true);
+            datePicker.setMouseTransparent(false);
+        });
+        getTextField(parent, "address").ifPresent(textField -> textField.setEditable(true));
+        getTextField(parent, "phoneNumber").ifPresent(textField -> textField.setEditable(true));
+        getChoiceBox(parent, "doctor").ifPresent(choiceBox -> choiceBox.setMouseTransparent(false));
+        getChoiceBox(parent, "symptoms").ifPresent(choiceBox -> choiceBox.setMouseTransparent(false));
+    }
 
     static boolean requiredInput(
             TextField firstName,
@@ -189,25 +287,25 @@ public interface ComponentUtil {
     ) {
         if (firstName.getText().trim().isEmpty()) {
             Alert alert = initAlert("First Name is Required", "First Name is Required", "First name is required");
-            showAlertInfo("assets/success.png", "Success graphic not found", alert);
+            showAlertInfo("assets/error.png", "Error graphic not found", alert);
             return true;
         }
 
         if (lastName.getText().trim().isEmpty()) {
             Alert alert = initAlert("Last Name is Required", "Last Name is Required", "Last name is required");
-            showAlertInfo("assets/success.png", "Success graphic not found", alert);
+            showAlertInfo("assets/error.png", "Error graphic not found", alert);
             return true;
         }
 
         if (birthDate.getValue() == null) {
             Alert alert = initAlert("Birth Date is Required", "Birth Date is Required", "Birth date is required");
-            showAlertInfo("assets/success.png", "Success graphic not found", alert);
+            showAlertInfo("assets/error.png", "Error graphic not found", alert);
             return true;
         }
 
         if (address.getText().trim().isEmpty()) {
             Alert alert = initAlert("Address is Required", "Address is Required", "Address is required");
-            showAlertInfo("assets/success.png", "Success graphic not found", alert);
+            showAlertInfo("assets/error.png", "Error graphic not found", alert);
             return true;
         }
 
@@ -215,14 +313,18 @@ public interface ComponentUtil {
     }
 
     static void setCommonData(Person person,
-                              TextField name,
+                              TextField firstName,
+                              TextField middleName,
+                              TextField lastName,
                               TextField age,
                               ChoiceBox<Gender> gender,
                               DatePicker dateOfBirth,
                               TextField address,
                               TextField phoneNumber
     ) {
-        name.setText(person.getFirstName().concat(" ").concat(person.getLastName()));
+        firstName.setText(person.getFirstName());
+        middleName.setText(person.getMiddleName().isEmpty() ? "" : person.getMiddleName());
+        lastName.setText(person.getLastName());
         age.setText(String.valueOf(Period.between(person.getBirthDate(), LocalDate.now()).getYears()));
         gender.setValue(person.getGender());
         String dateString = person.getBirthDate().format(getDateFormatter());
