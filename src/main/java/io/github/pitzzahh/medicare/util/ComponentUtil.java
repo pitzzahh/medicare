@@ -32,6 +32,7 @@ import io.github.pitzzahh.medicare.backend.doctors.model.Specialization;
 import static io.github.pitzzahh.medicare.util.WindowUtil.getParent;
 import io.github.pitzzahh.medicare.backend.patients.model.Symptoms;
 import io.github.pitzzahh.medicare.backend.patients.model.Patient;
+import io.github.pitzzahh.medicare.backend.doctors.model.Doctor;
 import static io.github.pitzzahh.util.utilities.Print.printf;
 import io.github.pitzzahh.medicare.backend.AssignedDoctor;
 import io.github.pitzzahh.medicare.backend.Person;
@@ -161,7 +162,7 @@ public interface ComponentUtil {
 
                         controller.updateOrSaveButton.setOnAction(event ->{
                             event.consume();
-                            if (controller.updateOrSaveButton.getText().equals("UPDATE")) allowInput(controller);
+                            if (controller.updateOrSaveButton.getText().equals("UPDATE")) allowPatientInput(controller);
                             else {
                                 getPatientService()
                                         .getPatients()
@@ -170,17 +171,16 @@ public interface ComponentUtil {
                                         .filter(p -> p.getPatientId() == patient.getPatientId())
                                         .findAny()
                                         .ifPresent(p -> updatePatient(patient, controller));
+                                initPatientCards(cardStorage);
                             }
                         });
 
                         controller.removeButton.setOnAction(actionEvent -> {
                             actionEvent.consume();
-
                             if (controller.removeButton.getText().equals("CANCEL")) {
                                 System.out.println("CANCELING");
                                 controller.updateOrSaveButton.setText("UPDATE");
                                 controller.removeButton.setText("REMOVE");
-                                initPatientCards(cardStorage);
                             } else {
                                 System.out.println("REMOVING");
                                 cardStorage.getChildren().remove(patientCard);
@@ -188,6 +188,7 @@ public interface ComponentUtil {
                                 setDashBoardData();
                                 setCommonDashboardData("patient_dashboard", "patientsCount", false);
                             }
+                            initPatientCards(cardStorage);
                         });
                         cardStorage.getChildren().add(patientCard);
                     } catch (Exception e) {
@@ -205,15 +206,38 @@ public interface ComponentUtil {
                         FXMLLoader fxmlLoader = new FXMLLoader();
                         fxmlLoader.setLocation(requireNonNull(Launcher.class.getResource("fxml/doctors/doctorCard.fxml"), "Cannot find doctorCard.fxml"));
                         HBox doctorCard = fxmlLoader.load();
-                        DoctorCardController doctorCardController = fxmlLoader.getController();
-                        doctorCardController.setData(doctor);
+                        DoctorCardController controller = fxmlLoader.getController();
+                        controller.setData(doctor);
 
-                        doctorCardController.removeButton.setOnAction(actionEvent -> {
+                        controller.updateOrSaveButton.setOnAction(event ->{
+                            event.consume();
+                            if (controller.updateOrSaveButton.getText().equals("UPDATE")) allowDoctorInput(controller);
+                            else {
+                                getDoctorService()
+                                        .getDoctors()
+                                        .values()
+                                        .stream()
+                                        .filter(p -> p.getId() == doctor.getId())
+                                        .findAny()
+                                        .ifPresent(p -> updateDoctor(doctor, controller));
+                                initDoctorCards(cardStorage);
+                            }
+                        });
+
+                        controller.removeButton.setOnAction(actionEvent -> {
                             actionEvent.consume();
-                            cardStorage.getChildren().remove(doctorCard);
-                            getDoctorService().removeDoctorById().accept(doctor.getId());
-                            setDashBoardData();
-                            setCommonDashboardData("doctor_dashboard", "doctorsCount", false);
+                            if (controller.removeButton.getText().equals("CANCEL")) {
+                                System.out.println("CANCELING");
+                                controller.updateOrSaveButton.setText("UPDATE");
+                                controller.removeButton.setText("REMOVE");
+                            } else {
+                                System.out.println("REMOVING");
+                                cardStorage.getChildren().remove(doctorCard);
+                                getDoctorService().removeDoctorById().accept(doctor.getId());
+                                setDashBoardData();
+                                setCommonDashboardData("doctor_dashboard", "doctorsCount", false);
+                            }
+                            initDoctorCards(cardStorage);
                         });
                         cardStorage.getChildren().add(doctorCard);
                     } catch (Exception e) {
@@ -222,21 +246,37 @@ public interface ComponentUtil {
                 });
     }
 
-    private static void allowInput(PatientCardController controller) {
-        controller.firstName.setEditable(true);
-        controller.middleName.setEditable(true);
-        controller.lastName.setEditable(true);
-        controller.gender.setMouseTransparent(false);
-        controller.dateOfBirth.setEditable(true);
-        controller.dateOfBirth.setMouseTransparent(false);
-        controller.address.setEditable(true);
-        controller.phoneNumber.setEditable(true);
-        controller.doctor.setMouseTransparent(false);
-        controller.symptoms.setMouseTransparent(false);
+    private static void allowPatientInput(PatientCardController controller) {
+        initGenderChoiceBox(controller.gender);
+        initAssignedDoctorChoiceBox(controller.doctor);
+        initSymptomsChoiceBox(controller.symptoms);
+        allowCommonInputs(controller.firstName, controller.middleName, controller.lastName, controller.gender, controller.dateOfBirth, controller.address, controller.phoneNumber);
+        controller.doctor.setMouseTransparent(false); // EDITABLE
+        controller.symptoms.setMouseTransparent(false); // EDITABLE
         controller.updateOrSaveButton.setText("SAVE");
         controller.removeButton.setText("CANCEL");
-
     }
+
+    static void allowCommonInputs(TextField firstName, TextField middleName, TextField lastName, ChoiceBox<Gender> gender, DatePicker dateOfBirth, TextField address, TextField phoneNumber) {
+        firstName.setEditable(true);
+        middleName.setEditable(true);
+        lastName.setEditable(true);
+        gender.setMouseTransparent(false); // EDITABLE
+        dateOfBirth.setEditable(true);
+        dateOfBirth.setMouseTransparent(false);
+        address.setEditable(true);
+        phoneNumber.setEditable(true);
+    }
+
+    private static void allowDoctorInput(DoctorCardController controller) {
+        initGenderChoiceBox(controller.gender);
+        initSpecializationChoiceBox(controller.specialization);
+        allowCommonInputs(controller.firstName, controller.middleName, controller.lastName, controller.gender, controller.dateOfBirth, controller.address, controller.phoneNumber);
+        controller.specialization.setMouseTransparent(false); // EDITABLE
+        controller.updateOrSaveButton.setText("SAVE");
+        controller.removeButton.setText("CANCEL");
+    }
+
 
     private static void updatePatient(Patient patient, PatientCardController controller) {
 
@@ -246,15 +286,17 @@ public interface ComponentUtil {
                 controller.address,
                 controller.dateOfBirth
         )) return;
+
         controller.updateOrSaveButton.setText("UPDATE");
         controller.removeButton.setText("REMOVE");
+
         getPatientService()
                 .updatePatientById()
                 .accept(patient.getPatientId(),
                         new Patient(
+                                controller.lastName.getText().trim(),
                                 controller.firstName.getText().trim(),
                                 controller.middleName.getText().trim().isEmpty() ? "" : controller.middleName.getText().trim(),
-                                controller.lastName.getText().trim(),
                                 controller.gender.getValue(),
                                 controller.dateOfBirth.getValue(),
                                 controller.address.getText().trim(),
@@ -265,6 +307,36 @@ public interface ComponentUtil {
                 );
 
         Alert alert = initAlert("Patient Updated", "Patient Updated", "Patient Updated Successfully");
+        showAlertInfo("assets/success.png", "Success graphic not found", alert);
+    }
+
+    private static void updateDoctor(Doctor doctor, DoctorCardController controller) {
+        if (requiredInput(
+                controller.firstName,
+                controller.lastName,
+                controller.address,
+                controller.dateOfBirth
+        )) return;
+
+        controller.updateOrSaveButton.setText("UPDATE");
+        controller.removeButton.setText("REMOVE");
+
+        getDoctorService()
+                .updateDoctorById()
+                .accept(doctor.getId(),
+                        new Doctor(
+                                controller.lastName.getText().trim(),
+                                controller.firstName.getText().trim(),
+                                controller.middleName.getText().trim().isEmpty() ? "" : controller.middleName.getText().trim(),
+                                controller.gender.getValue(),
+                                controller.dateOfBirth.getValue(),
+                                controller.address.getText().trim(),
+                                controller.phoneNumber.getText().trim(),
+                                controller.specialization.getValue()
+                        )
+                );
+
+        Alert alert = initAlert("Doctor Updated", "Doctor Updated", "Doctor Updated Successfully");
         showAlertInfo("assets/success.png", "Success graphic not found", alert);
     }
 
