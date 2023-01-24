@@ -25,9 +25,9 @@
 package io.github.pitzzahh.medicare.backend.doctors.dao;
 
 import io.github.pitzzahh.medicare.backend.doctors.model.Doctor;
-
-import java.util.Map;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.Map;
 
 public interface DoctorDAO {
 
@@ -37,4 +37,5 @@ public interface DoctorDAO {
 
     Consumer<Integer> removeDoctorById();
 
+    BiConsumer<Integer, Doctor> updateDoctorById();
 }
