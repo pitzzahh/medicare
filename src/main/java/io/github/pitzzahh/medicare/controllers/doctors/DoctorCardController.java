@@ -40,7 +40,7 @@ import static io.github.pitzzahh.medicare.util.ToolTipUtil.initToolTip;
 public class DoctorCardController {
 
     @FXML
-    private TextField name, age, address, phoneNumber;
+    public TextField firstName, middleName, lastName, age, address, phoneNumber;
 
     @FXML
     private ChoiceBox<Gender> gender;
@@ -57,7 +57,9 @@ public class DoctorCardController {
     @FXML
     public void initialize() {
         removeButton.setTooltip(initToolTip("Click to Remove Doctor", normalStyle()));
-        name.setEditable(false);
+        firstName.setEditable(false);
+        middleName.setEditable(false);
+        lastName.setEditable(false);
         age.setEditable(false);
         gender.setMouseTransparent(true);
         address.setEditable(false);
@@ -68,9 +70,8 @@ public class DoctorCardController {
     }
 
     public void setData(Doctor doctor) {
-        setCommonData(doctor, name, age, gender, dateOfBirth, address, phoneNumber);
+        setCommonData(doctor, firstName, middleName, lastName, age, gender, dateOfBirth, address, phoneNumber);
         specialization.setValue(doctor.getSpecialization());
     }
-
 
 }
