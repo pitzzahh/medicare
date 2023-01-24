@@ -37,16 +37,16 @@ import javafx.fxml.FXML;
 public class PatientCardController {
 
     @FXML
-    private TextField id, name, age, address, phoneNumber;
+    public TextField id, firstName, middleName, lastName, age, address, phoneNumber;
 
     @FXML
-    private ChoiceBox<Gender> gender;
+    public ChoiceBox<Gender> gender;
 
     @FXML
-    private DatePicker dateOfBirth;
+    public DatePicker dateOfBirth;
 
     @FXML
-    private ChoiceBox<AssignedDoctor> doctor;
+    public ChoiceBox<AssignedDoctor> doctor;
 
     @FXML
     public ChoiceBox<Symptoms> symptoms;
@@ -59,7 +59,9 @@ public class PatientCardController {
         updateOrSaveButton.setTooltip(initToolTip("Click to Update Patient", normalStyle()));
         removeButton.setTooltip(initToolTip("Click to Remove Patient", normalStyle()));
         id.setEditable(false);
-        name.setEditable(false);
+        firstName.setEditable(false);
+        middleName.setEditable(false);
+        lastName.setEditable(false);
         age.setEditable(false);
         gender.setMouseTransparent(true);
         address.setEditable(false);
@@ -72,7 +74,7 @@ public class PatientCardController {
 
     public void setData(Patient patient) {
         id.setText(String.valueOf(patient.getPatientId()));
-        setCommonData(patient, name, age, gender, dateOfBirth, address, phoneNumber);
+        setCommonData(patient, firstName, middleName, lastName, age, gender, dateOfBirth, address, phoneNumber);
         doctor.getItems().clear();
         doctor.setValue(patient.getAssignDoctor());
         symptoms.setValue(patient.getSymptoms());
