@@ -52,12 +52,12 @@ public class PatientCardController {
     public ChoiceBox<Symptoms> symptoms;
 
     @FXML
-    public Button updateOrSaveButton, removeButton;
+    public Button updateOrSaveButton, dischargeButton;
 
     @FXML
     public void initialize() {
-        updateOrSaveButton.setTooltip(initToolTip("Click to Update Patient", normalStyle()));
-        removeButton.setTooltip(initToolTip("Click to Remove Patient", normalStyle()));
+        updateOrSaveButton.setTooltip(initToolTip("Click to Update Patient Details", normalStyle()));
+        dischargeButton.setTooltip(initToolTip("Click to Discharge Patient", normalStyle()));
         id.setEditable(false);
         firstName.setEditable(false);
         middleName.setEditable(false);
