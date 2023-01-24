@@ -9,18 +9,17 @@
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/19"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="io.github.pitzzahh.medicare.controllers.DashboardController">
+            xmlns:fx="http://javafx.com/fxml/1">
     <center>
         <VBox alignment="CENTER" BorderPane.alignment="CENTER">
-            <HBox alignment="CENTER" prefHeight="104.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+            <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
                 <VBox.margin>
                     <Insets top="10.0"/>
                 </VBox.margin>
                 <padding>
                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
                 </padding>
-                <HBox fx:id="patientsCard" alignment="CENTER" maxWidth="400.0" styleClass="card"
+                <HBox fx:id="patientsCard" alignment="CENTER" maxHeight="200.0" maxWidth="500.0" styleClass="card"
                       stylesheets="@../css/common.css" HBox.hgrow="ALWAYS">
                     <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
@@ -41,7 +40,7 @@
                         </HBox>
                     </VBox>
                 </HBox>
-                <HBox fx:id="doctorsCard" alignment="CENTER" maxWidth="400.0" styleClass="card"
+                <HBox fx:id="doctorsCard" alignment="CENTER" maxHeight="200.0" maxWidth="500.0" styleClass="card"
                       stylesheets="@../css/common.css" HBox.hgrow="ALWAYS">
                     <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
@@ -69,12 +68,11 @@
                     </VBox>
                 </HBox>
             </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="209.0" prefWidth="600.0"
-                  VBox.vgrow="ALWAYS">
+            <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
                 <VBox.margin>
                     <Insets bottom="20.0"/>
                 </VBox.margin>
-                <ImageView fitHeight="185.0" fitWidth="246.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../assets/logo.png"/>
                 </ImageView>
             </HBox>
