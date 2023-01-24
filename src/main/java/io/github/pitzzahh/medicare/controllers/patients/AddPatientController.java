@@ -113,7 +113,7 @@ public class AddPatientController {
 
         setDashBoardData();
 
-        loadPage("patients_panel", "dashboard");
+        loadPage("patients_panel", "patient_dashboard");
         resetInputs(lastName, firstName, middleName, address, phoneNumber, gender, doctor, birthDate);
         getPatientService().getPatients().put(patient.getPatientId(), patient);
         initGenderChoiceBox(gender);
