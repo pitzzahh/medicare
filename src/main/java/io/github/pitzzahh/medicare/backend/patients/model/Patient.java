@@ -38,9 +38,22 @@ import lombok.*;
 public class Patient extends Person {
     private int patientId;
     private AssignedDoctor assignDoctor;
+    private LocalDate dateConfined;
     private Symptoms symptoms;
 
-    public Patient(int patientId, String lastName, String firstName, String middleName, Gender gender, LocalDate birthDate, String address, String phoneNumber, AssignedDoctor assignedDoctor, Symptoms symptoms) {
+    public Patient(
+            int patientId,
+            String lastName,
+            String firstName,
+            String middleName,
+            Gender gender,
+            LocalDate birthDate,
+            String address,
+            String phoneNumber,
+            AssignedDoctor assignedDoctor,
+            LocalDate dateConfined,
+            Symptoms symptoms
+    ) {
         this.patientId = patientId;
         super.setLastName(lastName);
         super.setFirstName(firstName);
@@ -50,10 +63,21 @@ public class Patient extends Person {
         super.setAddress(address);
         super.setPhoneNumber(phoneNumber);
         this.assignDoctor = assignedDoctor;
+        this.dateConfined = dateConfined;
         this.symptoms = symptoms;
     }
 
-    public Patient(String lastName, String firstName, String middleName, Gender gender, LocalDate birthDate, String address, String phoneNumber, AssignedDoctor assignedDoctor, Symptoms symptoms) {
+    public Patient(
+            String lastName,
+            String firstName,
+            String middleName,
+            Gender gender,
+            LocalDate birthDate,
+            String address,
+            String phoneNumber,
+            AssignedDoctor assignedDoctor,
+            LocalDate dateConfined,
+            Symptoms symptoms) {
         super.setLastName(lastName);
         super.setFirstName(firstName);
         super.setMiddleName(middleName);
@@ -62,6 +86,7 @@ public class Patient extends Person {
         super.setAddress(address);
         super.setPhoneNumber(phoneNumber);
         this.assignDoctor = assignedDoctor;
+        this.dateConfined = dateConfined;
         this.symptoms = symptoms;
     }
 }
