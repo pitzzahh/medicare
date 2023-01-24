@@ -29,6 +29,7 @@ import io.github.pitzzahh.medicare.backend.patients.mapper.PatientMapper;
 import static io.github.pitzzahh.util.utilities.SecurityUtil.encrypt;
 import io.github.pitzzahh.medicare.backend.patients.model.Patient;
 import static java.lang.String.valueOf;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -80,4 +81,34 @@ public class PatientDAOImpl implements PatientDAO {
         return id -> getJDBC().update("DELETE FROM p4t13nt$ WHERE id = ?", id);
     }
 
+    @Override
+    public BiConsumer<Integer, Patient> updatePatientById() {
+        final String QUERY = "UPDATE p4t13nt$ SET last_name = ?, " +
+                "first_name = ?, " +
+                "middle_name = ?, " +
+                "gender = ?, " +
+                "birthdate = ?, " +
+                "address = ?, " +
+                "phone_number = ?, " +
+                "doctor_id = ?, " +
+                "doctor_name = ?, " +
+                "doctor_specialization = ?, " +
+                "symptoms = ?  " +
+                "WHERE id = ?;";
+        return (id, patient) -> getJDBC().update(
+                QUERY,
+                encrypt(patient.getLastName()),
+                encrypt(patient.getFirstName()),
+                patient.getMiddleName().trim().isEmpty() ? null : encrypt(patient.getMiddleName()),
+                encrypt(patient.getGender().name()),
+                encrypt(patient.getBirthDate().toString()),
+                encrypt(patient.getAddress()),
+                patient.getPhoneNumber().trim().isEmpty() ? null : encrypt(patient.getPhoneNumber()),
+                patient.getAssignDoctor() == null ? "" : encrypt(valueOf(patient.getAssignDoctor().getId())),
+                patient.getAssignDoctor() == null ? "" : encrypt(patient.getAssignDoctor().getName()),
+                patient.getAssignDoctor() == null ? "" : encrypt(patient.getAssignDoctor().getSpecialization().name()),
+                encrypt(patient.getSymptoms().name()),
+                id
+        );
+    }
 }
