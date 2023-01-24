@@ -24,12 +24,14 @@
 
 package io.github.pitzzahh.medicare.backend.doctors.service;
 
+import io.github.pitzzahh.medicare.backend.AssignedDoctor;
 import io.github.pitzzahh.medicare.backend.doctors.dao.DoctorDAO;
 import io.github.pitzzahh.medicare.backend.doctors.model.Doctor;
-import lombok.AllArgsConstructor;
-
-import java.util.Map;
 import java.util.function.Consumer;
+import java.util.function.Function;
+import lombok.AllArgsConstructor;
+import java.util.Optional;
+import java.util.Map;
 
 @AllArgsConstructor
 public class DoctorService {
@@ -39,6 +41,21 @@ public class DoctorService {
 
     public Map<Integer, Doctor> getDoctors() {
         return DAO.getDoctors();
+    }
+
+    public Function<Integer, Optional<AssignedDoctor>> getAssignedDoctorById() {
+        return id -> getDoctors()
+                .values()
+                .stream()
+                .filter(doctor -> doctor.getId() == id)
+                .map(d -> new AssignedDoctor(
+                                d.getId(),
+                                d.getLastName().isEmpty() ? d.getFirstName().concat(" ").concat(d.getLastName()) :
+                                        d.getFirstName().concat(" ").concat(d.getMiddleName()).concat(" ").concat(d.getLastName()),
+                                d.getSpecialization()
+                        )
+                )
+                .findAny();
     }
 
     public Consumer<Doctor> addDoctor() {
