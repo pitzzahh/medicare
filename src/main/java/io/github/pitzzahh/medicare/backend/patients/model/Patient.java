@@ -24,6 +24,7 @@
 
 package io.github.pitzzahh.medicare.backend.patients.model;
 
+import io.github.pitzzahh.medicare.backend.AssignedDoctor;
 import io.github.pitzzahh.medicare.backend.Gender;
 import io.github.pitzzahh.medicare.backend.Person;
 import java.time.LocalDate;
@@ -36,9 +37,10 @@ import lombok.*;
 @NoArgsConstructor
 public class Patient extends Person {
     private int patientId;
-    private String symptoms;
+    private AssignedDoctor assignDoctor;
+    private Symptoms symptoms;
 
-    public Patient(int patientId, String lastName, String firstName, String middleName, Gender gender, LocalDate birthDate, String address, String phoneNumber, String symptoms) {
+    public Patient(int patientId, String lastName, String firstName, String middleName, Gender gender, LocalDate birthDate, String address, String phoneNumber, AssignedDoctor assignedDoctor, Symptoms symptoms) {
         this.patientId = patientId;
         super.setLastName(lastName);
         super.setFirstName(firstName);
@@ -47,10 +49,11 @@ public class Patient extends Person {
         super.setBirthDate(birthDate);
         super.setAddress(address);
         super.setPhoneNumber(phoneNumber);
+        this.assignDoctor = assignedDoctor;
         this.symptoms = symptoms;
     }
 
-    public Patient(String lastName, String firstName, String middleName, Gender gender, LocalDate birthDate, String address, String phoneNumber, String symptoms) {
+    public Patient(String lastName, String firstName, String middleName, Gender gender, LocalDate birthDate, String address, String phoneNumber, AssignedDoctor assignedDoctor, Symptoms symptoms) {
         super.setLastName(lastName);
         super.setFirstName(firstName);
         super.setMiddleName(middleName);
@@ -58,6 +61,7 @@ public class Patient extends Person {
         super.setBirthDate(birthDate);
         super.setAddress(address);
         super.setPhoneNumber(phoneNumber);
+        this.assignDoctor = assignedDoctor;
         this.symptoms = symptoms;
     }
 }
