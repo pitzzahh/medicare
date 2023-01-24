@@ -40,6 +40,8 @@ import javafx.scene.image.Image;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
 
+import java.time.LocalDate;
+
 public class AddPatientController {
 
     @FXML
@@ -90,6 +92,7 @@ public class AddPatientController {
                 address.getText().trim(),
                 phoneNumber.getText().trim(),
                 doctor.getSelectionModel().isEmpty() ? null : getDoctorService().getAssignedDoctorById().apply(doc.getId()).orElse(null),
+                LocalDate.now(),
                 symptoms.getSelectionModel().getSelectedItem()
         );
 
