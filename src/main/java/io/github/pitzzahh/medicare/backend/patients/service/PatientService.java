@@ -26,10 +26,9 @@ package io.github.pitzzahh.medicare.backend.patients.service;
 
 import io.github.pitzzahh.medicare.backend.patients.dao.PatientDAO;
 import io.github.pitzzahh.medicare.backend.patients.model.Patient;
-import lombok.AllArgsConstructor;
-
-import java.util.Map;
 import java.util.function.Consumer;
+import lombok.AllArgsConstructor;
+import java.util.Map;
 
 @AllArgsConstructor
 public class PatientService {
