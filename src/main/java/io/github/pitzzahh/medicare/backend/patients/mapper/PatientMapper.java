@@ -51,7 +51,7 @@ public class PatientMapper implements RowMapper<Patient> {
                 decrypt(rs.getString("address")),
                 rs.getString("phone_number") != null ? decrypt(rs.getString("phone_number")) : "",
                 new AssignedDoctor(
-                        parseInt(rs.getString("doctor_id").isEmpty() ? "" : decrypt(rs.getString("doctor_id"))),
+                        parseInt(rs.getString("doctor_id").isEmpty() ? "0" : decrypt(rs.getString("doctor_id"))),
                         rs.getString("doctor_name").isEmpty() ? "" : decrypt(rs.getString("doctor_name")),
                         rs.getString("doctor_specialization").isEmpty() ? null :
                                 Specialization.valueOf(decrypt(rs.getString("doctor_specialization")))
