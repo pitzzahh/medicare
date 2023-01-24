@@ -27,6 +27,7 @@ package io.github.pitzzahh.medicare.util;
 import static io.github.pitzzahh.medicare.application.Medicare.getPatientService;
 import static io.github.pitzzahh.medicare.application.Medicare.getDoctorService;
 import io.github.pitzzahh.medicare.controllers.patients.PatientCardController;
+import io.github.pitzzahh.medicare.backend.patients.model.DischargedPatient;
 import io.github.pitzzahh.medicare.controllers.doctors.DoctorCardController;
 import io.github.pitzzahh.medicare.backend.doctors.model.Specialization;
 import static io.github.pitzzahh.medicare.util.ToolTipUtil.initToolTip;
@@ -188,16 +189,39 @@ public interface ComponentUtil {
                             }
                         });
 
-                        controller.removeButton.setOnAction(actionEvent -> {
+                        controller.dischargeButton.setOnAction(actionEvent -> {
                             actionEvent.consume();
-                            if (controller.removeButton.getText().equals("CANCEL")) {
+                            if (controller.dischargeButton.getText().equals("CANCEL")) {
                                 System.out.println("CANCELING");
                                 controller.updateOrSaveButton.setText("UPDATE");
-                                controller.removeButton.setText("REMOVE");
+                                controller.dischargeButton.setText("DISCHARGE");
                             } else {
-                                System.out.println("REMOVING");
+                                System.out.println("DISCHARGING");
                                 cardStorage.getChildren().remove(patientCard);
-                                getPatientService().removePatientById().accept(patient.getPatientId());
+                                getPatientService()
+                                        .dischargePatientById()
+                                        .accept(patient.getPatientId());
+
+                                final String PATIENT_NAME = patient.getMiddleName().isEmpty() ?
+                                        patient.getFirstName()
+                                                .concat(" ")
+                                                .concat(patient.getLastName()) :
+                                        patient.getFirstName()
+                                                .concat(" ")
+                                                .concat(patient.getMiddleName())
+                                                .concat(" ")
+                                                .concat(patient.getLastName());
+                                getPatientService()
+                                        .addDischargedPatient()
+                                        .accept(
+                                                new DischargedPatient(
+                                                        patient.getPatientId(),
+                                                        PATIENT_NAME,
+                                                        patient.getAssignDoctor().getName(),
+                                                        patient.getDateConfined(),
+                                                        LocalDate.now()
+                                                )
+                                        );
                                 setDashBoardData();
                                 setCommonDashboardData("patient_dashboard", "patientsCount", false);
                             }
@@ -275,9 +299,9 @@ public interface ComponentUtil {
         controller.doctor.setMouseTransparent(false); // EDITABLE
         controller.symptoms.setMouseTransparent(false); // EDITABLE
         controller.updateOrSaveButton.setText("SAVE");
-        controller.removeButton.setText("CANCEL");
+        controller.dischargeButton.setText("CANCEL");
         controller.updateOrSaveButton.setTooltip(initToolTip("Click to Save Doctor", normalStyle()));
-        controller.removeButton.setTooltip(initToolTip("Click to Cancel Edit", normalStyle()));
+        controller.dischargeButton.setTooltip(initToolTip("Click to Cancel Edit", normalStyle()));
     }
 
     static void allowCommonInputs(TextField firstName, TextField middleName, TextField lastName, ChoiceBox<Gender> gender, DatePicker dateOfBirth, TextField address, TextField phoneNumber) {
@@ -313,9 +337,9 @@ public interface ComponentUtil {
         )) return;
 
         controller.updateOrSaveButton.setText("UPDATE");
-        controller.removeButton.setText("REMOVE");
+        controller.dischargeButton.setText("REMOVE");
         controller.updateOrSaveButton.setTooltip(initToolTip("Click to Update Patient", normalStyle()));
-        controller.removeButton.setTooltip(initToolTip("Click to Remove Patient", normalStyle()));
+        controller.dischargeButton.setTooltip(initToolTip("Click to Discharge Patient", normalStyle()));
 
         getPatientService()
                 .updatePatientById()
@@ -329,6 +353,7 @@ public interface ComponentUtil {
                                 controller.address.getText().trim(),
                                 controller.phoneNumber.getText().trim(),
                                 controller.doctor.getValue() == null ? new AssignedDoctor() : controller.doctor.getValue(),
+                                patient.getDateConfined(),
                                 controller.symptoms.getValue()
                         )
                 );
