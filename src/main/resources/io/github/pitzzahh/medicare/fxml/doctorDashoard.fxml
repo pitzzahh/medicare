@@ -11,7 +11,7 @@
 <BorderPane style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/19"
             xmlns:fx="http://javafx.com/fxml/1">
     <center>
-        <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+        <VBox alignment="CENTER" prefWidth="600.0" BorderPane.alignment="CENTER">
             <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
                 <VBox.margin>
                     <Insets top="10.0"/>
@@ -19,28 +19,7 @@
                 <padding>
                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
                 </padding>
-                <HBox fx:id="patientsCard" alignment="CENTER" maxHeight="200.0" maxWidth="500.0" styleClass="card"
-                      stylesheets="@../css/common.css" HBox.hgrow="ALWAYS">
-                    <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                    </HBox.margin>
-                    <VBox alignment="CENTER">
-                        <HBox alignment="CENTER">
-                            <padding>
-                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
-                            </padding>
-                            <Label styleClass="card-title" stylesheets="@../css/common.css" text="NUMBER OF PATIENTS"/>
-                        </HBox>
-                        <HBox alignment="TOP_CENTER">
-                            <padding>
-                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
-                            </padding>
-                            <Label fx:id="patientsCount" styleClass="card-count" stylesheets="@../css/common.css"
-                                   text="0"/>
-                        </HBox>
-                    </VBox>
-                </HBox>
-                <HBox fx:id="doctorsCard" alignment="CENTER" maxHeight="200.0" maxWidth="500.0" styleClass="card"
+                <HBox fx:id="doctorsCard" alignment="CENTER" maxHeight="150.0" maxWidth="400.0" styleClass="doctor-card"
                       stylesheets="@../css/common.css" HBox.hgrow="ALWAYS">
                     <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
@@ -53,7 +32,8 @@
                             <padding>
                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                             </padding>
-                            <Label styleClass="card-title" stylesheets="@../css/common.css" text="NUMBER OF DOCTORS"/>
+                            <Label styleClass="doctor-card-title" stylesheets="@../css/common.css"
+                                   text="NUMBER OF DOCTORS"/>
                         </HBox>
                         <HBox alignment="CENTER">
                             <VBox.margin>
@@ -62,13 +42,13 @@
                             <padding>
                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                             </padding>
-                            <Label fx:id="doctorsCount" styleClass="card-count" stylesheets="@../css/common.css"
+                            <Label fx:id="doctorsCount" styleClass="doctor-card-count" stylesheets="@../css/common.css"
                                    text="0"/>
                         </HBox>
                     </VBox>
                 </HBox>
             </HBox>
-            <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" VBox.vgrow="ALWAYS">
                 <VBox.margin>
                     <Insets bottom="20.0"/>
                 </VBox.margin>

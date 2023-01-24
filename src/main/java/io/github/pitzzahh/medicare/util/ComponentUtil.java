@@ -24,33 +24,34 @@
 
 package io.github.pitzzahh.medicare.util;
 
-import io.github.pitzzahh.medicare.Launcher;
-import io.github.pitzzahh.medicare.backend.Gender;
-import io.github.pitzzahh.medicare.backend.Person;
-import io.github.pitzzahh.medicare.backend.doctors.model.Specialization;
-import io.github.pitzzahh.medicare.controllers.doctors.DoctorCardController;
+import static io.github.pitzzahh.medicare.application.Medicare.getPatientService;
+import static io.github.pitzzahh.medicare.application.Medicare.getDoctorService;
 import io.github.pitzzahh.medicare.controllers.patients.PatientCardController;
+import io.github.pitzzahh.medicare.controllers.doctors.DoctorCardController;
+import io.github.pitzzahh.medicare.backend.doctors.model.Specialization;
+import static io.github.pitzzahh.medicare.util.WindowUtil.getParent;
+import io.github.pitzzahh.medicare.backend.patients.model.Symptoms;
+import io.github.pitzzahh.medicare.backend.AssignedDoctor;
+import io.github.pitzzahh.medicare.backend.Person;
+import io.github.pitzzahh.medicare.backend.Gender;
+import static java.util.Objects.requireNonNull;
+import io.github.pitzzahh.medicare.Launcher;
+import java.time.format.DateTimeFormatter;
 import javafx.collections.FXCollections;
+import static java.lang.String.format;
+import javafx.scene.image.ImageView;
+import java.time.format.FormatStyle;
+import java.util.stream.Collectors;
+import javafx.scene.layout.HBox;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
+import javafx.scene.control.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-
 import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.util.Arrays;
 import java.util.Optional;
-
-import static io.github.pitzzahh.medicare.application.Medicare.getDoctorService;
-import static io.github.pitzzahh.medicare.application.Medicare.getPatientService;
-import static io.github.pitzzahh.medicare.util.WindowUtil.getParent;
-import static java.lang.String.format;
-import static java.util.Objects.requireNonNull;
+import java.time.Period;
+import java.util.Arrays;
 
 public interface ComponentUtil {
 
@@ -68,8 +69,36 @@ public interface ComponentUtil {
         return Optional.ofNullable((Label) parent.lookup(format("#%s", id)));
     }
 
+    static Optional<ChoiceBox<?>> getChoiceBox(Parent parent, String id) {
+        return Optional.ofNullable((ChoiceBox<?>) parent.lookup(format("#%s", id)));
+    }
+
     static void initGenderChoiceBox(ChoiceBox<Gender> choiceBox) {
         choiceBox.getItems().addAll(FXCollections.observableArrayList(Arrays.asList(Gender.values())));
+        choiceBox.getSelectionModel().selectFirst();
+    }
+
+    static void initSymptomsChoiceBox(ChoiceBox<Symptoms> choiceBox) {
+        choiceBox.getItems().addAll(FXCollections.observableArrayList(Arrays.asList(Symptoms.values())));
+        choiceBox.getSelectionModel().selectFirst();
+    }
+
+    static void initAssignedDoctorChoiceBox(ChoiceBox<AssignedDoctor> choiceBox) {
+        choiceBox.getItems().clear();
+        if (getDoctorService().getDoctors().isEmpty()) choiceBox.setValue(new AssignedDoctor());
+        else choiceBox.getItems().addAll(
+                getDoctorService()
+                        .getDoctors()
+                        .values()
+                        .stream()
+                        .map(d -> new AssignedDoctor(
+                                d.getId(),
+                                d.getFirstName().concat(" ").concat(d.getLastName()),
+                                d.getSpecialization()
+                                )
+                        )
+                        .collect(Collectors.toList())
+        );
         choiceBox.getSelectionModel().selectFirst();
     }
 
@@ -85,6 +114,7 @@ public interface ComponentUtil {
             TextField address,
             TextField phoneNumber,
             ChoiceBox<Gender> gender,
+            ChoiceBox<AssignedDoctor> doctor,
             DatePicker birthDate
     ) {
         lastName.clear();
@@ -93,20 +123,11 @@ public interface ComponentUtil {
         address.clear();
         phoneNumber.clear();
         gender.getSelectionModel().selectFirst();
+        if (doctor != null) doctor.getSelectionModel().selectFirst();
         birthDate.setValue(null);
     }
 
-    static Alert showAlert(String title, String header, String content) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
 
-        alert.setTitle(title);
-        alert.setHeaderText(header);
-        alert.setContentText(content);
-        DialogPane dialogPane = alert.getDialogPane();
-        dialogPane.getStylesheets().add(requireNonNull(Launcher.class.getResource("css/alert.css"), "Cannot find alert.css").toExternalForm());
-        dialogPane.setId("alert-dialog");
-        return alert;
-    }
 
     static void initPatientCards(VBox cardStorage) {
         cardStorage.getChildren().clear();
@@ -164,60 +185,30 @@ public interface ComponentUtil {
             TextField firstName,
             TextField lastName,
             TextField address,
-            DatePicker birthDate,
-            TextArea symptoms,
-            boolean isAddPatient
+            DatePicker birthDate
     ) {
         if (firstName.getText().trim().isEmpty()) {
-            Alert alert = showAlert("First Name is Required", "First Name is Required", "First name is required");
-            ImageView graphic = new ImageView(new Image(requireNonNull(Launcher.class.getResourceAsStream("assets/error.png"), "Error graphic not found")));
-            graphic.setFitWidth(50);
-            graphic.setFitHeight(50);
-            alert.setGraphic(graphic);
-            alert.showAndWait();
+            Alert alert = initAlert("First Name is Required", "First Name is Required", "First name is required");
+            showAlertInfo("assets/success.png", "Success graphic not found", alert);
             return true;
         }
 
         if (lastName.getText().trim().isEmpty()) {
-            Alert alert = showAlert("Last Name is Required", "Last Name is Required", "Last name is required");
-            ImageView graphic = new ImageView(new Image(requireNonNull(Launcher.class.getResourceAsStream("assets/error.png"), "Error graphic not found")));
-            graphic.setFitWidth(50);
-            graphic.setFitHeight(50);
-            alert.setGraphic(graphic);
-            alert.showAndWait();
+            Alert alert = initAlert("Last Name is Required", "Last Name is Required", "Last name is required");
+            showAlertInfo("assets/success.png", "Success graphic not found", alert);
             return true;
         }
 
         if (birthDate.getValue() == null) {
-            Alert alert = showAlert("Birth Date is Required", "Birth Date is Required", "Birth date is required");
-            ImageView graphic = new ImageView(new Image(requireNonNull(Launcher.class.getResourceAsStream("assets/error.png"), "Error graphic not found")));
-            graphic.setFitWidth(50);
-            graphic.setFitHeight(50);
-            alert.setGraphic(graphic);
-            alert.showAndWait();
+            Alert alert = initAlert("Birth Date is Required", "Birth Date is Required", "Birth date is required");
+            showAlertInfo("assets/success.png", "Success graphic not found", alert);
             return true;
         }
 
         if (address.getText().trim().isEmpty()) {
-            Alert alert = showAlert("Address is Required", "Address is Required", "Address is required");
-            ImageView graphic = new ImageView(new Image(requireNonNull(Launcher.class.getResourceAsStream("assets/error.png"), "Error graphic not found")));
-            graphic.setFitWidth(50);
-            graphic.setFitHeight(50);
-            alert.setGraphic(graphic);
-            alert.showAndWait();
+            Alert alert = initAlert("Address is Required", "Address is Required", "Address is required");
+            showAlertInfo("assets/success.png", "Success graphic not found", alert);
             return true;
-        }
-
-        if (isAddPatient) {
-            if (symptoms.getText().trim().isEmpty()) {
-                Alert alert = showAlert("Symptoms is Required", "Symptoms is Required", "Symptoms is required");
-                ImageView graphic = new ImageView(new Image(requireNonNull(Launcher.class.getResourceAsStream("assets/error.png"), "Error graphic not found")));
-                graphic.setFitWidth(50);
-                graphic.setFitHeight(50);
-                alert.setGraphic(graphic);
-                alert.showAndWait();
-                return true;
-            }
         }
 
         return false;
@@ -249,6 +240,19 @@ public interface ComponentUtil {
         Optional<Label> doctorsCountLabel = getLabel(getParent("dashboard"), "doctorsCount");
         doctorsCountLabel.ifPresent(l -> l.setText(String.valueOf(doctorsCount)));
     }
+
+    static Alert initAlert(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(requireNonNull(Launcher.class.getResource("css/alert.css"), "Cannot find alert.css").toExternalForm());
+        dialogPane.setId("alert-dialog");
+        return alert;
+    }
+
     static void showAlertInfo(String name, String errorMessage, Alert alert) {
         ImageView graphic = new ImageView(new Image(requireNonNull(Launcher.class.getResourceAsStream(name), errorMessage)));
         graphic.setFitWidth(50);

@@ -24,10 +24,13 @@
 
 package io.github.pitzzahh.medicare.controllers.patients;
 
+import static io.github.pitzzahh.medicare.application.Medicare.getDoctorService;
 import static io.github.pitzzahh.medicare.application.Medicare.getPatientService;
 import static io.github.pitzzahh.medicare.util.WindowUtil.loadPage;
+import io.github.pitzzahh.medicare.backend.patients.model.Symptoms;
 import io.github.pitzzahh.medicare.backend.patients.model.Patient;
 import static io.github.pitzzahh.medicare.util.ComponentUtil.*;
+import io.github.pitzzahh.medicare.backend.AssignedDoctor;
 import io.github.pitzzahh.medicare.backend.Gender;
 import static java.util.Objects.requireNonNull;
 import io.github.pitzzahh.medicare.Launcher;
@@ -46,10 +49,13 @@ public class AddPatientController {
     public ChoiceBox<Gender> gender;
 
     @FXML
-    public DatePicker birthDate;
+    private ChoiceBox<AssignedDoctor> doctor;
 
     @FXML
-    public TextArea symptoms;
+    private ChoiceBox<Symptoms> symptoms;
+
+    @FXML
+    public DatePicker birthDate;
 
     @FXML
     public Button addPatient;
@@ -58,7 +64,9 @@ public class AddPatientController {
     public void initialize() {
         addPatient.setTooltip(new Tooltip("Click to Add Patient"));
         initGenderChoiceBox(gender);
-        resetInputs(lastName, firstName, middleName, address, phoneNumber, gender, birthDate);
+        initSymptomsChoiceBox(symptoms);
+        initAssignedDoctorChoiceBox(doctor);
+        resetInputs(lastName, firstName, middleName, address, phoneNumber, gender, doctor, birthDate);
     }
 
     @FXML
@@ -69,10 +77,9 @@ public class AddPatientController {
                 firstName,
                 lastName,
                 address,
-                birthDate,
-                symptoms,
-                true
+                birthDate
         )) return;
+        AssignedDoctor doc = doctor.getValue();
 
         Patient patient = new Patient(
                 lastName.getText().trim(),
@@ -82,11 +89,12 @@ public class AddPatientController {
                 birthDate.getValue(),
                 address.getText().trim(),
                 phoneNumber.getText().trim(),
-                symptoms.getText().trim()
+                doctor.getSelectionModel().isEmpty() ? null : getDoctorService().getAssignedDoctorById().apply(doc.getId()).orElse(null),
+                symptoms.getSelectionModel().getSelectedItem()
         );
 
         if (getPatientService().doesPatientAlreadyExists(patient)) {
-            Alert alert = showAlert("Patient Already Exists", "Patient Already Exists", "Patient already exists in the database");
+            Alert alert = initAlert("Patient Already Exists", "Patient Already Exists", "Patient already exists in the database");
             ImageView graphic = new ImageView(new Image(requireNonNull(Launcher.class.getResourceAsStream("assets/error.png"), "Error graphic not found")));
             graphic.setFitWidth(50);
             graphic.setFitHeight(50);
@@ -96,7 +104,7 @@ public class AddPatientController {
         }
 
         getPatientService().addPatient().accept(patient);
-        Alert alert = showAlert("Patient Added", "Patient Added", "Patient has been added successfully");
+        Alert alert = initAlert("Patient Added", "Patient Added", "Patient has been added successfully");
         ImageView graphic = new ImageView(new Image(requireNonNull(Launcher.class.getResourceAsStream("assets/success.png"), "Success graphic not found")));
         graphic.setFitWidth(50);
         graphic.setFitHeight(50);
@@ -106,10 +114,11 @@ public class AddPatientController {
         setDashBoardData();
 
         loadPage("patients_panel", "dashboard");
-        resetInputs(lastName, firstName, middleName, address, phoneNumber, gender, birthDate);
+        resetInputs(lastName, firstName, middleName, address, phoneNumber, gender, doctor, birthDate);
         getPatientService().getPatients().put(patient.getPatientId(), patient);
-        symptoms.clear();
         initGenderChoiceBox(gender);
+        initSymptomsChoiceBox(symptoms);
+        initAssignedDoctorChoiceBox(doctor);
     }
 
 }

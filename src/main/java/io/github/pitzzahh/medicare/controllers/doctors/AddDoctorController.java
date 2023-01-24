@@ -30,10 +30,6 @@ import static io.github.pitzzahh.medicare.util.WindowUtil.loadPage;
 import io.github.pitzzahh.medicare.backend.doctors.model.Doctor;
 import static io.github.pitzzahh.medicare.util.ComponentUtil.*;
 import io.github.pitzzahh.medicare.backend.Gender;
-import static java.util.Objects.requireNonNull;
-import io.github.pitzzahh.medicare.Launcher;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.Image;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
@@ -59,7 +55,7 @@ public class AddDoctorController {
         addDoctor.setTooltip(new Tooltip("Click to Add Doctors Data"));
         initGenderChoiceBox(gender);
         initSpecializationChoiceBox(specialization);
-        resetInputs(lastName, firstName, middleName, address, phoneNumber, gender, birthDate);
+        resetInputs(lastName, firstName, middleName, address, phoneNumber, gender, null, birthDate);
     }
 
     @FXML
@@ -70,9 +66,7 @@ public class AddDoctorController {
                 firstName,
                 lastName,
                 address,
-                birthDate,
-                null,
-                false
+                birthDate
         )) return;
 
         // TODO: finish
@@ -89,19 +83,19 @@ public class AddDoctorController {
         );
 
         if (getDoctorService().doesDoctorAlreadyExists(doctor)) {
-            Alert alert = showAlert("Doctor Already Exists", "Doctor Already Exists", "Doctor already exists in the database");
+            Alert alert = initAlert("Doctor Already Exists", "Doctor Already Exists", "Doctor already exists in the database");
             showAlertInfo("assets/error.png", "Error graphic not found", alert);
             return;
         }
 
         getDoctorService().addDoctor().accept(doctor);
-        Alert alert = showAlert("Doctor Added", "Doctor Added", "Doctor has been added successfully");
+        Alert alert = initAlert("Doctor Added", "Doctor Added", "Doctor has been added successfully");
         showAlertInfo("assets/success.png", "Success graphic not found", alert);
 
         setDashBoardData();
 
         loadPage("patients_panel", "dashboard");
-        resetInputs(lastName, firstName, middleName, address, phoneNumber, gender, birthDate);
+        resetInputs(lastName, firstName, middleName, address, phoneNumber, gender, null, birthDate);
         getDoctorService().getDoctors().put(doctor.getId(), doctor);
         initGenderChoiceBox(gender);
         initSpecializationChoiceBox(specialization);

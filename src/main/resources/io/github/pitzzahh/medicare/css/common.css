@@ -1,19 +1,32 @@
 .card {
     -fx-background-color: #E0FBFC;
     -fx-background-radius: 5px;
+    -fx-padding: 10px;
 }
 
-.card-title, .card-count {
+.card-title, .card-count  {
     -fx-text-fill: #000;
+    -fx-font-weight: bold;
+    -fx-font-size: 24px;
+}
+
+.doctor-card, .patient-card {
+    -fx-background-color: #3D5A80;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px;
+}
+
+.patient-card-title, .patient-card-count, .doctor-card-title, .doctor-card-count {
+    -fx-text-fill: #fff;
     -fx-font-weight: bold;
 }
 
-.card-title {
-    -fx-font-size: 18px;
+.patient-card-title, .doctor-card-title {
+    -fx-font-size: 22px;
 }
 
-.card-count {
-    -fx-font-size: 16px;
+.patient-card-count, .doctor-card-count {
+    -fx-font-size: 18px;
 }
 
 .brand-name {

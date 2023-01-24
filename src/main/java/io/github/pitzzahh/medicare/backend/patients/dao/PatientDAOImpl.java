@@ -24,16 +24,15 @@
 
 package io.github.pitzzahh.medicare.backend.patients.dao;
 
+import static io.github.pitzzahh.medicare.backend.db.DatabaseConnection.getJDBC;
 import io.github.pitzzahh.medicare.backend.patients.mapper.PatientMapper;
+import static io.github.pitzzahh.util.utilities.SecurityUtil.encrypt;
 import io.github.pitzzahh.medicare.backend.patients.model.Patient;
-
-import java.util.Map;
+import static java.lang.String.valueOf;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import static io.github.pitzzahh.medicare.backend.db.DatabaseConnection.getJDBC;
-import static io.github.pitzzahh.util.utilities.SecurityUtil.encrypt;
+import java.util.Map;
 
 public class PatientDAOImpl implements PatientDAO {
     @Override
@@ -45,7 +44,21 @@ public class PatientDAOImpl implements PatientDAO {
 
     @Override
     public Consumer<Patient> addPatient() {
-        final String QUERY = "INSERT INTO p4t13nt$(last_name, first_name, middle_name, gender, birthdate, address, phone_number, symptoms) VALUES (?,?,?,?,?,?,?,?)";
+        final String QUERY = "INSERT INTO p4t13nt$" +
+                "(" +
+                "last_name, " +
+                "first_name, " +
+                "middle_name, " +
+                "gender, " +
+                "birthdate, " +
+                "address, " +
+                "phone_number, " +
+                "doctor_id, " +
+                "doctor_name, " +
+                "doctor_specialization, " +
+                "symptoms" +
+                ") " +
+                "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
         return patient -> getJDBC().update(
                 QUERY,
                 encrypt(patient.getLastName()),
@@ -55,7 +68,10 @@ public class PatientDAOImpl implements PatientDAO {
                 encrypt(patient.getBirthDate().toString()),
                 encrypt(patient.getAddress()),
                 patient.getPhoneNumber().trim().isEmpty() ? null : encrypt(patient.getPhoneNumber()),
-                encrypt(patient.getSymptoms())
+                patient.getAssignDoctor() == null ? "" : encrypt(valueOf(patient.getAssignDoctor().getId())),
+                patient.getAssignDoctor() == null ? "" : encrypt(patient.getAssignDoctor().getName()),
+                patient.getAssignDoctor() == null ? "" : encrypt(patient.getAssignDoctor().getSpecialization().name()),
+                encrypt(patient.getSymptoms().name())
         );
     }
 

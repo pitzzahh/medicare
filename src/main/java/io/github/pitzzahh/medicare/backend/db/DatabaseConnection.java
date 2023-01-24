@@ -125,6 +125,9 @@ public class DatabaseConnection {
                 "    birthdate TEXT NOT NULL,\n" +
                 "    address TEXT NOT NULL,\n" +
                 "    phone_number TEXT,\n" +
+                "    doctor_id TEXT,\n" +
+                "    doctor_name TEXT,\n" +
+                "    doctor_specialization TEXT,\n" +
                 "    symptoms TEXT NOT NULL\n" +
                 ");");
         getJDBC().execute("CREATE TABLE IF NOT EXISTS d0ct0r$ (\n" +
