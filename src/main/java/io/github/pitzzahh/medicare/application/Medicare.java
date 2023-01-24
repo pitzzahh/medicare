@@ -25,16 +25,15 @@
 package io.github.pitzzahh.medicare.application;
 
 import static io.github.pitzzahh.medicare.util.ComponentUtil.getMainProgressBar;
-
-import io.github.pitzzahh.medicare.backend.doctors.dao.DoctorDAO;
-import io.github.pitzzahh.medicare.backend.doctors.dao.DoctorDAOImpl;
-import io.github.pitzzahh.medicare.backend.doctors.service.DoctorService;
 import io.github.pitzzahh.medicare.backend.patients.service.PatientService;
 import static io.github.pitzzahh.medicare.backend.db.DatabaseConnection.*;
+import io.github.pitzzahh.medicare.backend.doctors.service.DoctorService;
 import io.github.pitzzahh.medicare.backend.login.service.AccountService;
 import io.github.pitzzahh.medicare.backend.patients.dao.PatientDAOImpl;
+import io.github.pitzzahh.medicare.backend.doctors.dao.DoctorDAOImpl;
 import io.github.pitzzahh.medicare.backend.login.dao.AccountDAOImp;
 import io.github.pitzzahh.medicare.backend.patients.dao.PatientDAO;
+import io.github.pitzzahh.medicare.backend.doctors.dao.DoctorDAO;
 import io.github.pitzzahh.medicare.backend.db.DatabaseConnection;
 import io.github.pitzzahh.medicare.backend.login.dao.AccountDAO;
 import static io.github.pitzzahh.medicare.util.WindowUtil.*;
@@ -47,7 +46,7 @@ import javafx.stage.StageStyle;
 import javafx.scene.Parent;
 import java.io.IOException;
 import javafx.stage.Stage;
-import java.util.Map;
+import java.util.Hashtable;
 
 public class Medicare extends Application {
 
@@ -94,6 +93,9 @@ public class Medicare extends Application {
         Parent addDoctor = load(requireNonNull(aClass.getResource("fxml/doctors/addDoctor.fxml"), "Cannot find addDoctor.fxml"));
         Parent aboutPanel = load(requireNonNull(aClass.getResource("fxml/about/about.fxml"), "Cannot find about.fxml"));
 
+        Parent patientsDashboard = load(requireNonNull(aClass.getResource("fxml/patientDashboard.fxml"), "Cannot find patientDashboard.fxml"));
+        Parent doctorDashboard = load(requireNonNull(aClass.getResource("fxml/doctorDashboard.fxml"), "Cannot find doctorDashboard.fxml"));
+
         loginPage.setId("auth_window");
         mainPanel.setId("main_panel");
         dashboard.setId("dashboard");
@@ -104,17 +106,23 @@ public class Medicare extends Application {
         addDoctor.setId("add_doctor");
         aboutPanel.setId("about");
 
-        addParents.accept(Map.of(
-                loginPage.getId(), loginPage,
-                mainPanel.getId(), mainPanel,
-                dashboard.getId(), dashboard,
-                patientsPanel.getId(), patientsPanel,
-                addPatient.getId(), addPatient,
-                cardHolder.getId(), cardHolder,
-                doctorsPanel.getId(), doctorsPanel,
-                addDoctor.getId(), addDoctor,
-                aboutPanel.getId(), aboutPanel
-        ));
+        patientsDashboard.setId("patient_dashboard");
+        doctorDashboard.setId("doctor_dashboard");
+
+        Hashtable<String, Parent> parents = new Hashtable<>();
+        parents.put( loginPage.getId(), loginPage);
+        parents.put( mainPanel.getId(), mainPanel);
+        parents.put( dashboard.getId(), dashboard);
+        parents.put( patientsPanel.getId(), patientsPanel);
+        parents.put( addPatient.getId(), addPatient);
+        parents.put( cardHolder.getId(), cardHolder);
+        parents.put( doctorsPanel.getId(), doctorsPanel);
+        parents.put( addDoctor.getId(), addDoctor);
+        parents.put( aboutPanel.getId(), aboutPanel);
+        parents.put( patientsDashboard.getId(), patientsDashboard);
+        parents.put( doctorDashboard.getId(), doctorDashboard);
+
+        addParents.accept(parents);
     }
 
     public static AccountService getAccountService() {
