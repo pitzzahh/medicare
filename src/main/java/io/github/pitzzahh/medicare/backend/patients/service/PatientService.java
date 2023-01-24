@@ -24,6 +24,7 @@
 
 package io.github.pitzzahh.medicare.backend.patients.service;
 
+import io.github.pitzzahh.medicare.backend.patients.model.DischargedPatient;
 import io.github.pitzzahh.medicare.backend.patients.dao.PatientDAO;
 import io.github.pitzzahh.medicare.backend.patients.model.Patient;
 import java.util.function.BiConsumer;
@@ -44,8 +45,16 @@ public class PatientService {
         return DAO.addPatient();
     }
 
-    public Consumer<Integer> removePatientById() {
-        return DAO.removePatientById();
+    public Consumer<DischargedPatient> addDischargedPatient() {
+        return patient -> DAO.addDischargedPatient().accept(patient);
+    }
+
+    public Map<Integer, DischargedPatient> getDischargedPatients() {
+        return DAO.getDischargedPatients();
+    }
+
+    public Consumer<Integer> dischargePatientById() {
+        return DAO.dischargePatientById();
     }
 
     public boolean doesPatientAlreadyExists(Patient patient) {
