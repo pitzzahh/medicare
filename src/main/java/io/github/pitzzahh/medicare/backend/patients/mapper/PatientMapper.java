@@ -40,14 +40,15 @@ public class PatientMapper implements RowMapper<Patient> {
 
     @Override
     public Patient mapRow(ResultSet rs, int rowNum) throws SQLException {
-        String[] date = decrypt(rs.getString("birthdate")).split("-");
+        final String[] BIRTHDATE = decrypt(rs.getString("birthdate")).split("-");
+        final String[] DATE_CONFINED = decrypt(rs.getString("dateConfined")).split("-");
         return new Patient(
                 rs.getInt("id"),
                 decrypt(rs.getString("last_name")),
                 decrypt(rs.getString("first_name")),
                 rs.getString("middle_name") != null ? decrypt(rs.getString("middle_name")) : "",
                 Gender.valueOf(decrypt(rs.getString("gender"))),
-                LocalDate.of(parseInt(date[0]), parseInt(date[1]), parseInt(date[2])),
+                LocalDate.of(parseInt(BIRTHDATE[0]), parseInt(BIRTHDATE[1]), parseInt(BIRTHDATE[2])),
                 decrypt(rs.getString("address")),
                 rs.getString("phone_number") != null ? decrypt(rs.getString("phone_number")) : "",
                 new AssignedDoctor(
@@ -56,6 +57,7 @@ public class PatientMapper implements RowMapper<Patient> {
                         rs.getString("doctor_specialization").isEmpty() ? null :
                                 Specialization.valueOf(decrypt(rs.getString("doctor_specialization")))
                 ),
+                LocalDate.of(parseInt(DATE_CONFINED[0]), parseInt(DATE_CONFINED[1]), parseInt(DATE_CONFINED[2])),
                 Symptoms.valueOf(decrypt(rs.getString("symptoms")))
         );
     }
