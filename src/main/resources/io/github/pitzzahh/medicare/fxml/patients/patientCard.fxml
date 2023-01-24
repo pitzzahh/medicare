@@ -10,14 +10,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER" styleClass="box" stylesheets="@../../css/card.css" xmlns="http://javafx.com/javafx/19"
-      xmlns:fx="http://javafx.com/fxml/1"
+<HBox alignment="CENTER" minWidth="-Infinity" styleClass="box" stylesheets="@../../css/card.css"
+      xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="io.github.pitzzahh.medicare.controllers.patients.PatientCardController">
     <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
         <padding>
             <Insets bottom="40.0" left="40.0" top="40.0"/>
         </padding>
-        <HBox alignment="CENTER_LEFT">
+        <HBox alignment="CENTER_LEFT" minWidth="-Infinity">
             <VBox.margin>
                 <Insets bottom="5.0"/>
             </VBox.margin>
@@ -33,7 +33,7 @@
             <TextField fx:id="id" editable="false" prefWidth="250.0" styleClass="id" stylesheets="@../../css/card.css"
                        HBox.hgrow="ALWAYS"/>
         </HBox>
-        <HBox alignment="CENTER_LEFT">
+        <HBox alignment="CENTER_LEFT" minWidth="-Infinity">
             <VBox.margin>
                 <Insets bottom="5.0"/>
             </VBox.margin>
@@ -46,10 +46,10 @@
                     <Insets right="58.0"/>
                 </HBox.margin>
             </Label>
-            <TextField fx:id="firstName" prefWidth="300.0" styleClass="inputs" stylesheets="@../../css/card.css"
-                       HBox.hgrow="ALWAYS"/>
+            <TextField fx:id="firstName" minWidth="300.0" prefWidth="300.0" styleClass="inputs"
+                       stylesheets="@../../css/card.css" HBox.hgrow="ALWAYS"/>
         </HBox>
-        <HBox alignment="CENTER_LEFT">
+        <HBox alignment="CENTER_LEFT" minWidth="-Infinity">
             <Label alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="0.0" styleClass="card-label"
                    stylesheets="@../../css/card.css" text="MIDDLE NAME:" HBox.hgrow="ALWAYS">
                 <font>
@@ -59,14 +59,14 @@
                     <Insets right="40.0"/>
                 </HBox.margin>
             </Label>
-            <TextField fx:id="middleName" prefWidth="200.0" styleClass="inputs" stylesheets="@../../css/card.css"
-                       HBox.hgrow="ALWAYS">
+            <TextField fx:id="middleName" minWidth="300.0" prefWidth="300.0" styleClass="inputs"
+                       stylesheets="@../../css/card.css" HBox.hgrow="ALWAYS">
                 <HBox.margin>
                     <Insets bottom="5.0"/>
                 </HBox.margin>
             </TextField>
         </HBox>
-        <HBox alignment="CENTER_LEFT">
+        <HBox alignment="CENTER_LEFT" minWidth="-Infinity">
             <VBox.margin>
                 <Insets bottom="5.0"/>
             </VBox.margin>
@@ -79,10 +79,10 @@
                     <Insets right="63.0"/>
                 </HBox.margin>
             </Label>
-            <TextField fx:id="lastName" prefWidth="200.0" styleClass="inputs" stylesheets="@../../css/card.css"
-                       HBox.hgrow="ALWAYS"/>
+            <TextField fx:id="lastName" minWidth="300.0" prefWidth="300.0" styleClass="inputs"
+                       stylesheets="@../../css/card.css" HBox.hgrow="ALWAYS"/>
         </HBox>
-        <HBox alignment="CENTER_LEFT">
+        <HBox alignment="CENTER_LEFT" minWidth="-Infinity">
             <VBox.margin>
                 <Insets bottom="5.0"/>
             </VBox.margin>
@@ -92,10 +92,10 @@
                     <Insets right="122.0"/>
                 </HBox.margin>
             </Label>
-            <TextField fx:id="age" prefWidth="200.0" styleClass="inputs" stylesheets="@../../css/card.css"
-                       HBox.hgrow="ALWAYS"/>
+            <TextField fx:id="age" minWidth="300.0" prefWidth="300.0" styleClass="inputs"
+                       stylesheets="@../../css/card.css" HBox.hgrow="ALWAYS"/>
         </HBox>
-        <HBox alignment="CENTER_LEFT">
+        <HBox alignment="CENTER_LEFT" minWidth="-Infinity">
             <VBox.margin>
                 <Insets bottom="5.0"/>
             </VBox.margin>
@@ -105,10 +105,10 @@
                     <Insets right="90.0"/>
                 </HBox.margin>
             </Label>
-            <ChoiceBox fx:id="gender" maxWidth="1200.0" prefWidth="200.0" styleClass="inputs"
+            <ChoiceBox fx:id="gender" maxWidth="1200.0" minWidth="300.0" prefWidth="300.0" styleClass="inputs"
                        stylesheets="@../../css/card.css" HBox.hgrow="ALWAYS"/>
         </HBox>
-        <HBox alignment="CENTER_LEFT">
+        <HBox alignment="CENTER_LEFT" minWidth="-Infinity">
             <VBox.margin>
                 <Insets bottom="5.0"/>
             </VBox.margin>
@@ -118,10 +118,10 @@
                     <Insets right="36.0"/>
                 </HBox.margin>
             </Label>
-            <DatePicker fx:id="dateOfBirth" maxWidth="1200.0" prefWidth="200.0" styleClass="inputs"
+            <DatePicker fx:id="dateOfBirth" maxWidth="1200.0" minWidth="300.0" prefWidth="300.0" styleClass="inputs"
                         stylesheets="@../../css/card.css" HBox.hgrow="ALWAYS"/>
         </HBox>
-        <HBox alignment="CENTER_LEFT">
+        <HBox alignment="CENTER_LEFT" minWidth="-Infinity">
             <VBox.margin>
                 <Insets bottom="5.0"/>
             </VBox.margin>
@@ -131,10 +131,10 @@
                     <Insets right="81.0"/>
                 </HBox.margin>
             </Label>
-            <TextField fx:id="address" prefWidth="200.0" styleClass="inputs" stylesheets="@../../css/card.css"
-                       HBox.hgrow="ALWAYS"/>
+            <TextField fx:id="address" minWidth="300.0" prefWidth="300.0" styleClass="inputs"
+                       stylesheets="@../../css/card.css" HBox.hgrow="ALWAYS"/>
         </HBox>
-        <HBox alignment="CENTER_LEFT">
+        <HBox alignment="CENTER_LEFT" minWidth="-Infinity">
             <VBox.margin>
                 <Insets bottom="5.0"/>
             </VBox.margin>
@@ -144,10 +144,10 @@
                     <Insets right="25.0"/>
                 </HBox.margin>
             </Label>
-            <TextField fx:id="phoneNumber" prefWidth="200.0" styleClass="inputs" stylesheets="@../../css/card.css"
-                       HBox.hgrow="ALWAYS"/>
+            <TextField fx:id="phoneNumber" minWidth="300.0" prefWidth="300.0" styleClass="inputs"
+                       stylesheets="@../../css/card.css" HBox.hgrow="ALWAYS"/>
         </HBox>
-        <HBox alignment="CENTER_LEFT">
+        <HBox alignment="CENTER_LEFT" minWidth="-Infinity">
             <VBox.margin>
                 <Insets bottom="5.0"/>
             </VBox.margin>
@@ -157,31 +157,34 @@
                     <Insets right="5.0"/>
                 </HBox.margin>
             </Label>
-            <ChoiceBox fx:id="doctor" maxWidth="1200.0" prefWidth="200.0" styleClass="inputs"
+            <ChoiceBox fx:id="doctor" maxWidth="1200.0" minWidth="300.0" prefWidth="300.0" styleClass="inputs"
                        stylesheets="@../../css/card.css" HBox.hgrow="ALWAYS"/>
         </HBox>
-        <HBox alignment="CENTER_LEFT">
+        <HBox alignment="CENTER_LEFT" minWidth="-Infinity">
             <Label contentDisplay="RIGHT" graphicTextGap="0.0" styleClass="card-label" stylesheets="@../../css/card.css"
                    text="SYMPTOMS:">
                 <HBox.margin>
                     <Insets right="65.0"/>
                 </HBox.margin>
             </Label>
-            <ChoiceBox fx:id="symptoms" maxWidth="1200.0" prefWidth="300.0" styleClass="inputs"
+            <ChoiceBox fx:id="symptoms" maxWidth="1200.0" minWidth="300.0" prefWidth="300.0" styleClass="inputs"
                        stylesheets="@../../css/card.css" HBox.hgrow="ALWAYS"/>
         </HBox>
     </VBox>
-    <VBox alignment="BOTTOM_CENTER" prefHeight="513.0" prefWidth="178.0" HBox.hgrow="ALWAYS">
-        <HBox alignment="CENTER" layoutX="10.0" layoutY="193.0" prefHeight="61.0" prefWidth="177.0">
+    <VBox alignment="BOTTOM_CENTER" minWidth="-Infinity" HBox.hgrow="ALWAYS">
+        <HBox alignment="CENTER" layoutX="10.0" layoutY="193.0">
             <Button fx:id="updateOrSaveButton" mnemonicParsing="false" prefWidth="150.0" styleClass="update-button"
                     stylesheets="@../../css/card.css" text="UPDATE"/>
+            <VBox.margin>
+                <Insets bottom="5.0"/>
+            </VBox.margin>
         </HBox>
-        <HBox alignment="CENTER" layoutX="10.0" layoutY="384.0" prefHeight="61.0" prefWidth="177.0">
+        <HBox alignment="CENTER" layoutX="10.0" layoutY="384.0">
             <Button fx:id="removeButton" mnemonicParsing="false" prefWidth="150.0" styleClass="remove-button"
                     stylesheets="@../../css/card.css" text="REMOVE"/>
         </HBox>
         <padding>
-            <Insets bottom="30.0" top="30.0"/>
+            <Insets bottom="39.0" left="15.0" right="15.0" top="15.0"/>
         </padding>
     </VBox>
 </HBox>
