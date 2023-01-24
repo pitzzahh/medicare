@@ -24,6 +24,7 @@
 
 package io.github.pitzzahh.medicare.controllers;
 
+import static io.github.pitzzahh.medicare.util.ComponentUtil.setCommonDashboardData;
 import static io.github.pitzzahh.medicare.util.ToolTipUtil.initToolTip;
 import static io.github.pitzzahh.medicare.util.Style.normalStyle;
 import static io.github.pitzzahh.medicare.util.WindowUtil.*;
@@ -46,6 +47,7 @@ public class MainPanelController {
         actionEvent.consume();
         loadPage("main_panel", "patients_panel");
         loadPage("patients_panel", "patient_dashboard");
+        setCommonDashboardData("patient_dashboard", "patientsCount", true);
     }
 
     @FXML
@@ -53,6 +55,7 @@ public class MainPanelController {
         actionEvent.consume();
         loadPage("main_panel", "doctors_panel");
         loadPage("doctors_panel", "doctor_dashboard");
+        setCommonDashboardData("doctor_dashboard", "doctorsCount", false);
     }
 
     @FXML
