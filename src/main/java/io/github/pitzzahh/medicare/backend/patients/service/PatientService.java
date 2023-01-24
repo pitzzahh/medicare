@@ -26,6 +26,7 @@ package io.github.pitzzahh.medicare.backend.patients.service;
 
 import io.github.pitzzahh.medicare.backend.patients.dao.PatientDAO;
 import io.github.pitzzahh.medicare.backend.patients.model.Patient;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import lombok.AllArgsConstructor;
 import java.util.Map;
@@ -54,4 +55,7 @@ public class PatientService {
                 .anyMatch(p -> p.getFirstName().equals(patient.getFirstName()) || p.getLastName().equals(patient.getLastName()));
     }
 
+    public BiConsumer<Integer, Patient> updatePatientById() {
+        return DAO.updatePatientById();
+    }
 }
