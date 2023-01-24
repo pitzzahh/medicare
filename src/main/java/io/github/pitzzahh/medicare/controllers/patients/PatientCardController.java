@@ -24,23 +24,20 @@
 
 package io.github.pitzzahh.medicare.controllers.patients;
 
-import io.github.pitzzahh.medicare.backend.Gender;
-import io.github.pitzzahh.medicare.backend.patients.model.Patient;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
-
-import static io.github.pitzzahh.medicare.util.ComponentUtil.setCommonData;
-import static io.github.pitzzahh.medicare.util.Style.normalStyle;
 import static io.github.pitzzahh.medicare.util.ToolTipUtil.initToolTip;
+import io.github.pitzzahh.medicare.backend.patients.model.Symptoms;
+import io.github.pitzzahh.medicare.backend.patients.model.Patient;
+import static io.github.pitzzahh.medicare.util.Style.normalStyle;
+import static io.github.pitzzahh.medicare.util.ComponentUtil.*;
+import io.github.pitzzahh.medicare.backend.AssignedDoctor;
+import io.github.pitzzahh.medicare.backend.Gender;
+import javafx.scene.control.*;
+import javafx.fxml.FXML;
 
 public class PatientCardController {
 
-
     @FXML
-    private TextField id, name, age, address, phoneNumber, symptoms;
+    private TextField id, name, age, address, phoneNumber;
 
     @FXML
     private ChoiceBox<Gender> gender;
@@ -49,7 +46,13 @@ public class PatientCardController {
     private DatePicker dateOfBirth;
 
     @FXML
-    public Button removeButton;
+    private ChoiceBox<AssignedDoctor> doctor;
+
+    @FXML
+    public ChoiceBox<Symptoms> symptoms;
+
+    @FXML
+    public Button updateOrSaveButton, removeButton;
 
     @FXML
     public void initialize() {
@@ -60,15 +63,18 @@ public class PatientCardController {
         gender.setMouseTransparent(true);
         address.setEditable(false);
         phoneNumber.setEditable(false);
-        symptoms.setEditable(false);
         dateOfBirth.setEditable(false);
         dateOfBirth.setMouseTransparent(true);
+        doctor.setMouseTransparent(true);
+        symptoms.setMouseTransparent(true);
     }
 
     public void setData(Patient patient) {
         id.setText(String.valueOf(patient.getPatientId()));
         setCommonData(patient, name, age, gender, dateOfBirth, address, phoneNumber);
-        symptoms.setText(patient.getSymptoms());
+        doctor.getItems().clear();
+        doctor.setValue(patient.getAssignDoctor());
+        symptoms.setValue(patient.getSymptoms());
     }
 
 }
