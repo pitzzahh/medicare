@@ -112,6 +112,7 @@ public class AddPatientController {
         alert.showAndWait();
 
         setDashBoardData();
+        setCommonDashboardData("patient_dashboard", "patientsCount", true);
 
         loadPage("patients_panel", "patient_dashboard");
         resetInputs(lastName, firstName, middleName, address, phoneNumber, gender, doctor, birthDate);
