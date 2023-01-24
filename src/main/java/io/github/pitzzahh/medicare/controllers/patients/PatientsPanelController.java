@@ -26,16 +26,24 @@ package io.github.pitzzahh.medicare.controllers.patients;
 
 import static io.github.pitzzahh.medicare.controllers.CardHolderController.getCardStorage;
 import static io.github.pitzzahh.medicare.util.ComponentUtil.initPatientCards;
+import static io.github.pitzzahh.medicare.util.WindowUtil.getParent;
 import static io.github.pitzzahh.medicare.util.WindowUtil.loadPage;
+import io.github.pitzzahh.medicare.backend.AssignedDoctor;
+import io.github.pitzzahh.medicare.util.ComponentUtil;
+import javafx.scene.control.ChoiceBox;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 public class PatientsPanelController {
 
     @FXML
+    @SuppressWarnings("unchecked")
     public void onAddPatient(ActionEvent actionEvent) {
         actionEvent.consume();
         loadPage("patients_panel", "add_patient");
+        ComponentUtil.getChoiceBox(getParent("add_patient"), "doctor")
+                .map(n -> (ChoiceBox<AssignedDoctor>) n)
+                .ifPresent(ComponentUtil::initAssignedDoctorChoiceBox);
     }
 
     @FXML
