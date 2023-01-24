@@ -93,6 +93,7 @@ public class AddDoctorController {
         showAlertInfo("assets/success.png", "Success graphic not found", alert);
 
         setDashBoardData();
+        setCommonDashboardData("doctor_dashboard", "doctorsCount", false);
 
         loadPage("patients_panel", "doctor_dashboard");
         resetInputs(lastName, firstName, middleName, address, phoneNumber, gender, null, birthDate);
