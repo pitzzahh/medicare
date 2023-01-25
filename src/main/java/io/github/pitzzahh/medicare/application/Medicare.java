@@ -97,6 +97,7 @@ public class Medicare extends Application {
         Parent doctorDashboard = load(requireNonNull(aClass.getResource("fxml/doctorDashboard.fxml"), "Cannot find doctorDashboard.fxml"));
 
         Parent dischargedPatientPanel = load(requireNonNull(aClass.getResource("fxml/discharge/discharge.fxml"), "Cannot find discharge.fxml"));
+        Parent statistics = load(requireNonNull(aClass.getResource("fxml/statistics/statistics.fxml"), "Cannot find statistics.fxml"));
 
         loginPage.setId("auth_window");
         mainPanel.setId("main_panel");
@@ -111,6 +112,7 @@ public class Medicare extends Application {
         patientsDashboard.setId("patient_dashboard");
         doctorDashboard.setId("doctor_dashboard");
         dischargedPatientPanel.setId("discharge_panel");
+        statistics.setId("statistics");
 
         HashMap<String, Parent> parents = new HashMap<>();
         //noinspection DuplicatedCode
@@ -127,6 +129,7 @@ public class Medicare extends Application {
         parents.put(patientsDashboard.getId(), patientsDashboard);
         parents.put(doctorDashboard.getId(), doctorDashboard);
         parents.put(dischargedPatientPanel.getId(), dischargedPatientPanel);
+        parents.put(statistics.getId(), statistics);
 
         addParents.accept(parents);
     }
