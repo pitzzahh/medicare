@@ -13,9 +13,9 @@ import java.net.URL;
 public class DischargeController implements Initializable {
 
     @FXML
-    public TableView<DischargedPatient> table;
+    private TableView<DischargedPatient> table;
 
-    public static TableView<DischargedPatient> copy;
+    private static TableView<DischargedPatient> copy;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
