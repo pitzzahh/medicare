@@ -12,6 +12,7 @@ module medicare {
     opens io.github.pitzzahh.medicare.application to javafx.graphics;
     opens io.github.pitzzahh.medicare.controllers.patients to javafx.fxml;
     opens io.github.pitzzahh.medicare.controllers.doctors to javafx.fxml;
+    opens io.github.pitzzahh.medicare.backend.patients.model to javafx.base;
     exports io.github.pitzzahh.medicare;
     exports io.github.pitzzahh.medicare.backend.login.dao;
     exports io.github.pitzzahh.medicare.backend.login.model;
