@@ -69,7 +69,7 @@ public class Medicare extends Application {
         getStage().getIcons().add(new Image(requireNonNull(aClass.getResourceAsStream("assets/logo.png"), "Icon not found")));
         loadParent(parent, "Authentication");
         getMainProgressBar(parent).ifPresent(p -> p.setVisible(false));
-        getStage().setWidth(1000);
+        getStage().setWidth(1200);
         getStage().setHeight(700);
         getStage().centerOnScreen();
         getStage().show();
