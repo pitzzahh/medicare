@@ -27,12 +27,15 @@ package io.github.pitzzahh.medicare.controllers;
 import static io.github.pitzzahh.medicare.util.ComponentUtil.setCommonDashboardData;
 import static io.github.pitzzahh.medicare.application.Medicare.getPatientService;
 import static io.github.pitzzahh.medicare.util.ToolTipUtil.initToolTip;
+import io.github.pitzzahh.medicare.backend.patients.model.Patient;
 import static io.github.pitzzahh.medicare.util.Style.normalStyle;
 import static io.github.pitzzahh.medicare.util.WindowUtil.*;
 import javafx.collections.FXCollections;
 import java.util.stream.Collectors;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
+import java.util.ArrayList;
+import java.time.Month;
 import javafx.fxml.FXML;
 
 public class MainPanelController {
@@ -78,6 +81,23 @@ public class MainPanelController {
     public void onClickStatistics(ActionEvent actionEvent) {
         actionEvent.consume();
         loadPage("main_panel", "statistics");
+
+        ArrayList<Patient> patients = new ArrayList<>(getPatientService()
+                .getPatients()
+                .values());
+
+        StatisticsController.setMonthData(patients, Month.JANUARY);
+        StatisticsController.setMonthData(patients, Month.FEBRUARY);
+        StatisticsController.setMonthData(patients, Month.MARCH);
+        StatisticsController.setMonthData(patients, Month.APRIL);
+        StatisticsController.setMonthData(patients, Month.MAY);
+        StatisticsController.setMonthData(patients, Month.JUNE);
+        StatisticsController.setMonthData(patients, Month.JULY);
+        StatisticsController.setMonthData(patients, Month.AUGUST);
+        StatisticsController.setMonthData(patients, Month.SEPTEMBER);
+        StatisticsController.setMonthData(patients, Month.OCTOBER);
+        StatisticsController.setMonthData(patients, Month.NOVEMBER);
+        StatisticsController.setMonthData(patients, Month.DECEMBER);
     }
 
     @FXML
