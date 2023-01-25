@@ -46,7 +46,7 @@ import javafx.stage.StageStyle;
 import javafx.scene.Parent;
 import java.io.IOException;
 import javafx.stage.Stage;
-import java.util.Hashtable;
+import java.util.HashMap;
 
 public class Medicare extends Application {
 
@@ -96,6 +96,8 @@ public class Medicare extends Application {
         Parent patientsDashboard = load(requireNonNull(aClass.getResource("fxml/patientDashboard.fxml"), "Cannot find patientDashboard.fxml"));
         Parent doctorDashboard = load(requireNonNull(aClass.getResource("fxml/doctorDashboard.fxml"), "Cannot find doctorDashboard.fxml"));
 
+        Parent dischargedPatientPanel = load(requireNonNull(aClass.getResource("fxml/discharge/discharge.fxml"), "Cannot find discharge.fxml"));
+
         loginPage.setId("auth_window");
         mainPanel.setId("main_panel");
         dashboard.setId("dashboard");
@@ -108,19 +110,23 @@ public class Medicare extends Application {
 
         patientsDashboard.setId("patient_dashboard");
         doctorDashboard.setId("doctor_dashboard");
+        dischargedPatientPanel.setId("discharge_panel");
 
-        Hashtable<String, Parent> parents = new Hashtable<>();
-        parents.put( loginPage.getId(), loginPage);
-        parents.put( mainPanel.getId(), mainPanel);
-        parents.put( dashboard.getId(), dashboard);
-        parents.put( patientsPanel.getId(), patientsPanel);
-        parents.put( addPatient.getId(), addPatient);
-        parents.put( cardHolder.getId(), cardHolder);
-        parents.put( doctorsPanel.getId(), doctorsPanel);
-        parents.put( addDoctor.getId(), addDoctor);
-        parents.put( aboutPanel.getId(), aboutPanel);
-        parents.put( patientsDashboard.getId(), patientsDashboard);
-        parents.put( doctorDashboard.getId(), doctorDashboard);
+        HashMap<String, Parent> parents = new HashMap<>();
+        //noinspection DuplicatedCode
+        parents.put(loginPage.getId(), loginPage);
+        parents.put(mainPanel.getId(), mainPanel);
+        parents.put(dashboard.getId(), dashboard);
+        parents.put(patientsPanel.getId(), patientsPanel);
+        parents.put(addPatient.getId(), addPatient);
+        parents.put(cardHolder.getId(), cardHolder);
+        //noinspection DuplicatedCode
+        parents.put(addDoctor.getId(), addDoctor);
+        parents.put(doctorsPanel.getId(), doctorsPanel);
+        parents.put(aboutPanel.getId(), aboutPanel);
+        parents.put(patientsDashboard.getId(), patientsDashboard);
+        parents.put(doctorDashboard.getId(), doctorDashboard);
+        parents.put(dischargedPatientPanel.getId(), dischargedPatientPanel);
 
         addParents.accept(parents);
     }
