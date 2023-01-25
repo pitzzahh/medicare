@@ -11,9 +11,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: #3D5A80; -fx-border-color: none;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: #3D5A80; -fx-border-color: none;" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <VBox alignment="TOP_CENTER" style="-fx-background-color: #3D5A80; -fx-border-color: none;">
-        <HBox alignment="CENTER">
+        <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
             <VBox.margin>
                 <Insets left="50.0" right="50.0" top="50.0" />
             </VBox.margin>
@@ -21,7 +21,7 @@
                 <Image url="@../../assets/logo.png" />
             </ImageView>
         </HBox>
-        <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0">
+        <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" VBox.vgrow="ALWAYS">
          <Label styleClass="brand-name" stylesheets="@../../css/about.css" text="MED" textFill="WHITE" />
          <Label stylesheets="@../../css/about.css" text="i">
             <styleClass>
@@ -39,7 +39,7 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </VBox.margin>
       </HBox>
-        <HBox alignment="CENTER" layoutX="10.0" layoutY="211.0" styleClass="shadow" stylesheets="@../../css/common.css">
+        <HBox alignment="CENTER" layoutX="10.0" layoutY="211.0" styleClass="shadow" stylesheets="@../../css/common.css" VBox.vgrow="ALWAYS">
             <VBox alignment="CENTER" prefHeight="500.0" styleClass="about-box" stylesheets="@../../css/about.css" HBox.hgrow="ALWAYS">
                 <HBox alignment="CENTER">
                     <VBox.margin>
@@ -73,7 +73,6 @@
                             <Image url="@../../assets/about/peter.jpg" />
                         <styleClass>
                            <String fx:value="shadow" />
-                           <String fx:value="members-image" />
                         </styleClass>
                         </ImageView>
                      <VBox.margin>
@@ -81,7 +80,7 @@
                      </VBox.margin>
                     </HBox>
                     <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
-                        <Label alignment="CENTER" styleClass="names" stylesheets="@../../css/about.css" text="ARAO, PETER JOHN" textAlignment="CENTER" />
+                        <Label alignment="CENTER" styleClass="names" stylesheets="@../../css/about.css" text="ARAO, PETER JOHN" textAlignment="CENTER" wrapText="true" />
                   </HBox>
                </VBox>
                 <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
@@ -93,7 +92,6 @@
                             <Image url="@../../assets/about/kenth.jpg" />
                         <styleClass>
                            <String fx:value="shadow" />
-                           <String fx:value="members-image" />
                         </styleClass>
                         </ImageView>
                      <VBox.margin>
@@ -101,7 +99,7 @@
                      </VBox.margin>
                     </HBox>
                     <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
-                        <Label alignment="CENTER" styleClass="names" stylesheets="@../../css/about.css" text="SIBAY, KENTH ALFIE" textAlignment="CENTER" />
+                        <Label alignment="CENTER" styleClass="names" stylesheets="@../../css/about.css" text="SIBAY, KENTH ALFIE" textAlignment="CENTER" wrapText="true" />
                     </HBox>
                 </VBox>
                 <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
@@ -113,7 +111,6 @@
                             <Image url="@../../assets/about/pholy.jpg" />
                         <styleClass>
                            <String fx:value="shadow" />
-                           <String fx:value="members-image" />
                         </styleClass>
                         </ImageView>
                      <VBox.margin>
@@ -121,7 +118,7 @@
                      </VBox.margin>
                     </HBox>
                     <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
-                        <Label alignment="CENTER" styleClass="names" stylesheets="@../../css/about.css" text="LAURIN, PHOLYROSE" textAlignment="CENTER" />
+                        <Label alignment="CENTER" styleClass="names" stylesheets="@../../css/about.css" text="LAURIN, PHOLYROSE" textAlignment="CENTER" wrapText="true" />
                     </HBox>
                 </VBox>
                 <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
@@ -133,7 +130,6 @@
                             <Image url="@../../assets/about/clyde.jpg" />
                         <styleClass>
                            <String fx:value="shadow" />
-                           <String fx:value="members-image" />
                         </styleClass>
                         </ImageView>
                      <VBox.margin>
@@ -141,7 +137,7 @@
                      </VBox.margin>
                     </HBox>
                     <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
-                        <Label alignment="CENTER" styleClass="names" stylesheets="@../../css/about.css" text="BRUGADA, CLYDE" textAlignment="CENTER" />
+                        <Label alignment="CENTER" styleClass="names" stylesheets="@../../css/about.css" text="BRUGADA, CLYDE" textAlignment="CENTER" wrapText="true" />
                     </HBox>
                 </VBox>
             </HBox>
