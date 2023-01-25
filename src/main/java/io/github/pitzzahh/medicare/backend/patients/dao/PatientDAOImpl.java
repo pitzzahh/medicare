@@ -94,14 +94,15 @@ public class PatientDAOImpl implements PatientDAO {
                 "id, " +
                 "patient_name, " +
                 "name_of_doctor, " +
-                "date_disconfined, " +
-                "date_discharged, " +
+                "date_confined, " +
+                "date_discharged " +
                 ") " +
                 "VALUES (?,?,?,?,?)";
         return dischargedPatient -> getJDBC().update(
                 QUERY,
-                encrypt(String.valueOf(dischargedPatient.getPatientId())),
+                dischargedPatient.getPatientId(),
                 encrypt(dischargedPatient.getName()),
+                dischargedPatient.getNameOfDoctor().isEmpty() ? "" : encrypt(dischargedPatient.getNameOfDoctor()),
                 encrypt(dischargedPatient.getDateConfined().toString()),
                 encrypt(dischargedPatient.getDateDischarged().toString())
         );
