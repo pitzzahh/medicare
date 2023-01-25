@@ -46,7 +46,7 @@ public class PatientService {
     }
 
     public Consumer<DischargedPatient> addDischargedPatient() {
-        return patient -> DAO.addDischargedPatient().accept(patient);
+        return DAO.addDischargedPatient();
     }
 
     public Map<Integer, DischargedPatient> getDischargedPatients() {
