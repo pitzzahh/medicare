@@ -508,7 +508,7 @@ public interface ComponentUtil {
     static void initTableColumns(TableView<?> table, String[] columns) {
         for (int i = 0; i < columns.length; i++) {
             TableColumn<?, ?> column = table.getColumns().get(i);
-            if (i == 0 || i == 3) column.setStyle("-fx-alignment: CENTER;");
+            column.setStyle("-fx-alignment: CENTER;");
             column.setCellValueFactory(new PropertyValueFactory<>(columns[i]));
         }
     }
