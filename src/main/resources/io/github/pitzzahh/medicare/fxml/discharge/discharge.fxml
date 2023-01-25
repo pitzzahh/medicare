@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane style="-fx-background-color: #3D5A7F;" xmlns="http://javafx.com/javafx/19"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="io.github.pitzzahh.medicare.controllers.DischargeController">
+    <center>
+        <TableView fx:id="table" prefHeight="400.0" prefWidth="750.0" stylesheets="@../../css/table.css">
+            <columns>
+                <TableColumn editable="false" prefWidth="75.0" text="PATIENT ID"/>
+                <TableColumn editable="false" prefWidth="75.0" text="PATIENT NAME"/>
+                <TableColumn editable="false" prefWidth="75.0" text="ASSIGNED DOCTOR"/>
+                <TableColumn editable="false" prefWidth="75.0" text="DATE CONFINED"/>
+                <TableColumn editable="false" prefWidth="75.0" text="DATE DISCHARGED"/>
+            </columns>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+            </columnResizePolicy>
+        </TableView>
+    </center>
+</BorderPane>
