@@ -1,14 +1,17 @@
 
 .brand-name {
+    -fx-effect: dropshadow(three-pass-box, rgba(37, 37, 37, 0.3), 10.0, 0.0, 0.0, 10.0);
     -fx-font-size: 50px;
     -fx-font-weight: bold;
 }
 
 .i {
+    -fx-effect: dropshadow(three-pass-box, rgba(37, 37, 37, 0.3), 10.0, 0.0, 0.0, 10.0);
     -fx-text-fill: #D1462F;
 }
 
 .care {
+    -fx-effect: dropshadow(three-pass-box, rgba(37, 37, 37, 0.3), 10.0, 0.0, 0.0, 10.0);
     -fx-text-fill: #E0FBFC;
 }
 
@@ -18,18 +21,18 @@
 }
 
 .about-title {
-    -fx-font-size: 20px;
-    -fx-text-fill: #000;
+    -fx-font-size: 25px;
+    -fx-text-fill: #1a1919;
     -fx-font-weight: bold;
 }
 
 .about-us {
     -fx-font-size: 16px;
-    -fx-text-fill: #000;
+    -fx-text-fill: #1a1919;
 }
 
 .names {
     -fx-font-size: 18px;
-    -fx-text-fill: #000;
+    -fx-text-fill: #1a1919;
     -fx-font-weight: bold;
 }
