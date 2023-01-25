@@ -41,7 +41,7 @@ public class PatientMapper implements RowMapper<Patient> {
     @Override
     public Patient mapRow(ResultSet rs, int rowNum) throws SQLException {
         final String[] BIRTHDATE = decrypt(rs.getString("birthdate")).split("-");
-        final String[] DATE_CONFINED = decrypt(rs.getString("dateConfined")).split("-");
+        final String[] DATE_CONFINED = decrypt(rs.getString("date_confined")).split("-");
         return new Patient(
                 rs.getInt("id"),
                 decrypt(rs.getString("last_name")),
