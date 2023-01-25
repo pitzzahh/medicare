@@ -25,9 +25,12 @@
 package io.github.pitzzahh.medicare.controllers;
 
 import static io.github.pitzzahh.medicare.util.ComponentUtil.setCommonDashboardData;
+import static io.github.pitzzahh.medicare.application.Medicare.getPatientService;
 import static io.github.pitzzahh.medicare.util.ToolTipUtil.initToolTip;
 import static io.github.pitzzahh.medicare.util.Style.normalStyle;
 import static io.github.pitzzahh.medicare.util.WindowUtil.*;
+import javafx.collections.FXCollections;
+import java.util.stream.Collectors;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -69,5 +72,27 @@ public class MainPanelController {
         actionEvent.consume();
         logoutSession();
         loadPage("main_panel", "dashboard");
+    }
+
+    @FXML
+    public void onClickStatistics(ActionEvent actionEvent) {
+        actionEvent.consume();
+        loadPage("main_panel", "statistics");
+    }
+
+    @FXML
+    public void onClickDischargeHistory(ActionEvent actionEvent) {
+        actionEvent.consume();
+        loadPage("main_panel", "discharge_panel");
+        DischargeController.getCopy()
+                .getItems()
+                .clear();
+        DischargeController.setData(
+                getPatientService()
+                        .getDischargedPatients()
+                        .values()
+                        .stream()
+                        .collect(Collectors.toCollection(FXCollections::observableArrayList))
+        );
     }
 }
