@@ -146,7 +146,7 @@ public class DatabaseConnection {
                 "    id INTEGER PRIMARY KEY NOT NULL UNIQUE,\n" +
                 "    patient_name TEXT  NOT NULL,\n" +
                 "    name_of_doctor TEXT NOT NULL,\n" +
-                "    date_disconfined TEXT,\n" +
+                "    date_confined TEXT,\n" +
                 "    date_discharged TEXT NOT NULL\n" +
                 ");");
         getJDBC().execute("INSERT OR IGNORE INTO l0g1n(u$erN4me, p$ssW0rd) VALUES ('YWRtaW4=', 'YWRtaW4=');");
