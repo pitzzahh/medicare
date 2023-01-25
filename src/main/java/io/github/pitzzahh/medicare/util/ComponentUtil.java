@@ -38,6 +38,7 @@ import static io.github.pitzzahh.medicare.util.Style.normalStyle;
 import io.github.pitzzahh.medicare.backend.doctors.model.Doctor;
 import static io.github.pitzzahh.util.utilities.Print.printf;
 import io.github.pitzzahh.medicare.backend.AssignedDoctor;
+import javafx.scene.control.cell.PropertyValueFactory;
 import io.github.pitzzahh.medicare.backend.Person;
 import io.github.pitzzahh.medicare.backend.Gender;
 import static java.util.Objects.requireNonNull;
@@ -73,6 +74,10 @@ public interface ComponentUtil {
 
     static Optional<Label> getLabel(Parent parent, String id) {
         return Optional.ofNullable((Label) parent.lookup(format("#%s", id)));
+    }
+
+    static Optional<TableView<?>> getTable(Parent parent, String id) {
+        return Optional.ofNullable((TableView<?>) parent.lookup(format("#%s", id)));
     }
 
     static Optional<ChoiceBox<?>> getChoiceBox(Parent parent, String id) {
@@ -498,6 +503,14 @@ public interface ComponentUtil {
         graphic.setFitHeight(50);
         alert.setGraphic(graphic);
         alert.showAndWait();
+    }
+
+    static void initTableColumns(TableView<?> table, String[] columns) {
+        for (int i = 0; i < columns.length; i++) {
+            TableColumn<?, ?> column = table.getColumns().get(i);
+            if (i == 0 || i == 3) column.setStyle("-fx-alignment: CENTER;");
+            column.setCellValueFactory(new PropertyValueFactory<>(columns[i]));
+        }
     }
 
     static DateTimeFormatter getDateFormatter() {
