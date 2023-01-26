@@ -27,7 +27,6 @@ package io.github.pitzzahh.medicare.util;
 import static io.github.pitzzahh.medicare.application.Medicare.getPatientService;
 import static io.github.pitzzahh.medicare.application.Medicare.getDoctorService;
 import io.github.pitzzahh.medicare.controllers.patients.PatientCardController;
-import io.github.pitzzahh.medicare.backend.patients.model.DischargedPatient;
 import io.github.pitzzahh.medicare.controllers.doctors.DoctorCardController;
 import io.github.pitzzahh.medicare.backend.doctors.model.Specialization;
 import static io.github.pitzzahh.medicare.util.ToolTipUtil.initToolTip;
@@ -101,11 +100,13 @@ public interface ComponentUtil {
     }
 
     static void initGenderChoiceBox(ChoiceBox<Gender> choiceBox) {
+        choiceBox.getItems().clear();
         choiceBox.getItems().addAll(FXCollections.observableArrayList(Arrays.asList(Gender.values())));
         choiceBox.getSelectionModel().selectFirst();
     }
 
     static void initSymptomsChoiceBox(ChoiceBox<Symptoms> choiceBox) {
+        choiceBox.getItems().clear();
         choiceBox.getItems().addAll(FXCollections.observableArrayList(Arrays.asList(Symptoms.values())));
         choiceBox.getSelectionModel().selectFirst();
     }
@@ -177,7 +178,7 @@ public interface ComponentUtil {
                                         .select(patient.getGender().ordinal());
                                 controller.doctor
                                         .getSelectionModel()
-                                        .select(patient.getAssignDoctor());
+                                        .select(patient.getAssignedDoctor());
                                 controller.symptoms
                                         .getSelectionModel()
                                         .select(patient.getSymptoms().ordinal());
@@ -207,22 +208,15 @@ public interface ComponentUtil {
                                         .dischargePatientById()
                                         .accept(patient.getPatientId());
 
-                                final String PATIENT_NAME = patient.getMiddleName().isEmpty() ?
-                                        patient.getFirstName()
-                                                .concat(" ")
-                                                .concat(patient.getLastName()) :
-                                        patient.getFirstName()
-                                                .concat(" ")
-                                                .concat(patient.getMiddleName())
-                                                .concat(" ")
-                                                .concat(patient.getLastName());
                                 getPatientService()
                                         .addDischargedPatient()
-                                        .accept(
-                                                new DischargedPatient(
+                                        .accept(new Patient(
                                                         patient.getPatientId(),
-                                                        PATIENT_NAME,
-                                                        patient.getAssignDoctor().getName(),
+                                                        patient.getLastName(),
+                                                        patient.getFirstName(),
+                                                        patient.getMiddleName(),
+                                                        patient.getSymptoms(),
+                                                        patient.getAssignedDoctor(),
                                                         patient.getDateConfined(),
                                                         LocalDate.now()
                                                 )
@@ -357,7 +351,8 @@ public interface ComponentUtil {
                                 controller.dateOfBirth.getValue(),
                                 controller.address.getText().trim(),
                                 controller.phoneNumber.getText().trim(),
-                                controller.doctor.getValue() == null ? new AssignedDoctor() : controller.doctor.getValue(),
+                                Optional.ofNullable(controller.doctor.getValue())
+                                                .orElse(new AssignedDoctor()),
                                 patient.getDateConfined(),
                                 controller.symptoms.getValue()
                         )
@@ -398,11 +393,11 @@ public interface ComponentUtil {
                 .getPatients()
                 .values()
                 .stream()
-                .filter(d -> d.getAssignDoctor().getId() == doctor.getId())
+                .filter(d -> d.getAssignedDoctor().getId() == doctor.getId())
                 .findAny();
 
         patientWithDoctorBeingUpdated
-                .ifPresent(patient -> patient.setAssignDoctor(new AssignedDoctor(
+                .ifPresent(patient -> patient.setAssignedDoctor(new AssignedDoctor(
                 doctor.getId(),
                 doctor.getMiddleName().isEmpty() ? doctor.getFirstName().concat(" ").concat(doctor.getLastName()) :
                         doctor.getFirstName().concat(" ").concat(doctor.getMiddleName()).concat(" ").concat(doctor.getLastName()),
