@@ -18,6 +18,6 @@ public class AssignedDoctor {
 
     @Override
     public String toString() {
-        return name == null ? "NO DOCTORS YET" : name;
+        return name == null ? "NO ASSIGNED DOCTOR" : name;
     }
 }

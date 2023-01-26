@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<?import java.lang.String?>
-<ScrollPane xmlns:fx="http://javafx.com/fxml/1" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="909.0"
-            prefWidth="837.0" style="-fx-background-color: #3D5A80; -fx-border-color: none;"
-            xmlns="http://javafx.com/javafx/19">
+
+<ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: #3D5A80; -fx-border-color: none;" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <VBox alignment="TOP_CENTER" style="-fx-background-color: #3D5A80; -fx-border-color: none;">
-        <HBox alignment="CENTER">
+        <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
             <VBox.margin>
-                <Insets left="50.0" right="50.0" top="50.0"/>
+                <Insets left="50.0" right="50.0" top="50.0" />
             </VBox.margin>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                <Image url="@../../assets/logo.png"/>
+                <Image url="@../../assets/logo.png" />
             </ImageView>
         </HBox>
-        <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0">
+        <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" VBox.vgrow="ALWAYS">
          <Label styleClass="brand-name" stylesheets="@../../css/about.css" text="MED" textFill="WHITE" />
          <Label stylesheets="@../../css/about.css" text="i">
             <styleClass>
@@ -37,91 +39,118 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </VBox.margin>
       </HBox>
-        <HBox alignment="CENTER" layoutX="10.0" layoutY="211.0">
-            <VBox alignment="CENTER" prefHeight="547.0" prefWidth="743.0" styleClass="about-box"
-                  stylesheets="@../../css/about.css" HBox.hgrow="ALWAYS">
+        <HBox alignment="CENTER" layoutX="10.0" layoutY="211.0" styleClass="shadow" stylesheets="@../../css/common.css" VBox.vgrow="ALWAYS">
+            <VBox alignment="CENTER" prefHeight="500.0" styleClass="about-box" stylesheets="@../../css/about.css" HBox.hgrow="ALWAYS">
                 <HBox alignment="CENTER">
                     <VBox.margin>
-                        <Insets top="20.0"/>
+                        <Insets bottom="20.0" top="20.0" />
                     </VBox.margin>
-                    <Label styleClass="about-title" stylesheets="@../../css/about.css" text="ABOUT"/>
+                    <Label styleClass="about-title" stylesheets="@../../css/about.css" text="ABOUT" />
                 </HBox>
-                <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="264.0" prefWidth="743.0"
-                      VBox.vgrow="ALWAYS">
+                <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" VBox.vgrow="ALWAYS">
                     <VBox.margin>
-                        <Insets bottom="10.0"/>
+                        <Insets bottom="10.0" />
                </VBox.margin>
-               <Text fill="#3d5a80" strokeType="OUTSIDE" strokeWidth="0.0" text="TThe list and counts of patients and doctors are used by this application to verify their information.Many of life's most significant events take place at Medicare and always have. Since 2015, Medicare has played a crucial role in the provision of healthcare services in STI. We presently offer complete services in our emergency department, including critical care as well as a full complement of acute care services. We are one of three acute care sites in the city" textAlignment="CENTER" wrappingWidth="500.0">
+               <Text fill="#3d5a80" strokeType="OUTSIDE" strokeWidth="0.0" text="The list and counts of patients and doctors are used by this application to verify their information.Many of life's most significant events take place at Medicare and always have. Since 2022, Medicare has played a crucial role in the provision of healthcare services in STI. We presently offer complete services in our emergency department, including critical care as well as a full complement of acute care services. We are one of three acute care sites in the city" textAlignment="CENTER" wrappingWidth="750.0">
                   <font>
-                     <Font name="System Bold" size="16.0" />
+                     <Font name="System Bold" size="18.0" />
                   </font>
                </Text>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </padding>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="266.0" prefWidth="743.0" VBox.vgrow="ALWAYS">
+            <HBox alignment="CENTER">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
-                <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                <VBox alignment="CENTER">
                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                     </HBox.margin>
-                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <HBox alignment="CENTER" stylesheets="@../../css/about.css">
                         <ImageView fitHeight="120.0" fitWidth="120.0" pickOnBounds="true">
-                            <Image url="@../../assets/about/peter.jpg"/>
+                            <Image url="@../../assets/about/peter.jpg" />
+                        <styleClass>
+                           <String fx:value="shadow" />
+                        </styleClass>
                         </ImageView>
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
                     </HBox>
-                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                        <Label alignment="CENTER" styleClass="names" stylesheets="@../../css/about.css"
-                               text="ARAO, PETER JOHN" textAlignment="CENTER"/>
+                    <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+                        <Label alignment="CENTER" styleClass="names" stylesheets="@../../css/about.css" text="ARAO, PETER JOHN" textAlignment="CENTER" wrapText="true" />
                   </HBox>
                </VBox>
-                <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" HBox.hgrow="ALWAYS">
+                <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                     </HBox.margin>
-                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <HBox alignment="CENTER">
                         <ImageView fitHeight="120.0" fitWidth="120.0" pickOnBounds="true">
-                            <Image url="@../../assets/about/kenth.jpg"/>
+                            <Image url="@../../assets/about/kenth.jpg" />
+                        <styleClass>
+                           <String fx:value="shadow" />
+                        </styleClass>
                         </ImageView>
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
                     </HBox>
-                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                        <Label alignment="CENTER" styleClass="names" stylesheets="@../../css/about.css"
-                               text="SIBAY, KENTH ALFIE" textAlignment="CENTER"/>
+                    <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+                        <Label alignment="CENTER" styleClass="names" stylesheets="@../../css/about.css" text="SIBAY, KENTH ALFIE" textAlignment="CENTER" wrapText="true" />
                     </HBox>
                 </VBox>
-                <VBox alignment="CENTER" layoutX="210.0" layoutY="10.0" HBox.hgrow="ALWAYS">
+                <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                     </HBox.margin>
-                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <HBox alignment="CENTER">
                         <ImageView fitHeight="120.0" fitWidth="120.0" pickOnBounds="true">
-                            <Image url="@../../assets/about/pholy.jpg"/>
+                            <Image url="@../../assets/about/pholy.jpg" />
+                        <styleClass>
+                           <String fx:value="shadow" />
+                        </styleClass>
                         </ImageView>
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
                     </HBox>
-                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                        <Label alignment="CENTER" styleClass="names" stylesheets="@../../css/about.css"
-                               text="LAURIN, PHOLYROSE" textAlignment="CENTER"/>
+                    <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+                        <Label alignment="CENTER" styleClass="names" stylesheets="@../../css/about.css" text="LAURIN, PHOLYROSE" textAlignment="CENTER" wrapText="true" />
                     </HBox>
                 </VBox>
-                <VBox alignment="CENTER" layoutX="370.0" layoutY="10.0" HBox.hgrow="ALWAYS">
+                <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                     </HBox.margin>
-                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <HBox alignment="CENTER">
                         <ImageView fitHeight="120.0" fitWidth="120.0" pickOnBounds="true">
-                            <Image url="@../../assets/about/clyde.jpg"/>
+                            <Image url="@../../assets/about/clyde.jpg" />
+                        <styleClass>
+                           <String fx:value="shadow" />
+                        </styleClass>
                         </ImageView>
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
                     </HBox>
-                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                        <Label alignment="CENTER" styleClass="names" stylesheets="@../../css/about.css"
-                               text="BRUGADA, CLYDE" textAlignment="CENTER"/>
+                    <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+                        <Label alignment="CENTER" styleClass="names" stylesheets="@../../css/about.css" text="BRUGADA, CLYDE" textAlignment="CENTER" wrapText="true" />
                     </HBox>
                 </VBox>
             </HBox>
+            <padding>
+               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
          </VBox>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
       </HBox>
       <padding>
          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

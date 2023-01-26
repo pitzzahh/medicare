@@ -71,10 +71,10 @@ public class DatabaseConnection {
      * Creates a datasource
      */
     public void setDataSource() {
-        DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
-        driverManagerDataSource.setDriverClassName(this.driverClassName);
-        driverManagerDataSource.setUrl(this.url);
-        jdbcTemplate = new JdbcTemplate(driverManagerDataSource);
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName(driverClassName);
+        dataSource.setUrl(url);
+        jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     /**
@@ -128,6 +128,7 @@ public class DatabaseConnection {
                 "    doctor_id TEXT,\n" +
                 "    doctor_name TEXT,\n" +
                 "    doctor_specialization TEXT,\n" +
+                "    date_confined TEXT,\n" +
                 "    symptoms TEXT NOT NULL\n" +
                 ");");
         getJDBC().execute("CREATE TABLE IF NOT EXISTS d0ct0r$ (\n" +
@@ -141,6 +142,16 @@ public class DatabaseConnection {
                 "    phone_number TEXT,\n" +
                 "    specialization TEXT NOT NULL\n" +
                 ");\n");
+        getJDBC().execute("CREATE TABLE IF NOT EXISTS d1sch4rg3d_p4t13nt$ (\n" +
+                "    id INTEGER PRIMARY KEY NOT NULL UNIQUE,\n" +
+                "    last_name TEXT  NOT NULL,\n" +
+                "    first_name TEXT  NOT NULL,\n" +
+                "    middle_name TEXT  NOT NULL,\n" +
+                "    symptoms TEXT  NOT NULL,\n" +
+                "    doctor_id TEXT NOT NULL,\n" +
+                "    date_confined TEXT,\n" +
+                "    date_discharged TEXT NOT NULL\n" +
+                ");");
         getJDBC().execute("INSERT OR IGNORE INTO l0g1n(u$erN4me, p$ssW0rd) VALUES ('YWRtaW4=', 'YWRtaW4=');");
     }
 

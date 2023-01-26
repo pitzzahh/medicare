@@ -5,7 +5,7 @@
 }
 
 .card-title, .card-count  {
-    -fx-text-fill: #000;
+    -fx-text-fill: #262424;
     -fx-font-weight: bold;
     -fx-font-size: 24px;
 }
@@ -84,6 +84,7 @@
 }
 
 .main-button:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(37, 37, 37, 0.2), 10.0, 0.0, 0.0, 10.0);
     -fx-background-color: #98C1D9;
     -fx-background-radius: 10px;
     -fx-border-width: 3px;
@@ -94,3 +95,8 @@
 .main-button:armed {
     -fx-opacity: 0.5;
 }
+
+.shadow {
+    -fx-effect: dropshadow(three-pass-box, rgba(37, 37, 37, 0.3), 10.0, 0.0, 0.0, 10.0);
+}
+

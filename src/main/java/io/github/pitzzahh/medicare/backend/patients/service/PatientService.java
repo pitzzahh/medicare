@@ -44,8 +44,16 @@ public class PatientService {
         return DAO.addPatient();
     }
 
-    public Consumer<Integer> removePatientById() {
-        return DAO.removePatientById();
+    public Consumer<Patient> addDischargedPatient() {
+        return DAO.addDischargedPatient();
+    }
+
+    public Map<Integer, Patient> getDischargedPatients() {
+        return DAO.getDischargedPatients();
+    }
+
+    public Consumer<Integer> dischargePatientById() {
+        return DAO.dischargePatientById();
     }
 
     public boolean doesPatientAlreadyExists(Patient patient) {

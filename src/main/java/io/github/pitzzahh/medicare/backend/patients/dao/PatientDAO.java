@@ -35,7 +35,11 @@ public interface PatientDAO {
 
     Consumer<Patient> addPatient();
 
-    Consumer<Integer> removePatientById();
+    Map<Integer, Patient> getDischargedPatients();
+
+    Consumer<Patient> addDischargedPatient();
+
+    Consumer<Integer> dischargePatientById();
 
     BiConsumer<Integer, Patient> updatePatientById();
 

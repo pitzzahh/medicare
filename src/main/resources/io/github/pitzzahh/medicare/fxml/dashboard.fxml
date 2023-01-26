@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -8,72 +9,83 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/19"
-            xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <center>
         <VBox alignment="CENTER" BorderPane.alignment="CENTER">
             <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
                 <VBox.margin>
-                    <Insets top="10.0"/>
+                    <Insets top="10.0" />
                 </VBox.margin>
                 <padding>
-                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                 </padding>
-                <HBox fx:id="patientsCard" alignment="CENTER" maxHeight="200.0" maxWidth="500.0" styleClass="card"
-                      stylesheets="@../css/common.css" HBox.hgrow="ALWAYS">
+                <HBox fx:id="patientsCard" alignment="CENTER" maxHeight="200.0" maxWidth="500.0" stylesheets="@../css/common.css" HBox.hgrow="ALWAYS">
                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                     </HBox.margin>
                     <VBox alignment="CENTER">
                         <HBox alignment="CENTER">
                             <padding>
-                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                             </padding>
-                            <Label styleClass="card-title" stylesheets="@../css/common.css" text="NUMBER OF PATIENTS"/>
+                            <Label stylesheets="@../css/common.css" text="NUMBER OF PATIENTS">
+                        <styleClass>
+                           <String fx:value="card-title" />
+                           <String fx:value="shadow" />
+                        </styleClass></Label>
                         </HBox>
                         <HBox alignment="TOP_CENTER">
                             <padding>
-                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                             </padding>
-                            <Label fx:id="patientsCount" styleClass="card-count" stylesheets="@../css/common.css"
-                                   text="0"/>
+                            <Label fx:id="patientsCount" styleClass="card-count" stylesheets="@../css/common.css" text="0" />
                         </HBox>
                     </VBox>
+               <styleClass>
+                  <String fx:value="card" />
+                  <String fx:value="shadow" />
+               </styleClass>
                 </HBox>
-                <HBox fx:id="doctorsCard" alignment="CENTER" maxHeight="200.0" maxWidth="500.0" styleClass="card"
-                      stylesheets="@../css/common.css" HBox.hgrow="ALWAYS">
+                <HBox fx:id="doctorsCard" alignment="CENTER" maxHeight="200.0" maxWidth="500.0" stylesheets="@../css/common.css" HBox.hgrow="ALWAYS">
                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                     </HBox.margin>
                     <VBox alignment="CENTER">
                         <HBox alignment="CENTER">
                             <VBox.margin>
-                                <Insets/>
+                                <Insets />
                             </VBox.margin>
                             <padding>
-                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                             </padding>
-                            <Label styleClass="card-title" stylesheets="@../css/common.css" text="NUMBER OF DOCTORS"/>
+                            <Label stylesheets="@../css/common.css" text="NUMBER OF DOCTORS">
+                        <styleClass>
+                           <String fx:value="card-title" />
+                           <String fx:value="shadow" />
+                        </styleClass></Label>
                         </HBox>
                         <HBox alignment="CENTER">
                             <VBox.margin>
-                                <Insets/>
+                                <Insets />
                             </VBox.margin>
                             <padding>
-                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                             </padding>
-                            <Label fx:id="doctorsCount" styleClass="card-count" stylesheets="@../css/common.css"
-                                   text="0"/>
+                            <Label fx:id="doctorsCount" styleClass="card-count" stylesheets="@../css/common.css" text="0" />
                         </HBox>
                     </VBox>
+               <styleClass>
+                  <String fx:value="card" />
+                  <String fx:value="shadow" />
+               </styleClass>
                 </HBox>
             </HBox>
             <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
                 <VBox.margin>
-                    <Insets bottom="20.0"/>
+                    <Insets bottom="20.0" />
                 </VBox.margin>
                 <ImageView fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../assets/logo.png"/>
+                    <Image url="@../assets/logo.png" />
                 </ImageView>
             </HBox>
         </VBox>

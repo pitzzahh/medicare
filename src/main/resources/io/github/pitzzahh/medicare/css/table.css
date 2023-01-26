@@ -1,0 +1,11 @@
+.table-view,
+.table-view .table-cell,
+.table-view .column-header,
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.table-cell .tabl-row,
+.table-view .column-header .label {
+    -fx-text-fill: #fff;
+}

@@ -29,12 +29,15 @@ import static io.github.pitzzahh.medicare.application.Medicare.getDoctorService;
 import io.github.pitzzahh.medicare.controllers.patients.PatientCardController;
 import io.github.pitzzahh.medicare.controllers.doctors.DoctorCardController;
 import io.github.pitzzahh.medicare.backend.doctors.model.Specialization;
+import static io.github.pitzzahh.medicare.util.ToolTipUtil.initToolTip;
 import static io.github.pitzzahh.medicare.util.WindowUtil.getParent;
 import io.github.pitzzahh.medicare.backend.patients.model.Symptoms;
 import io.github.pitzzahh.medicare.backend.patients.model.Patient;
+import static io.github.pitzzahh.medicare.util.Style.normalStyle;
 import io.github.pitzzahh.medicare.backend.doctors.model.Doctor;
 import static io.github.pitzzahh.util.utilities.Print.printf;
 import io.github.pitzzahh.medicare.backend.AssignedDoctor;
+import javafx.scene.control.cell.PropertyValueFactory;
 import io.github.pitzzahh.medicare.backend.Person;
 import io.github.pitzzahh.medicare.backend.Gender;
 import static java.util.Objects.requireNonNull;
@@ -72,6 +75,10 @@ public interface ComponentUtil {
         return Optional.ofNullable((Label) parent.lookup(format("#%s", id)));
     }
 
+    static Optional<TableView<?>> getTable(Parent parent, String id) {
+        return Optional.ofNullable((TableView<?>) parent.lookup(format("#%s", id)));
+    }
+
     static Optional<ChoiceBox<?>> getChoiceBox(Parent parent, String id) {
         return Optional.ofNullable((ChoiceBox<?>) parent.lookup(format("#%s", id)));
     }
@@ -93,11 +100,13 @@ public interface ComponentUtil {
     }
 
     static void initGenderChoiceBox(ChoiceBox<Gender> choiceBox) {
+        choiceBox.getItems().clear();
         choiceBox.getItems().addAll(FXCollections.observableArrayList(Arrays.asList(Gender.values())));
         choiceBox.getSelectionModel().selectFirst();
     }
 
     static void initSymptomsChoiceBox(ChoiceBox<Symptoms> choiceBox) {
+        choiceBox.getItems().clear();
         choiceBox.getItems().addAll(FXCollections.observableArrayList(Arrays.asList(Symptoms.values())));
         choiceBox.getSelectionModel().selectFirst();
     }
@@ -162,7 +171,18 @@ public interface ComponentUtil {
 
                         controller.updateOrSaveButton.setOnAction(event ->{
                             event.consume();
-                            if (controller.updateOrSaveButton.getText().equals("UPDATE")) allowPatientInput(controller);
+                            if (controller.updateOrSaveButton.getText().equals("UPDATE")) {
+                                allowPatientInput(controller);
+                                controller.gender
+                                        .getSelectionModel()
+                                        .select(patient.getGender().ordinal());
+                                controller.doctor
+                                        .getSelectionModel()
+                                        .select(patient.getAssignedDoctor());
+                                controller.symptoms
+                                        .getSelectionModel()
+                                        .select(patient.getSymptoms().ordinal());
+                            }
                             else {
                                 getPatientService()
                                         .getPatients()
@@ -175,16 +195,32 @@ public interface ComponentUtil {
                             }
                         });
 
-                        controller.removeButton.setOnAction(actionEvent -> {
+                        controller.dischargeButton.setOnAction(actionEvent -> {
                             actionEvent.consume();
-                            if (controller.removeButton.getText().equals("CANCEL")) {
+                            if (controller.dischargeButton.getText().equals("CANCEL")) {
                                 System.out.println("CANCELING");
                                 controller.updateOrSaveButton.setText("UPDATE");
-                                controller.removeButton.setText("REMOVE");
+                                controller.dischargeButton.setText("DISCHARGE");
                             } else {
-                                System.out.println("REMOVING");
+                                System.out.println("DISCHARGING");
                                 cardStorage.getChildren().remove(patientCard);
-                                getPatientService().removePatientById().accept(patient.getPatientId());
+                                getPatientService()
+                                        .dischargePatientById()
+                                        .accept(patient.getPatientId());
+
+                                getPatientService()
+                                        .addDischargedPatient()
+                                        .accept(new Patient(
+                                                        patient.getPatientId(),
+                                                        patient.getLastName(),
+                                                        patient.getFirstName(),
+                                                        patient.getMiddleName(),
+                                                        patient.getSymptoms(),
+                                                        patient.getAssignedDoctor(),
+                                                        patient.getDateConfined(),
+                                                        LocalDate.now()
+                                                )
+                                        );
                                 setDashBoardData();
                                 setCommonDashboardData("patient_dashboard", "patientsCount", false);
                             }
@@ -211,7 +247,15 @@ public interface ComponentUtil {
 
                         controller.updateOrSaveButton.setOnAction(event ->{
                             event.consume();
-                            if (controller.updateOrSaveButton.getText().equals("UPDATE")) allowDoctorInput(controller);
+                            if (controller.updateOrSaveButton.getText().equals("UPDATE")) {
+                                allowDoctorInput(controller);
+                                controller.gender
+                                        .getSelectionModel()
+                                        .select(doctor.getGender().ordinal());
+                                controller.specialization
+                                        .getSelectionModel()
+                                        .select(doctor.getSpecialization().ordinal());
+                            }
                             else {
                                 getDoctorService()
                                         .getDoctors()
@@ -254,7 +298,9 @@ public interface ComponentUtil {
         controller.doctor.setMouseTransparent(false); // EDITABLE
         controller.symptoms.setMouseTransparent(false); // EDITABLE
         controller.updateOrSaveButton.setText("SAVE");
-        controller.removeButton.setText("CANCEL");
+        controller.dischargeButton.setText("CANCEL");
+        controller.updateOrSaveButton.setTooltip(initToolTip("Click to Save Doctor", normalStyle()));
+        controller.dischargeButton.setTooltip(initToolTip("Click to Cancel Edit", normalStyle()));
     }
 
     static void allowCommonInputs(TextField firstName, TextField middleName, TextField lastName, ChoiceBox<Gender> gender, DatePicker dateOfBirth, TextField address, TextField phoneNumber) {
@@ -275,6 +321,8 @@ public interface ComponentUtil {
         controller.specialization.setMouseTransparent(false); // EDITABLE
         controller.updateOrSaveButton.setText("SAVE");
         controller.removeButton.setText("CANCEL");
+        controller.updateOrSaveButton.setTooltip(initToolTip("Click to Save Doctor", normalStyle()));
+        controller.removeButton.setTooltip(initToolTip("Click to Cancel Edit", normalStyle()));
     }
 
 
@@ -288,7 +336,9 @@ public interface ComponentUtil {
         )) return;
 
         controller.updateOrSaveButton.setText("UPDATE");
-        controller.removeButton.setText("REMOVE");
+        controller.dischargeButton.setText("REMOVE");
+        controller.updateOrSaveButton.setTooltip(initToolTip("Click to Update Patient", normalStyle()));
+        controller.dischargeButton.setTooltip(initToolTip("Click to Discharge Patient", normalStyle()));
 
         getPatientService()
                 .updatePatientById()
@@ -301,7 +351,9 @@ public interface ComponentUtil {
                                 controller.dateOfBirth.getValue(),
                                 controller.address.getText().trim(),
                                 controller.phoneNumber.getText().trim(),
-                                controller.doctor.getValue() == null ? new AssignedDoctor() : controller.doctor.getValue(),
+                                Optional.ofNullable(controller.doctor.getValue())
+                                                .orElse(new AssignedDoctor()),
+                                patient.getDateConfined(),
                                 controller.symptoms.getValue()
                         )
                 );
@@ -320,7 +372,8 @@ public interface ComponentUtil {
 
         controller.updateOrSaveButton.setText("UPDATE");
         controller.removeButton.setText("REMOVE");
-
+        controller.updateOrSaveButton.setTooltip(initToolTip("Click to Update Doctor", normalStyle()));
+        controller.removeButton.setTooltip(initToolTip("Click to Remove Doctor", normalStyle()));
         getDoctorService()
                 .updateDoctorById()
                 .accept(doctor.getId(),
@@ -335,6 +388,23 @@ public interface ComponentUtil {
                                 controller.specialization.getValue()
                         )
                 );
+
+        Optional<Patient> patientWithDoctorBeingUpdated = getPatientService() // TODO: ALso update patient with doctor being updated
+                .getPatients()
+                .values()
+                .stream()
+                .filter(d -> d.getAssignedDoctor().getId() == doctor.getId())
+                .findAny();
+
+        patientWithDoctorBeingUpdated
+                .ifPresent(patient -> patient.setAssignedDoctor(new AssignedDoctor(
+                doctor.getId(),
+                doctor.getMiddleName().isEmpty() ? doctor.getFirstName().concat(" ").concat(doctor.getLastName()) :
+                        doctor.getFirstName().concat(" ").concat(doctor.getMiddleName()).concat(" ").concat(doctor.getLastName()),
+                doctor.getSpecialization())
+        ));
+
+        patientWithDoctorBeingUpdated.ifPresent(patient -> getPatientService().updatePatientById().accept(patient.getPatientId(), patient));
 
         Alert alert = initAlert("Doctor Updated", "Doctor Updated", "Doctor Updated Successfully");
         showAlertInfo("assets/success.png", "Success graphic not found", alert);
@@ -428,6 +498,14 @@ public interface ComponentUtil {
         graphic.setFitHeight(50);
         alert.setGraphic(graphic);
         alert.showAndWait();
+    }
+
+    static void initTableColumns(TableView<?> table, String[] columns) {
+        for (int i = 0; i < columns.length; i++) {
+            TableColumn<?, ?> column = table.getColumns().get(i);
+            column.setStyle("-fx-alignment: CENTER;");
+            column.setCellValueFactory(new PropertyValueFactory<>(columns[i]));
+        }
     }
 
     static DateTimeFormatter getDateFormatter() {

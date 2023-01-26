@@ -5,6 +5,7 @@
 }
 
 .main-button:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(37, 37, 37, 0.2), 10.0, 0.0, 0.0, 10.0);
     -fx-background-color: #98C1D9;
     -fx-background-radius: 10px;
     -fx-border-width: 3px;

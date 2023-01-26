@@ -25,12 +25,19 @@
 package io.github.pitzzahh.medicare.controllers;
 
 import static io.github.pitzzahh.medicare.util.ComponentUtil.setCommonDashboardData;
+import static io.github.pitzzahh.medicare.application.Medicare.getPatientService;
 import static io.github.pitzzahh.medicare.util.ToolTipUtil.initToolTip;
+import io.github.pitzzahh.medicare.backend.patients.model.Patient;
 import static io.github.pitzzahh.medicare.util.Style.normalStyle;
 import static io.github.pitzzahh.medicare.util.WindowUtil.*;
+import javafx.collections.FXCollections;
+import java.util.stream.Collectors;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
+import java.util.Collection;
+import java.util.ArrayList;
 import javafx.fxml.FXML;
+import java.time.Month;
 
 public class MainPanelController {
 
@@ -69,5 +76,59 @@ public class MainPanelController {
         actionEvent.consume();
         logoutSession();
         loadPage("main_panel", "dashboard");
+    }
+
+    @FXML
+    public void onClickStatistics(ActionEvent actionEvent) {
+        actionEvent.consume();
+        loadPage("main_panel", "statistics");
+
+
+        Collection<Patient> dischargedPatients = getPatientService()
+                .getDischargedPatients()
+                .values()
+                .stream()
+                .map(patient -> new Patient(patient.getSymptoms(), patient.getDateConfined()))
+                .collect(Collectors.toList());
+
+        Collection<Patient> patientCollection = getPatientService()
+                .getPatients()
+                .values()
+                .stream()
+                .map(patient -> new Patient(patient.getSymptoms(), patient.getDateConfined()))
+                .collect(Collectors.toList());
+
+        if (!dischargedPatients.isEmpty()) patientCollection.addAll(dischargedPatients);
+
+        ArrayList<Patient> patients = new ArrayList<>(patientCollection);
+
+        StatisticsController.setMonthData(patients, Month.JANUARY);
+        StatisticsController.setMonthData(patients, Month.FEBRUARY);
+        StatisticsController.setMonthData(patients, Month.MARCH);
+        StatisticsController.setMonthData(patients, Month.APRIL);
+        StatisticsController.setMonthData(patients, Month.MAY);
+        StatisticsController.setMonthData(patients, Month.JUNE);
+        StatisticsController.setMonthData(patients, Month.JULY);
+        StatisticsController.setMonthData(patients, Month.AUGUST);
+        StatisticsController.setMonthData(patients, Month.SEPTEMBER);
+        StatisticsController.setMonthData(patients, Month.OCTOBER);
+        StatisticsController.setMonthData(patients, Month.NOVEMBER);
+        StatisticsController.setMonthData(patients, Month.DECEMBER);
+    }
+
+    @FXML
+    public void onClickDischargeHistory(ActionEvent actionEvent) {
+        actionEvent.consume();
+        loadPage("main_panel", "discharge_panel");
+        DischargeController.getCopy()
+                .getItems()
+                .clear();
+        DischargeController.setData(
+                getPatientService()
+                        .getDischargedPatients()
+                        .values()
+                        .stream()
+                        .collect(Collectors.toCollection(FXCollections::observableArrayList))
+        );
     }
 }

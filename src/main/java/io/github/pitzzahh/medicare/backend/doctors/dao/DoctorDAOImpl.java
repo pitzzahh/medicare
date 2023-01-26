@@ -85,7 +85,8 @@ public class DoctorDAOImpl implements DoctorDAO {
                 encrypt(doctor.getBirthDate().toString()),
                 encrypt(doctor.getAddress()),
                 doctor.getPhoneNumber().trim().isEmpty() ? null : encrypt(doctor.getPhoneNumber()),
-                encrypt(doctor.getSpecialization().name())
+                encrypt(doctor.getSpecialization().name()),
+                id
         );
     }
 
