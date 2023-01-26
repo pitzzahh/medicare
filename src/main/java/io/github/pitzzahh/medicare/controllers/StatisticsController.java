@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import javafx.scene.chart.XYChart;
 import javafx.fxml.Initializable;
 import java.util.ResourceBundle;
+import java.util.Collection;
 import javafx.fxml.FXML;
 import java.time.Month;
 import java.util.List;
@@ -58,7 +59,7 @@ public class StatisticsController implements Initializable {
         decemberCopy = december;
     }
 
-    public static void setMonthData(List<Patient> patients, Month month) {
+    public static void setMonthData(Collection<Patient> patients, Month month) {
         XYChart.Series<String, Integer> series = new XYChart.Series<>();
 
         Map<Symptoms, List<Patient>> collect = patients.stream()
@@ -67,18 +68,20 @@ public class StatisticsController implements Initializable {
 
         collect.forEach((key, value) -> series.getData().add(new XYChart.Data<>(key.name(), value.size())));
 
-        if (month == Month.JANUARY) januaryCopy.getData().add(series);
-        else if (month == Month.FEBRUARY) februaryCopy.getData().add(series);
-        else if (month == Month.MARCH) marchCopy.getData().add(series);
-        else if (month == Month.APRIL) aprilCopy.getData().add(series);
-        else if (month == Month.MAY) mayCopy.getData().add(series);
-        else if (month == Month.JUNE) juneCopy.getData().add(series);
-        else if (month == Month.JULY) julyCopy.getData().add(series);
-        else if (month == Month.AUGUST) augustCopy.getData().add(series);
-        else if (month == Month.SEPTEMBER) septemberCopy.getData().add(series);
-        else if (month == Month.OCTOBER) octoberCopy.getData().add(series);
-        else if (month == Month.NOVEMBER) novemberCopy.getData().add(series);
-        else if (month == Month.DECEMBER) decemberCopy.getData().add(series);
-        else throw new IllegalStateException("Invalid Month: " + month);
+        if (month == Month.JANUARY && !collect.isEmpty()) januaryCopy.getData().add(series);
+        else if (month == Month.FEBRUARY && !collect.isEmpty()) februaryCopy.getData().add(series);
+        else if (month == Month.MARCH && !collect.isEmpty()) marchCopy.getData().add(series);
+        else if (month == Month.APRIL && !collect.isEmpty()) aprilCopy.getData().add(series);
+        else if (month == Month.MAY && !collect.isEmpty()) mayCopy.getData().add(series);
+        else if (month == Month.JUNE && !collect.isEmpty()) juneCopy.getData().add(series);
+        else if (month == Month.JULY && !collect.isEmpty()) julyCopy.getData().add(series);
+        else if (month == Month.AUGUST && !collect.isEmpty()) augustCopy.getData().add(series);
+        else if (month == Month.SEPTEMBER && !collect.isEmpty()) septemberCopy.getData().add(series);
+        else if (month == Month.OCTOBER && !collect.isEmpty()) octoberCopy.getData().add(series);
+        else if (month == Month.NOVEMBER && !collect.isEmpty()) novemberCopy.getData().add(series);
+        else if (month == Month.DECEMBER && !collect.isEmpty()) decemberCopy.getData().add(series);
+        else {
+            if (!collect.isEmpty()) throw new IllegalStateException("Invalid Month: " + month);
+        }
     }
 }
