@@ -3,13 +3,15 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 
-
 <TableView fx:id="table" prefHeight="400.0" prefWidth="750.0" stylesheets="@../../css/table.css"
            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="io.github.pitzzahh.medicare.controllers.DischargeController">
     <columns>
         <TableColumn editable="false" prefWidth="75.0" text="PATIENT ID"/>
-        <TableColumn editable="false" prefWidth="75.0" text="PATIENT NAME"/>
+        <TableColumn editable="false" prefWidth="75.0" text="LAST NAME"/>
+        <TableColumn editable="false" prefWidth="75.0" text="FIRST NAME"/>
+        <TableColumn editable="false" prefWidth="75.0" text="MIDDLE NAME"/>
+        <TableColumn editable="false" prefWidth="75.0" text="SYMPTOMS"/>
         <TableColumn editable="false" prefWidth="75.0" text="ASSIGNED DOCTOR"/>
         <TableColumn editable="false" prefWidth="75.0" text="DATE CONFINED"/>
         <TableColumn editable="false" prefWidth="75.0" text="DATE DISCHARGED"/>
