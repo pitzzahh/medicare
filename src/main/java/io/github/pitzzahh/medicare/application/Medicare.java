@@ -41,15 +41,15 @@ import static java.util.Objects.requireNonNull;
 import io.github.pitzzahh.medicare.Launcher;
 import static javafx.fxml.FXMLLoader.load;
 import javafx.application.Application;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import javafx.scene.image.Image;
+import java.util.stream.Stream;
 import javafx.stage.StageStyle;
 import javafx.scene.Parent;
 import java.io.IOException;
 import javafx.stage.Stage;
 import java.util.HashMap;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Medicare extends Application {
 
