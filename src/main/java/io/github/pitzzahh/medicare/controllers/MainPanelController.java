@@ -34,9 +34,10 @@ import javafx.collections.FXCollections;
 import java.util.stream.Collectors;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
+import java.util.Collection;
 import java.util.ArrayList;
-import java.time.Month;
 import javafx.fxml.FXML;
+import java.time.Month;
 
 public class MainPanelController {
 
@@ -82,9 +83,24 @@ public class MainPanelController {
         actionEvent.consume();
         loadPage("main_panel", "statistics");
 
-        ArrayList<Patient> patients = new ArrayList<>(getPatientService()
+
+        Collection<Patient> dischargedPatients = getPatientService()
+                .getDischargedPatients()
+                .values()
+                .stream()
+                .map(patient -> new Patient(patient.getSymptoms(), patient.getDateConfined()))
+                .collect(Collectors.toList());
+
+        Collection<Patient> patientCollection = getPatientService()
                 .getPatients()
-                .values());
+                .values()
+                .stream()
+                .map(patient -> new Patient(patient.getSymptoms(), patient.getDateConfined()))
+                .collect(Collectors.toList());
+
+        if (!dischargedPatients.isEmpty()) patientCollection.addAll(dischargedPatients);
+
+        ArrayList<Patient> patients = new ArrayList<>(patientCollection);
 
         StatisticsController.setMonthData(patients, Month.JANUARY);
         StatisticsController.setMonthData(patients, Month.FEBRUARY);
