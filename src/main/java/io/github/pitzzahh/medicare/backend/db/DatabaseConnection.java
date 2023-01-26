@@ -144,8 +144,11 @@ public class DatabaseConnection {
                 ");\n");
         getJDBC().execute("CREATE TABLE IF NOT EXISTS d1sch4rg3d_p4t13nt$ (\n" +
                 "    id INTEGER PRIMARY KEY NOT NULL UNIQUE,\n" +
-                "    patient_name TEXT  NOT NULL,\n" +
-                "    name_of_doctor TEXT NOT NULL,\n" +
+                "    last_name TEXT  NOT NULL,\n" +
+                "    first_name TEXT  NOT NULL,\n" +
+                "    middle_name TEXT  NOT NULL,\n" +
+                "    symptoms TEXT  NOT NULL,\n" +
+                "    doctor_id TEXT NOT NULL,\n" +
                 "    date_confined TEXT,\n" +
                 "    date_discharged TEXT NOT NULL\n" +
                 ");");
