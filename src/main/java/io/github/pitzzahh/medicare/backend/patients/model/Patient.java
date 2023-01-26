@@ -37,8 +37,9 @@ import lombok.*;
 @NoArgsConstructor
 public class Patient extends Person {
     private int patientId;
-    private AssignedDoctor assignDoctor;
+    private AssignedDoctor assignedDoctor;
     private LocalDate dateConfined;
+    private LocalDate dateDischarged;
     private Symptoms symptoms;
 
     public Patient(
@@ -62,7 +63,7 @@ public class Patient extends Person {
         super.setBirthDate(birthDate);
         super.setAddress(address);
         super.setPhoneNumber(phoneNumber);
-        this.assignDoctor = assignedDoctor;
+        this.assignedDoctor = assignedDoctor;
         this.dateConfined = dateConfined;
         this.symptoms = symptoms;
     }
@@ -85,8 +86,24 @@ public class Patient extends Person {
         super.setBirthDate(birthDate);
         super.setAddress(address);
         super.setPhoneNumber(phoneNumber);
-        this.assignDoctor = assignedDoctor;
+        this.assignedDoctor = assignedDoctor;
         this.dateConfined = dateConfined;
         this.symptoms = symptoms;
+    }
+
+    public Patient(int id, String lastName, String firstName, String middleName, Symptoms symptoms, AssignedDoctor assignedDoctor, LocalDate dateConfined, LocalDate dateDischarged) {
+        this.patientId = id;
+        super.setLastName(lastName);
+        super.setFirstName(firstName);
+        super.setMiddleName(middleName);
+        this.symptoms = symptoms;
+        this.assignedDoctor = assignedDoctor;
+        this.dateConfined = dateConfined;
+        this.dateDischarged = dateDischarged;
+    }
+
+    public Patient(Symptoms symptoms, LocalDate dateConfined) {
+        this.symptoms = symptoms;
+        this.dateConfined = dateConfined;
     }
 }
