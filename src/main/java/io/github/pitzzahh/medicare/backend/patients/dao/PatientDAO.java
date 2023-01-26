@@ -24,7 +24,6 @@
 
 package io.github.pitzzahh.medicare.backend.patients.dao;
 
-import io.github.pitzzahh.medicare.backend.patients.model.DischargedPatient;
 import io.github.pitzzahh.medicare.backend.patients.model.Patient;
 import java.util.function.Consumer;
 import java.util.function.BiConsumer;
@@ -36,9 +35,9 @@ public interface PatientDAO {
 
     Consumer<Patient> addPatient();
 
-    Map<Integer, DischargedPatient> getDischargedPatients();
+    Map<Integer, Patient> getDischargedPatients();
 
-    Consumer<DischargedPatient> addDischargedPatient();
+    Consumer<Patient> addDischargedPatient();
 
     Consumer<Integer> dischargePatientById();
 
