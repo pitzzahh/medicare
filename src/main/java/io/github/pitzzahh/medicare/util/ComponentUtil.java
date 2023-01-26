@@ -75,28 +75,8 @@ public interface ComponentUtil {
         return Optional.ofNullable((Label) parent.lookup(format("#%s", id)));
     }
 
-    static Optional<TableView<?>> getTable(Parent parent, String id) {
-        return Optional.ofNullable((TableView<?>) parent.lookup(format("#%s", id)));
-    }
-
     static Optional<ChoiceBox<?>> getChoiceBox(Parent parent, String id) {
         return Optional.ofNullable((ChoiceBox<?>) parent.lookup(format("#%s", id)));
-    }
-
-    static Optional<TextField> getTextField(Parent parent, String id) {
-        return Optional.ofNullable((TextField) parent.lookup(format("#%s", id)));
-    }
-
-    static Optional<DatePicker> getDatePicker(Parent parent, String id) {
-        return Optional.ofNullable((DatePicker) parent.lookup(format("#%s", id)));
-    }
-
-    static Optional<VBox> getVBox(Parent parent, String id) {
-        return Optional.ofNullable((VBox) parent.lookup(format("#%s", id)));
-    }
-
-    static Optional<HBox> getHBox(Parent parent, String id) {
-        return Optional.ofNullable((HBox) parent.lookup(format("#%s", id)));
     }
 
     static void initGenderChoiceBox(ChoiceBox<Gender> choiceBox) {
@@ -190,7 +170,7 @@ public interface ComponentUtil {
                                         .stream()
                                         .filter(p -> p.getPatientId() == patient.getPatientId())
                                         .findAny()
-                                        .ifPresent(p -> updatePatient(patient, controller));
+                                        .ifPresent(p -> updatePatient(p, controller));
                                 initPatientCards(cardStorage);
                             }
                         });
@@ -261,9 +241,9 @@ public interface ComponentUtil {
                                         .getDoctors()
                                         .values()
                                         .stream()
-                                        .filter(p -> p.getId() == doctor.getId())
+                                        .filter(d -> d.getId() == doctor.getId())
                                         .findAny()
-                                        .ifPresent(p -> updateDoctor(doctor, controller));
+                                        .ifPresent(d -> updateDoctor(d, controller));
                                 initDoctorCards(cardStorage);
                             }
                         });

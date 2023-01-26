@@ -153,6 +153,7 @@ public class PatientDAOImpl implements PatientDAO {
                 patient.getAssignedDoctor() == null ? "" : encrypt(valueOf(patient.getAssignedDoctor().getId())),
                 patient.getAssignedDoctor() == null ? "" : encrypt(patient.getAssignedDoctor().getName()),
                 patient.getAssignedDoctor() == null ? "" : encrypt(patient.getAssignedDoctor().getSpecialization().name()),
+                encrypt(patient.getDateConfined().toString()),
                 encrypt(patient.getSymptoms().name()),
                 id
         );

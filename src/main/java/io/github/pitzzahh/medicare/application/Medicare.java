@@ -41,7 +41,10 @@ import static java.util.Objects.requireNonNull;
 import io.github.pitzzahh.medicare.Launcher;
 import static javafx.fxml.FXMLLoader.load;
 import javafx.application.Application;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import javafx.scene.image.Image;
+import java.util.stream.Stream;
 import javafx.stage.StageStyle;
 import javafx.scene.Parent;
 import java.io.IOException;
@@ -114,22 +117,13 @@ public class Medicare extends Application {
         dischargedPatientPanel.setId("discharge_panel");
         statistics.setId("statistics");
 
-        HashMap<String, Parent> parents = new HashMap<>();
-        //noinspection DuplicatedCode
-        parents.put(loginPage.getId(), loginPage);
-        parents.put(mainPanel.getId(), mainPanel);
-        parents.put(dashboard.getId(), dashboard);
-        parents.put(patientsPanel.getId(), patientsPanel);
-        parents.put(addPatient.getId(), addPatient);
-        parents.put(cardHolder.getId(), cardHolder);
-        //noinspection DuplicatedCode
-        parents.put(addDoctor.getId(), addDoctor);
-        parents.put(doctorsPanel.getId(), doctorsPanel);
-        parents.put(aboutPanel.getId(), aboutPanel);
-        parents.put(patientsDashboard.getId(), patientsDashboard);
-        parents.put(doctorDashboard.getId(), doctorDashboard);
-        parents.put(dischargedPatientPanel.getId(), dischargedPatientPanel);
-        parents.put(statistics.getId(), statistics);
+        HashMap<String, Parent> parents = new HashMap<>(
+                Stream.of(loginPage, mainPanel, dashboard, patientsPanel,
+                                addPatient, cardHolder, addDoctor, doctorsPanel,
+                                aboutPanel, patientsDashboard, doctorDashboard,
+                                dischargedPatientPanel, statistics)
+                        .collect(Collectors.toMap(Parent::getId, Function.identity()))
+        );
 
         addParents.accept(parents);
     }
