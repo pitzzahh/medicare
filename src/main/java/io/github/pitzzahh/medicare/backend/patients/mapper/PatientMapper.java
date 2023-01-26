@@ -29,12 +29,14 @@ import static io.github.pitzzahh.util.utilities.SecurityUtil.decrypt;
 import io.github.pitzzahh.medicare.backend.patients.model.Symptoms;
 import io.github.pitzzahh.medicare.backend.patients.model.Patient;
 import io.github.pitzzahh.medicare.backend.AssignedDoctor;
+import io.github.pitzzahh.util.utilities.SecurityUtil;
 import io.github.pitzzahh.medicare.backend.Gender;
 import org.springframework.jdbc.core.RowMapper;
 import static java.lang.Integer.parseInt;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.sql.ResultSet;
+import java.util.Optional;
 
 public class PatientMapper implements RowMapper<Patient> {
 
@@ -46,11 +48,15 @@ public class PatientMapper implements RowMapper<Patient> {
                 rs.getInt("id"),
                 decrypt(rs.getString("last_name")),
                 decrypt(rs.getString("first_name")),
-                rs.getString("middle_name") != null ? decrypt(rs.getString("middle_name")) : "",
+                Optional.ofNullable(rs.getString("middle_name"))
+                        .map(SecurityUtil::decrypt)
+                        .orElse(""),
                 Gender.valueOf(decrypt(rs.getString("gender"))),
                 LocalDate.of(parseInt(BIRTHDATE[0]), parseInt(BIRTHDATE[1]), parseInt(BIRTHDATE[2])),
                 decrypt(rs.getString("address")),
-                rs.getString("phone_number") != null ? decrypt(rs.getString("phone_number")) : "",
+                Optional.ofNullable(rs.getString("phone_number"))
+                        .map(SecurityUtil::decrypt)
+                        .orElse(""),
                 new AssignedDoctor(
                         parseInt(rs.getString("doctor_id").isEmpty() ? "0" : decrypt(rs.getString("doctor_id"))),
                         rs.getString("doctor_name").isEmpty() ? "" : decrypt(rs.getString("doctor_name")),
