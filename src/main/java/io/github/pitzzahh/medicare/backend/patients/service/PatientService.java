@@ -24,7 +24,6 @@
 
 package io.github.pitzzahh.medicare.backend.patients.service;
 
-import io.github.pitzzahh.medicare.backend.patients.model.DischargedPatient;
 import io.github.pitzzahh.medicare.backend.patients.dao.PatientDAO;
 import io.github.pitzzahh.medicare.backend.patients.model.Patient;
 import java.util.function.BiConsumer;
@@ -45,11 +44,11 @@ public class PatientService {
         return DAO.addPatient();
     }
 
-    public Consumer<DischargedPatient> addDischargedPatient() {
+    public Consumer<Patient> addDischargedPatient() {
         return DAO.addDischargedPatient();
     }
 
-    public Map<Integer, DischargedPatient> getDischargedPatients() {
+    public Map<Integer, Patient> getDischargedPatients() {
         return DAO.getDischargedPatients();
     }
 
