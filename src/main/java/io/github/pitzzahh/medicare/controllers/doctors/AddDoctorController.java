@@ -95,7 +95,7 @@ public class AddDoctorController {
         setDashBoardData();
         setCommonDashboardData("doctor_dashboard", "doctorsCount", false);
 
-        loadPage("patients_panel", "doctor_dashboard");
+        loadPage("doctors_panel", "doctor_dashboard");
         resetInputs(lastName, firstName, middleName, address, phoneNumber, gender, null, birthDate);
         getDoctorService().getDoctors().put(doctor.getId(), doctor);
         initGenderChoiceBox(gender);
