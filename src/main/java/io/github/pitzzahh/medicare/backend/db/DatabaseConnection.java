@@ -128,7 +128,7 @@ public class DatabaseConnection {
                 "    doctor_id TEXT,\n" +
                 "    doctor_name TEXT,\n" +
                 "    doctor_specialization TEXT,\n" +
-                "    date_confined TEXT,\n" +
+                "    date_confined TEXT NOT NULL,\n" +
                 "    symptoms TEXT NOT NULL\n" +
                 ");");
         getJDBC().execute("CREATE TABLE IF NOT EXISTS d0ct0r$ (\n" +
