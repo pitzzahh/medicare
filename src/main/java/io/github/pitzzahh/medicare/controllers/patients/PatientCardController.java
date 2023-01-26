@@ -76,7 +76,7 @@ public class PatientCardController {
         id.setText(String.valueOf(patient.getPatientId()));
         setCommonData(patient, firstName, middleName, lastName, age, gender, dateOfBirth, address, phoneNumber);
         doctor.getItems().clear();
-        doctor.setValue(patient.getAssignDoctor());
+        doctor.setValue(patient.getAssignedDoctor());
         symptoms.setValue(patient.getSymptoms());
     }
 
